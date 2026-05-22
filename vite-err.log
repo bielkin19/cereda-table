@@ -1,0 +1,330 @@
+[2m16:04:36[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m Pre-transform error: Transform failed with 1 error:
+
+[31m[PARSE_ERROR] Error:[0m Expected `>` but found `Identifier`
+    [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/shared/data-table/lib/auto-group-column.ts:25:48 [38;5;246m][0m
+    [38;5;246m│[0m
+ [38;5;246m25 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249mc[0m[38;5;249me[0m[38;5;249ml[0m[38;5;249ml[0m[38;5;249m:[0m[38;5;249m [0m[38;5;249m([0m[38;5;249mc[0m[38;5;249mo[0m[38;5;249mn[0m[38;5;249mt[0m[38;5;249me[0m[38;5;249mx[0m[38;5;249mt[0m[38;5;249m)[0m[38;5;249m [0m[38;5;249m=[0m[38;5;249m>[0m[38;5;249m [0m[38;5;249m<[0m[38;5;249mD[0m[38;5;249ma[0m[38;5;249mt[0m[38;5;249ma[0m[38;5;249mT[0m[38;5;249ma[0m[38;5;249mb[0m[38;5;249ml[0m[38;5;249me[0m[38;5;249mA[0m[38;5;249mu[0m[38;5;249mt[0m[38;5;249mo[0m[38;5;249mG[0m[38;5;249mr[0m[38;5;249mo[0m[38;5;249mu[0m[38;5;249mp[0m[38;5;249mC[0m[38;5;249me[0m[38;5;249ml[0m[38;5;249ml[0m[38;5;249m [0mcell[38;5;249m=[0m[38;5;249m{[0m[38;5;249mc[0m[38;5;249mo[0m[38;5;249mn[0m[38;5;249mt[0m[38;5;249me[0m[38;5;249mx[0m[38;5;249mt[0m[38;5;249m.[0m[38;5;249mc[0m[38;5;249me[0m[38;5;249ml[0m[38;5;249ml[0m[38;5;249m}[0m[38;5;249m [0m[38;5;249m/[0m[38;5;249m>[0m[38;5;249m,[0m
+ [38;5;240m   │[0m                                                ──┬─  
+ [38;5;240m   │[0m                                                  ╰─── `>` expected
+[38;5;246m────╯[0m
+
+  Plugin: [35mvite:oxc[39m
+  File: [36mC:/cereda-systems/cereda-table/src/shared/data-table/lib/auto-group-column.ts[39m
+[2m16:04:36[22m [31m[1m[vite][22m[39m [31mInternal server error: Transform failed with 1 error:
+
+[31m[PARSE_ERROR] Error:[0m Expected `>` but found `Identifier`
+    [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/shared/data-table/lib/auto-group-column.ts:25:48 [38;5;246m][0m
+    [38;5;246m│[0m
+ [38;5;246m25 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249mc[0m[38;5;249me[0m[38;5;249ml[0m[38;5;249ml[0m[38;5;249m:[0m[38;5;249m [0m[38;5;249m([0m[38;5;249mc[0m[38;5;249mo[0m[38;5;249mn[0m[38;5;249mt[0m[38;5;249me[0m[38;5;249mx[0m[38;5;249mt[0m[38;5;249m)[0m[38;5;249m [0m[38;5;249m=[0m[38;5;249m>[0m[38;5;249m [0m[38;5;249m<[0m[38;5;249mD[0m[38;5;249ma[0m[38;5;249mt[0m[38;5;249ma[0m[38;5;249mT[0m[38;5;249ma[0m[38;5;249mb[0m[38;5;249ml[0m[38;5;249me[0m[38;5;249mA[0m[38;5;249mu[0m[38;5;249mt[0m[38;5;249mo[0m[38;5;249mG[0m[38;5;249mr[0m[38;5;249mo[0m[38;5;249mu[0m[38;5;249mp[0m[38;5;249mC[0m[38;5;249me[0m[38;5;249ml[0m[38;5;249ml[0m[38;5;249m [0mcell[38;5;249m=[0m[38;5;249m{[0m[38;5;249mc[0m[38;5;249mo[0m[38;5;249mn[0m[38;5;249mt[0m[38;5;249me[0m[38;5;249mx[0m[38;5;249mt[0m[38;5;249m.[0m[38;5;249mc[0m[38;5;249me[0m[38;5;249ml[0m[38;5;249ml[0m[38;5;249m}[0m[38;5;249m [0m[38;5;249m/[0m[38;5;249m>[0m[38;5;249m,[0m
+ [38;5;240m   │[0m                                                ──┬─  
+ [38;5;240m   │[0m                                                  ╰─── `>` expected
+[38;5;246m────╯[0m
+[39m
+  Plugin: [35mvite:oxc[39m
+  File: [36mC:/cereda-systems/cereda-table/src/shared/data-table/lib/auto-group-column.ts[39m
+      at transformWithOxc (file:///C:/cereda-systems/cereda-table/node_modules/vite/dist/node/chunks/node.js:3343:19)
+      at TransformPluginContext.transform (file:///C:/cereda-systems/cereda-table/node_modules/vite/dist/node/chunks/node.js:3411:26)
+      at EnvironmentPluginContainer.transform (file:///C:/cereda-systems/cereda-table/node_modules/vite/dist/node/chunks/node.js:30164:51)
+      at async loadAndTransform (file:///C:/cereda-systems/cereda-table/node_modules/vite/dist/node/chunks/node.js:24512:26)
+      at async viteTransformMiddleware (file:///C:/cereda-systems/cereda-table/node_modules/vite/dist/node/chunks/node.js:24306:20)
+[2m16:04:42[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m Pre-transform error: Transform failed with 1 error:
+
+[31m[PARSE_ERROR] Error:[0m Expected `>` but found `Identifier`
+    [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/shared/data-table/lib/auto-group-column.ts:25:48 [38;5;246m][0m
+    [38;5;246m│[0m
+ [38;5;246m25 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249mc[0m[38;5;249me[0m[38;5;249ml[0m[38;5;249ml[0m[38;5;249m:[0m[38;5;249m [0m[38;5;249m([0m[38;5;249mc[0m[38;5;249mo[0m[38;5;249mn[0m[38;5;249mt[0m[38;5;249me[0m[38;5;249mx[0m[38;5;249mt[0m[38;5;249m)[0m[38;5;249m [0m[38;5;249m=[0m[38;5;249m>[0m[38;5;249m [0m[38;5;249m<[0m[38;5;249mD[0m[38;5;249ma[0m[38;5;249mt[0m[38;5;249ma[0m[38;5;249mT[0m[38;5;249ma[0m[38;5;249mb[0m[38;5;249ml[0m[38;5;249me[0m[38;5;249mA[0m[38;5;249mu[0m[38;5;249mt[0m[38;5;249mo[0m[38;5;249mG[0m[38;5;249mr[0m[38;5;249mo[0m[38;5;249mu[0m[38;5;249mp[0m[38;5;249mC[0m[38;5;249me[0m[38;5;249ml[0m[38;5;249ml[0m[38;5;249m [0mcell[38;5;249m=[0m[38;5;249m{[0m[38;5;249mc[0m[38;5;249mo[0m[38;5;249mn[0m[38;5;249mt[0m[38;5;249me[0m[38;5;249mx[0m[38;5;249mt[0m[38;5;249m.[0m[38;5;249mc[0m[38;5;249me[0m[38;5;249ml[0m[38;5;249ml[0m[38;5;249m}[0m[38;5;249m [0m[38;5;249m/[0m[38;5;249m>[0m[38;5;249m,[0m
+ [38;5;240m   │[0m                                                ──┬─  
+ [38;5;240m   │[0m                                                  ╰─── `>` expected
+[38;5;246m────╯[0m
+
+  Plugin: [35mvite:oxc[39m
+  File: [36mC:/cereda-systems/cereda-table/src/shared/data-table/lib/auto-group-column.ts[39m
+[2m16:04:42[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m Pre-transform error: Transform failed with 1 error:
+
+[31m[PARSE_ERROR] Error:[0m Expected `>` but found `Identifier`
+    [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/shared/data-table/lib/auto-group-column.ts:25:48 [38;5;246m][0m
+    [38;5;246m│[0m
+ [38;5;246m25 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249mc[0m[38;5;249me[0m[38;5;249ml[0m[38;5;249ml[0m[38;5;249m:[0m[38;5;249m [0m[38;5;249m([0m[38;5;249mc[0m[38;5;249mo[0m[38;5;249mn[0m[38;5;249mt[0m[38;5;249me[0m[38;5;249mx[0m[38;5;249mt[0m[38;5;249m)[0m[38;5;249m [0m[38;5;249m=[0m[38;5;249m>[0m[38;5;249m [0m[38;5;249m<[0m[38;5;249mD[0m[38;5;249ma[0m[38;5;249mt[0m[38;5;249ma[0m[38;5;249mT[0m[38;5;249ma[0m[38;5;249mb[0m[38;5;249ml[0m[38;5;249me[0m[38;5;249mA[0m[38;5;249mu[0m[38;5;249mt[0m[38;5;249mo[0m[38;5;249mG[0m[38;5;249mr[0m[38;5;249mo[0m[38;5;249mu[0m[38;5;249mp[0m[38;5;249mC[0m[38;5;249me[0m[38;5;249ml[0m[38;5;249ml[0m[38;5;249m [0mcell[38;5;249m=[0m[38;5;249m{[0m[38;5;249mc[0m[38;5;249mo[0m[38;5;249mn[0m[38;5;249mt[0m[38;5;249me[0m[38;5;249mx[0m[38;5;249mt[0m[38;5;249m.[0m[38;5;249mc[0m[38;5;249me[0m[38;5;249ml[0m[38;5;249ml[0m[38;5;249m}[0m[38;5;249m [0m[38;5;249m/[0m[38;5;249m>[0m[38;5;249m,[0m
+ [38;5;240m   │[0m                                                ──┬─  
+ [38;5;240m   │[0m                                                  ╰─── `>` expected
+[38;5;246m────╯[0m
+
+  Plugin: [35mvite:oxc[39m
+  File: [36mC:/cereda-systems/cereda-table/src/shared/data-table/lib/auto-group-column.ts[39m
+[2m16:04:42[22m [31m[1m[vite][22m[39m [31mInternal server error: Transform failed with 1 error:
+
+[31m[PARSE_ERROR] Error:[0m Expected `>` but found `Identifier`
+    [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/shared/data-table/lib/auto-group-column.ts:25:48 [38;5;246m][0m
+    [38;5;246m│[0m
+ [38;5;246m25 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249mc[0m[38;5;249me[0m[38;5;249ml[0m[38;5;249ml[0m[38;5;249m:[0m[38;5;249m [0m[38;5;249m([0m[38;5;249mc[0m[38;5;249mo[0m[38;5;249mn[0m[38;5;249mt[0m[38;5;249me[0m[38;5;249mx[0m[38;5;249mt[0m[38;5;249m)[0m[38;5;249m [0m[38;5;249m=[0m[38;5;249m>[0m[38;5;249m [0m[38;5;249m<[0m[38;5;249mD[0m[38;5;249ma[0m[38;5;249mt[0m[38;5;249ma[0m[38;5;249mT[0m[38;5;249ma[0m[38;5;249mb[0m[38;5;249ml[0m[38;5;249me[0m[38;5;249mA[0m[38;5;249mu[0m[38;5;249mt[0m[38;5;249mo[0m[38;5;249mG[0m[38;5;249mr[0m[38;5;249mo[0m[38;5;249mu[0m[38;5;249mp[0m[38;5;249mC[0m[38;5;249me[0m[38;5;249ml[0m[38;5;249ml[0m[38;5;249m [0mcell[38;5;249m=[0m[38;5;249m{[0m[38;5;249mc[0m[38;5;249mo[0m[38;5;249mn[0m[38;5;249mt[0m[38;5;249me[0m[38;5;249mx[0m[38;5;249mt[0m[38;5;249m.[0m[38;5;249mc[0m[38;5;249me[0m[38;5;249ml[0m[38;5;249ml[0m[38;5;249m}[0m[38;5;249m [0m[38;5;249m/[0m[38;5;249m>[0m[38;5;249m,[0m
+ [38;5;240m   │[0m                                                ──┬─  
+ [38;5;240m   │[0m                                                  ╰─── `>` expected
+[38;5;246m────╯[0m
+[39m
+  Plugin: [35mvite:oxc[39m
+  File: [36mC:/cereda-systems/cereda-table/src/shared/data-table/lib/auto-group-column.ts[39m
+      at transformWithOxc (file:///C:/cereda-systems/cereda-table/node_modules/vite/dist/node/chunks/node.js:3343:19)
+      at TransformPluginContext.transform (file:///C:/cereda-systems/cereda-table/node_modules/vite/dist/node/chunks/node.js:3411:26)
+      at EnvironmentPluginContainer.transform (file:///C:/cereda-systems/cereda-table/node_modules/vite/dist/node/chunks/node.js:30164:51)
+      at async loadAndTransform (file:///C:/cereda-systems/cereda-table/node_modules/vite/dist/node/chunks/node.js:24512:26)
+[2m16:04:52[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m Pre-transform error: Transform failed with 1 error:
+
+[31m[PARSE_ERROR] Error:[0m Expected `>` but found `Identifier`
+    [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/shared/data-table/lib/auto-group-column.ts:25:48 [38;5;246m][0m
+    [38;5;246m│[0m
+ [38;5;246m25 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249mc[0m[38;5;249me[0m[38;5;249ml[0m[38;5;249ml[0m[38;5;249m:[0m[38;5;249m [0m[38;5;249m([0m[38;5;249mc[0m[38;5;249mo[0m[38;5;249mn[0m[38;5;249mt[0m[38;5;249me[0m[38;5;249mx[0m[38;5;249mt[0m[38;5;249m)[0m[38;5;249m [0m[38;5;249m=[0m[38;5;249m>[0m[38;5;249m [0m[38;5;249m<[0m[38;5;249mD[0m[38;5;249ma[0m[38;5;249mt[0m[38;5;249ma[0m[38;5;249mT[0m[38;5;249ma[0m[38;5;249mb[0m[38;5;249ml[0m[38;5;249me[0m[38;5;249mA[0m[38;5;249mu[0m[38;5;249mt[0m[38;5;249mo[0m[38;5;249mG[0m[38;5;249mr[0m[38;5;249mo[0m[38;5;249mu[0m[38;5;249mp[0m[38;5;249mC[0m[38;5;249me[0m[38;5;249ml[0m[38;5;249ml[0m[38;5;249m [0mcell[38;5;249m=[0m[38;5;249m{[0m[38;5;249mc[0m[38;5;249mo[0m[38;5;249mn[0m[38;5;249mt[0m[38;5;249me[0m[38;5;249mx[0m[38;5;249mt[0m[38;5;249m.[0m[38;5;249mc[0m[38;5;249me[0m[38;5;249ml[0m[38;5;249ml[0m[38;5;249m}[0m[38;5;249m [0m[38;5;249m/[0m[38;5;249m>[0m[38;5;249m,[0m
+ [38;5;240m   │[0m                                                ──┬─  
+ [38;5;240m   │[0m                                                  ╰─── `>` expected
+[38;5;246m────╯[0m
+
+  Plugin: [35mvite:oxc[39m
+  File: [36mC:/cereda-systems/cereda-table/src/shared/data-table/lib/auto-group-column.ts[39m
+[2m16:04:52[22m [31m[1m[vite][22m[39m [31mInternal server error: Transform failed with 1 error:
+
+[31m[PARSE_ERROR] Error:[0m Expected `>` but found `Identifier`
+    [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/shared/data-table/lib/auto-group-column.ts:25:48 [38;5;246m][0m
+    [38;5;246m│[0m
+ [38;5;246m25 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249mc[0m[38;5;249me[0m[38;5;249ml[0m[38;5;249ml[0m[38;5;249m:[0m[38;5;249m [0m[38;5;249m([0m[38;5;249mc[0m[38;5;249mo[0m[38;5;249mn[0m[38;5;249mt[0m[38;5;249me[0m[38;5;249mx[0m[38;5;249mt[0m[38;5;249m)[0m[38;5;249m [0m[38;5;249m=[0m[38;5;249m>[0m[38;5;249m [0m[38;5;249m<[0m[38;5;249mD[0m[38;5;249ma[0m[38;5;249mt[0m[38;5;249ma[0m[38;5;249mT[0m[38;5;249ma[0m[38;5;249mb[0m[38;5;249ml[0m[38;5;249me[0m[38;5;249mA[0m[38;5;249mu[0m[38;5;249mt[0m[38;5;249mo[0m[38;5;249mG[0m[38;5;249mr[0m[38;5;249mo[0m[38;5;249mu[0m[38;5;249mp[0m[38;5;249mC[0m[38;5;249me[0m[38;5;249ml[0m[38;5;249ml[0m[38;5;249m [0mcell[38;5;249m=[0m[38;5;249m{[0m[38;5;249mc[0m[38;5;249mo[0m[38;5;249mn[0m[38;5;249mt[0m[38;5;249me[0m[38;5;249mx[0m[38;5;249mt[0m[38;5;249m.[0m[38;5;249mc[0m[38;5;249me[0m[38;5;249ml[0m[38;5;249ml[0m[38;5;249m}[0m[38;5;249m [0m[38;5;249m/[0m[38;5;249m>[0m[38;5;249m,[0m
+ [38;5;240m   │[0m                                                ──┬─  
+ [38;5;240m   │[0m                                                  ╰─── `>` expected
+[38;5;246m────╯[0m
+[39m
+  Plugin: [35mvite:oxc[39m
+  File: [36mC:/cereda-systems/cereda-table/src/shared/data-table/lib/auto-group-column.ts[39m
+      at transformWithOxc (file:///C:/cereda-systems/cereda-table/node_modules/vite/dist/node/chunks/node.js:3343:19)
+      at TransformPluginContext.transform (file:///C:/cereda-systems/cereda-table/node_modules/vite/dist/node/chunks/node.js:3411:26)
+      at EnvironmentPluginContainer.transform (file:///C:/cereda-systems/cereda-table/node_modules/vite/dist/node/chunks/node.js:30164:51)
+      at async loadAndTransform (file:///C:/cereda-systems/cereda-table/node_modules/vite/dist/node/chunks/node.js:24512:26)
+      at async viteTransformMiddleware (file:///C:/cereda-systems/cereda-table/node_modules/vite/dist/node/chunks/node.js:24306:20)
+[2m16:05:00[22m [31m[1m[vite][22m[39m [31mInternal server error: Transform failed with 1 error:
+
+[31m[PARSE_ERROR] Error:[0m Expected `>` but found `Identifier`
+    [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/shared/data-table/lib/auto-group-column.ts:25:48 [38;5;246m][0m
+    [38;5;246m│[0m
+ [38;5;246m25 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249mc[0m[38;5;249me[0m[38;5;249ml[0m[38;5;249ml[0m[38;5;249m:[0m[38;5;249m [0m[38;5;249m([0m[38;5;249mc[0m[38;5;249mo[0m[38;5;249mn[0m[38;5;249mt[0m[38;5;249me[0m[38;5;249mx[0m[38;5;249mt[0m[38;5;249m)[0m[38;5;249m [0m[38;5;249m=[0m[38;5;249m>[0m[38;5;249m [0m[38;5;249m<[0m[38;5;249mD[0m[38;5;249ma[0m[38;5;249mt[0m[38;5;249ma[0m[38;5;249mT[0m[38;5;249ma[0m[38;5;249mb[0m[38;5;249ml[0m[38;5;249me[0m[38;5;249mA[0m[38;5;249mu[0m[38;5;249mt[0m[38;5;249mo[0m[38;5;249mG[0m[38;5;249mr[0m[38;5;249mo[0m[38;5;249mu[0m[38;5;249mp[0m[38;5;249mC[0m[38;5;249me[0m[38;5;249ml[0m[38;5;249ml[0m[38;5;249m [0mcell[38;5;249m=[0m[38;5;249m{[0m[38;5;249mc[0m[38;5;249mo[0m[38;5;249mn[0m[38;5;249mt[0m[38;5;249me[0m[38;5;249mx[0m[38;5;249mt[0m[38;5;249m.[0m[38;5;249mc[0m[38;5;249me[0m[38;5;249ml[0m[38;5;249ml[0m[38;5;249m}[0m[38;5;249m [0m[38;5;249m/[0m[38;5;249m>[0m[38;5;249m,[0m
+ [38;5;240m   │[0m                                                ──┬─  
+ [38;5;240m   │[0m                                                  ╰─── `>` expected
+[38;5;246m────╯[0m
+[39m
+  Plugin: [35mvite:oxc[39m
+  File: [36mC:/cereda-systems/cereda-table/src/shared/data-table/lib/auto-group-column.ts[39m
+      at transformWithOxc (file:///C:/cereda-systems/cereda-table/node_modules/vite/dist/node/chunks/node.js:3343:19)
+      at TransformPluginContext.transform (file:///C:/cereda-systems/cereda-table/node_modules/vite/dist/node/chunks/node.js:3411:26)
+      at EnvironmentPluginContainer.transform (file:///C:/cereda-systems/cereda-table/node_modules/vite/dist/node/chunks/node.js:30164:51)
+      at async loadAndTransform (file:///C:/cereda-systems/cereda-table/node_modules/vite/dist/node/chunks/node.js:24512:26)
+[2m16:05:00[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m Pre-transform error: Transform failed with 1 error:
+
+[31m[PARSE_ERROR] Error:[0m Expected `>` but found `Identifier`
+    [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/shared/data-table/lib/auto-group-column.ts:25:48 [38;5;246m][0m
+    [38;5;246m│[0m
+ [38;5;246m25 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249mc[0m[38;5;249me[0m[38;5;249ml[0m[38;5;249ml[0m[38;5;249m:[0m[38;5;249m [0m[38;5;249m([0m[38;5;249mc[0m[38;5;249mo[0m[38;5;249mn[0m[38;5;249mt[0m[38;5;249me[0m[38;5;249mx[0m[38;5;249mt[0m[38;5;249m)[0m[38;5;249m [0m[38;5;249m=[0m[38;5;249m>[0m[38;5;249m [0m[38;5;249m<[0m[38;5;249mD[0m[38;5;249ma[0m[38;5;249mt[0m[38;5;249ma[0m[38;5;249mT[0m[38;5;249ma[0m[38;5;249mb[0m[38;5;249ml[0m[38;5;249me[0m[38;5;249mA[0m[38;5;249mu[0m[38;5;249mt[0m[38;5;249mo[0m[38;5;249mG[0m[38;5;249mr[0m[38;5;249mo[0m[38;5;249mu[0m[38;5;249mp[0m[38;5;249mC[0m[38;5;249me[0m[38;5;249ml[0m[38;5;249ml[0m[38;5;249m [0mcell[38;5;249m=[0m[38;5;249m{[0m[38;5;249mc[0m[38;5;249mo[0m[38;5;249mn[0m[38;5;249mt[0m[38;5;249me[0m[38;5;249mx[0m[38;5;249mt[0m[38;5;249m.[0m[38;5;249mc[0m[38;5;249me[0m[38;5;249ml[0m[38;5;249ml[0m[38;5;249m}[0m[38;5;249m [0m[38;5;249m/[0m[38;5;249m>[0m[38;5;249m,[0m
+ [38;5;240m   │[0m                                                ──┬─  
+ [38;5;240m   │[0m                                                  ╰─── `>` expected
+[38;5;246m────╯[0m
+
+  Plugin: [35mvite:oxc[39m
+  File: [36mC:/cereda-systems/cereda-table/src/shared/data-table/lib/auto-group-column.ts[39m
+[2m16:05:08[22m [31m[1m[vite][22m[39m [31mInternal server error: Transform failed with 1 error:
+
+[31m[PARSE_ERROR] Error:[0m Expected `>` but found `Identifier`
+    [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/shared/data-table/lib/auto-group-column.ts:25:48 [38;5;246m][0m
+    [38;5;246m│[0m
+ [38;5;246m25 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249mc[0m[38;5;249me[0m[38;5;249ml[0m[38;5;249ml[0m[38;5;249m:[0m[38;5;249m [0m[38;5;249m([0m[38;5;249mc[0m[38;5;249mo[0m[38;5;249mn[0m[38;5;249mt[0m[38;5;249me[0m[38;5;249mx[0m[38;5;249mt[0m[38;5;249m)[0m[38;5;249m [0m[38;5;249m=[0m[38;5;249m>[0m[38;5;249m [0m[38;5;249m<[0m[38;5;249mD[0m[38;5;249ma[0m[38;5;249mt[0m[38;5;249ma[0m[38;5;249mT[0m[38;5;249ma[0m[38;5;249mb[0m[38;5;249ml[0m[38;5;249me[0m[38;5;249mA[0m[38;5;249mu[0m[38;5;249mt[0m[38;5;249mo[0m[38;5;249mG[0m[38;5;249mr[0m[38;5;249mo[0m[38;5;249mu[0m[38;5;249mp[0m[38;5;249mC[0m[38;5;249me[0m[38;5;249ml[0m[38;5;249ml[0m[38;5;249m [0mcell[38;5;249m=[0m[38;5;249m{[0m[38;5;249mc[0m[38;5;249mo[0m[38;5;249mn[0m[38;5;249mt[0m[38;5;249me[0m[38;5;249mx[0m[38;5;249mt[0m[38;5;249m.[0m[38;5;249mc[0m[38;5;249me[0m[38;5;249ml[0m[38;5;249ml[0m[38;5;249m}[0m[38;5;249m [0m[38;5;249m/[0m[38;5;249m>[0m[38;5;249m,[0m
+ [38;5;240m   │[0m                                                ──┬─  
+ [38;5;240m   │[0m                                                  ╰─── `>` expected
+[38;5;246m────╯[0m
+[39m
+  Plugin: [35mvite:oxc[39m
+  File: [36mC:/cereda-systems/cereda-table/src/shared/data-table/lib/auto-group-column.ts[39m
+      at transformWithOxc (file:///C:/cereda-systems/cereda-table/node_modules/vite/dist/node/chunks/node.js:3343:19)
+      at TransformPluginContext.transform (file:///C:/cereda-systems/cereda-table/node_modules/vite/dist/node/chunks/node.js:3411:26)
+      at EnvironmentPluginContainer.transform (file:///C:/cereda-systems/cereda-table/node_modules/vite/dist/node/chunks/node.js:30164:51)
+      at async loadAndTransform (file:///C:/cereda-systems/cereda-table/node_modules/vite/dist/node/chunks/node.js:24512:26)
+      at async viteTransformMiddleware (file:///C:/cereda-systems/cereda-table/node_modules/vite/dist/node/chunks/node.js:24306:20)
+[2m16:05:13[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m Pre-transform error: Transform failed with 1 error:
+
+[31m[PARSE_ERROR] Error:[0m Expected `>` but found `Identifier`
+    [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/shared/data-table/lib/auto-group-column.ts:25:48 [38;5;246m][0m
+    [38;5;246m│[0m
+ [38;5;246m25 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249mc[0m[38;5;249me[0m[38;5;249ml[0m[38;5;249ml[0m[38;5;249m:[0m[38;5;249m [0m[38;5;249m([0m[38;5;249mc[0m[38;5;249mo[0m[38;5;249mn[0m[38;5;249mt[0m[38;5;249me[0m[38;5;249mx[0m[38;5;249mt[0m[38;5;249m)[0m[38;5;249m [0m[38;5;249m=[0m[38;5;249m>[0m[38;5;249m [0m[38;5;249m<[0m[38;5;249mD[0m[38;5;249ma[0m[38;5;249mt[0m[38;5;249ma[0m[38;5;249mT[0m[38;5;249ma[0m[38;5;249mb[0m[38;5;249ml[0m[38;5;249me[0m[38;5;249mA[0m[38;5;249mu[0m[38;5;249mt[0m[38;5;249mo[0m[38;5;249mG[0m[38;5;249mr[0m[38;5;249mo[0m[38;5;249mu[0m[38;5;249mp[0m[38;5;249mC[0m[38;5;249me[0m[38;5;249ml[0m[38;5;249ml[0m[38;5;249m [0mcell[38;5;249m=[0m[38;5;249m{[0m[38;5;249mc[0m[38;5;249mo[0m[38;5;249mn[0m[38;5;249mt[0m[38;5;249me[0m[38;5;249mx[0m[38;5;249mt[0m[38;5;249m.[0m[38;5;249mc[0m[38;5;249me[0m[38;5;249ml[0m[38;5;249ml[0m[38;5;249m}[0m[38;5;249m [0m[38;5;249m/[0m[38;5;249m>[0m[38;5;249m,[0m
+ [38;5;240m   │[0m                                                ──┬─  
+ [38;5;240m   │[0m                                                  ╰─── `>` expected
+[38;5;246m────╯[0m
+
+  Plugin: [35mvite:oxc[39m
+  File: [36mC:/cereda-systems/cereda-table/src/shared/data-table/lib/auto-group-column.ts[39m
+[2m16:05:13[22m [31m[1m[vite][22m[39m [31mInternal server error: Transform failed with 1 error:
+
+[31m[PARSE_ERROR] Error:[0m Expected `>` but found `Identifier`
+    [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/shared/data-table/lib/auto-group-column.ts:25:48 [38;5;246m][0m
+    [38;5;246m│[0m
+ [38;5;246m25 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249mc[0m[38;5;249me[0m[38;5;249ml[0m[38;5;249ml[0m[38;5;249m:[0m[38;5;249m [0m[38;5;249m([0m[38;5;249mc[0m[38;5;249mo[0m[38;5;249mn[0m[38;5;249mt[0m[38;5;249me[0m[38;5;249mx[0m[38;5;249mt[0m[38;5;249m)[0m[38;5;249m [0m[38;5;249m=[0m[38;5;249m>[0m[38;5;249m [0m[38;5;249m<[0m[38;5;249mD[0m[38;5;249ma[0m[38;5;249mt[0m[38;5;249ma[0m[38;5;249mT[0m[38;5;249ma[0m[38;5;249mb[0m[38;5;249ml[0m[38;5;249me[0m[38;5;249mA[0m[38;5;249mu[0m[38;5;249mt[0m[38;5;249mo[0m[38;5;249mG[0m[38;5;249mr[0m[38;5;249mo[0m[38;5;249mu[0m[38;5;249mp[0m[38;5;249mC[0m[38;5;249me[0m[38;5;249ml[0m[38;5;249ml[0m[38;5;249m [0mcell[38;5;249m=[0m[38;5;249m{[0m[38;5;249mc[0m[38;5;249mo[0m[38;5;249mn[0m[38;5;249mt[0m[38;5;249me[0m[38;5;249mx[0m[38;5;249mt[0m[38;5;249m.[0m[38;5;249mc[0m[38;5;249me[0m[38;5;249ml[0m[38;5;249ml[0m[38;5;249m}[0m[38;5;249m [0m[38;5;249m/[0m[38;5;249m>[0m[38;5;249m,[0m
+ [38;5;240m   │[0m                                                ──┬─  
+ [38;5;240m   │[0m                                                  ╰─── `>` expected
+[38;5;246m────╯[0m
+[39m
+  Plugin: [35mvite:oxc[39m
+  File: [36mC:/cereda-systems/cereda-table/src/shared/data-table/lib/auto-group-column.ts[39m
+      at transformWithOxc (file:///C:/cereda-systems/cereda-table/node_modules/vite/dist/node/chunks/node.js:3343:19)
+      at TransformPluginContext.transform (file:///C:/cereda-systems/cereda-table/node_modules/vite/dist/node/chunks/node.js:3411:26)
+      at EnvironmentPluginContainer.transform (file:///C:/cereda-systems/cereda-table/node_modules/vite/dist/node/chunks/node.js:30164:51)
+      at async loadAndTransform (file:///C:/cereda-systems/cereda-table/node_modules/vite/dist/node/chunks/node.js:24512:26)
+[2m16:05:19[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m Pre-transform error: Transform failed with 1 error:
+
+[31m[PARSE_ERROR] Error:[0m Expected `>` but found `Identifier`
+    [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/shared/data-table/lib/auto-group-column.ts:25:48 [38;5;246m][0m
+    [38;5;246m│[0m
+ [38;5;246m25 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249mc[0m[38;5;249me[0m[38;5;249ml[0m[38;5;249ml[0m[38;5;249m:[0m[38;5;249m [0m[38;5;249m([0m[38;5;249mc[0m[38;5;249mo[0m[38;5;249mn[0m[38;5;249mt[0m[38;5;249me[0m[38;5;249mx[0m[38;5;249mt[0m[38;5;249m)[0m[38;5;249m [0m[38;5;249m=[0m[38;5;249m>[0m[38;5;249m [0m[38;5;249m<[0m[38;5;249mD[0m[38;5;249ma[0m[38;5;249mt[0m[38;5;249ma[0m[38;5;249mT[0m[38;5;249ma[0m[38;5;249mb[0m[38;5;249ml[0m[38;5;249me[0m[38;5;249mA[0m[38;5;249mu[0m[38;5;249mt[0m[38;5;249mo[0m[38;5;249mG[0m[38;5;249mr[0m[38;5;249mo[0m[38;5;249mu[0m[38;5;249mp[0m[38;5;249mC[0m[38;5;249me[0m[38;5;249ml[0m[38;5;249ml[0m[38;5;249m [0mcell[38;5;249m=[0m[38;5;249m{[0m[38;5;249mc[0m[38;5;249mo[0m[38;5;249mn[0m[38;5;249mt[0m[38;5;249me[0m[38;5;249mx[0m[38;5;249mt[0m[38;5;249m.[0m[38;5;249mc[0m[38;5;249me[0m[38;5;249ml[0m[38;5;249ml[0m[38;5;249m}[0m[38;5;249m [0m[38;5;249m/[0m[38;5;249m>[0m[38;5;249m,[0m
+ [38;5;240m   │[0m                                                ──┬─  
+ [38;5;240m   │[0m                                                  ╰─── `>` expected
+[38;5;246m────╯[0m
+
+  Plugin: [35mvite:oxc[39m
+  File: [36mC:/cereda-systems/cereda-table/src/shared/data-table/lib/auto-group-column.ts[39m
+[2m16:05:19[22m [31m[1m[vite][22m[39m [31mInternal server error: Transform failed with 1 error:
+
+[31m[PARSE_ERROR] Error:[0m Expected `>` but found `Identifier`
+    [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/shared/data-table/lib/auto-group-column.ts:25:48 [38;5;246m][0m
+    [38;5;246m│[0m
+ [38;5;246m25 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249mc[0m[38;5;249me[0m[38;5;249ml[0m[38;5;249ml[0m[38;5;249m:[0m[38;5;249m [0m[38;5;249m([0m[38;5;249mc[0m[38;5;249mo[0m[38;5;249mn[0m[38;5;249mt[0m[38;5;249me[0m[38;5;249mx[0m[38;5;249mt[0m[38;5;249m)[0m[38;5;249m [0m[38;5;249m=[0m[38;5;249m>[0m[38;5;249m [0m[38;5;249m<[0m[38;5;249mD[0m[38;5;249ma[0m[38;5;249mt[0m[38;5;249ma[0m[38;5;249mT[0m[38;5;249ma[0m[38;5;249mb[0m[38;5;249ml[0m[38;5;249me[0m[38;5;249mA[0m[38;5;249mu[0m[38;5;249mt[0m[38;5;249mo[0m[38;5;249mG[0m[38;5;249mr[0m[38;5;249mo[0m[38;5;249mu[0m[38;5;249mp[0m[38;5;249mC[0m[38;5;249me[0m[38;5;249ml[0m[38;5;249ml[0m[38;5;249m [0mcell[38;5;249m=[0m[38;5;249m{[0m[38;5;249mc[0m[38;5;249mo[0m[38;5;249mn[0m[38;5;249mt[0m[38;5;249me[0m[38;5;249mx[0m[38;5;249mt[0m[38;5;249m.[0m[38;5;249mc[0m[38;5;249me[0m[38;5;249ml[0m[38;5;249ml[0m[38;5;249m}[0m[38;5;249m [0m[38;5;249m/[0m[38;5;249m>[0m[38;5;249m,[0m
+ [38;5;240m   │[0m                                                ──┬─  
+ [38;5;240m   │[0m                                                  ╰─── `>` expected
+[38;5;246m────╯[0m
+[39m
+  Plugin: [35mvite:oxc[39m
+  File: [36mC:/cereda-systems/cereda-table/src/shared/data-table/lib/auto-group-column.ts[39m
+      at transformWithOxc (file:///C:/cereda-systems/cereda-table/node_modules/vite/dist/node/chunks/node.js:3343:19)
+      at TransformPluginContext.transform (file:///C:/cereda-systems/cereda-table/node_modules/vite/dist/node/chunks/node.js:3411:26)
+      at EnvironmentPluginContainer.transform (file:///C:/cereda-systems/cereda-table/node_modules/vite/dist/node/chunks/node.js:30164:51)
+      at async loadAndTransform (file:///C:/cereda-systems/cereda-table/node_modules/vite/dist/node/chunks/node.js:24512:26)
+      at async viteTransformMiddleware (file:///C:/cereda-systems/cereda-table/node_modules/vite/dist/node/chunks/node.js:24306:20)
+[2m16:05:26[22m [31m[1m[vite][22m[39m [31mInternal server error: Transform failed with 1 error:
+
+[31m[PARSE_ERROR] Error:[0m Expected `>` but found `Identifier`
+    [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/shared/data-table/lib/auto-group-column.ts:25:48 [38;5;246m][0m
+    [38;5;246m│[0m
+ [38;5;246m25 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249mc[0m[38;5;249me[0m[38;5;249ml[0m[38;5;249ml[0m[38;5;249m:[0m[38;5;249m [0m[38;5;249m([0m[38;5;249mc[0m[38;5;249mo[0m[38;5;249mn[0m[38;5;249mt[0m[38;5;249me[0m[38;5;249mx[0m[38;5;249mt[0m[38;5;249m)[0m[38;5;249m [0m[38;5;249m=[0m[38;5;249m>[0m[38;5;249m [0m[38;5;249m<[0m[38;5;249mD[0m[38;5;249ma[0m[38;5;249mt[0m[38;5;249ma[0m[38;5;249mT[0m[38;5;249ma[0m[38;5;249mb[0m[38;5;249ml[0m[38;5;249me[0m[38;5;249mA[0m[38;5;249mu[0m[38;5;249mt[0m[38;5;249mo[0m[38;5;249mG[0m[38;5;249mr[0m[38;5;249mo[0m[38;5;249mu[0m[38;5;249mp[0m[38;5;249mC[0m[38;5;249me[0m[38;5;249ml[0m[38;5;249ml[0m[38;5;249m [0mcell[38;5;249m=[0m[38;5;249m{[0m[38;5;249mc[0m[38;5;249mo[0m[38;5;249mn[0m[38;5;249mt[0m[38;5;249me[0m[38;5;249mx[0m[38;5;249mt[0m[38;5;249m.[0m[38;5;249mc[0m[38;5;249me[0m[38;5;249ml[0m[38;5;249ml[0m[38;5;249m}[0m[38;5;249m [0m[38;5;249m/[0m[38;5;249m>[0m[38;5;249m,[0m
+ [38;5;240m   │[0m                                                ──┬─  
+ [38;5;240m   │[0m                                                  ╰─── `>` expected
+[38;5;246m────╯[0m
+[39m
+  Plugin: [35mvite:oxc[39m
+  File: [36mC:/cereda-systems/cereda-table/src/shared/data-table/lib/auto-group-column.ts[39m
+      at transformWithOxc (file:///C:/cereda-systems/cereda-table/node_modules/vite/dist/node/chunks/node.js:3343:19)
+      at TransformPluginContext.transform (file:///C:/cereda-systems/cereda-table/node_modules/vite/dist/node/chunks/node.js:3411:26)
+      at EnvironmentPluginContainer.transform (file:///C:/cereda-systems/cereda-table/node_modules/vite/dist/node/chunks/node.js:30164:51)
+      at async loadAndTransform (file:///C:/cereda-systems/cereda-table/node_modules/vite/dist/node/chunks/node.js:24512:26)
+      at async viteTransformMiddleware (file:///C:/cereda-systems/cereda-table/node_modules/vite/dist/node/chunks/node.js:24306:20)
+[2m16:05:26[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m Pre-transform error: Transform failed with 1 error:
+
+[31m[PARSE_ERROR] Error:[0m Expected `>` but found `Identifier`
+    [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/shared/data-table/lib/auto-group-column.ts:25:48 [38;5;246m][0m
+    [38;5;246m│[0m
+ [38;5;246m25 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249mc[0m[38;5;249me[0m[38;5;249ml[0m[38;5;249ml[0m[38;5;249m:[0m[38;5;249m [0m[38;5;249m([0m[38;5;249mc[0m[38;5;249mo[0m[38;5;249mn[0m[38;5;249mt[0m[38;5;249me[0m[38;5;249mx[0m[38;5;249mt[0m[38;5;249m)[0m[38;5;249m [0m[38;5;249m=[0m[38;5;249m>[0m[38;5;249m [0m[38;5;249m<[0m[38;5;249mD[0m[38;5;249ma[0m[38;5;249mt[0m[38;5;249ma[0m[38;5;249mT[0m[38;5;249ma[0m[38;5;249mb[0m[38;5;249ml[0m[38;5;249me[0m[38;5;249mA[0m[38;5;249mu[0m[38;5;249mt[0m[38;5;249mo[0m[38;5;249mG[0m[38;5;249mr[0m[38;5;249mo[0m[38;5;249mu[0m[38;5;249mp[0m[38;5;249mC[0m[38;5;249me[0m[38;5;249ml[0m[38;5;249ml[0m[38;5;249m [0mcell[38;5;249m=[0m[38;5;249m{[0m[38;5;249mc[0m[38;5;249mo[0m[38;5;249mn[0m[38;5;249mt[0m[38;5;249me[0m[38;5;249mx[0m[38;5;249mt[0m[38;5;249m.[0m[38;5;249mc[0m[38;5;249me[0m[38;5;249ml[0m[38;5;249ml[0m[38;5;249m}[0m[38;5;249m [0m[38;5;249m/[0m[38;5;249m>[0m[38;5;249m,[0m
+ [38;5;240m   │[0m                                                ──┬─  
+ [38;5;240m   │[0m                                                  ╰─── `>` expected
+[38;5;246m────╯[0m
+
+  Plugin: [35mvite:oxc[39m
+  File: [36mC:/cereda-systems/cereda-table/src/shared/data-table/lib/auto-group-column.ts[39m
+[2m16:05:37[22m [31m[1m[vite][22m[39m [31mInternal server error: Transform failed with 1 error:
+
+[31m[PARSE_ERROR] Error:[0m Expected `>` but found `Identifier`
+    [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/shared/data-table/lib/auto-group-column.ts:25:48 [38;5;246m][0m
+    [38;5;246m│[0m
+ [38;5;246m25 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249mc[0m[38;5;249me[0m[38;5;249ml[0m[38;5;249ml[0m[38;5;249m:[0m[38;5;249m [0m[38;5;249m([0m[38;5;249mc[0m[38;5;249mo[0m[38;5;249mn[0m[38;5;249mt[0m[38;5;249me[0m[38;5;249mx[0m[38;5;249mt[0m[38;5;249m)[0m[38;5;249m [0m[38;5;249m=[0m[38;5;249m>[0m[38;5;249m [0m[38;5;249m<[0m[38;5;249mD[0m[38;5;249ma[0m[38;5;249mt[0m[38;5;249ma[0m[38;5;249mT[0m[38;5;249ma[0m[38;5;249mb[0m[38;5;249ml[0m[38;5;249me[0m[38;5;249mA[0m[38;5;249mu[0m[38;5;249mt[0m[38;5;249mo[0m[38;5;249mG[0m[38;5;249mr[0m[38;5;249mo[0m[38;5;249mu[0m[38;5;249mp[0m[38;5;249mC[0m[38;5;249me[0m[38;5;249ml[0m[38;5;249ml[0m[38;5;249m [0mcell[38;5;249m=[0m[38;5;249m{[0m[38;5;249mc[0m[38;5;249mo[0m[38;5;249mn[0m[38;5;249mt[0m[38;5;249me[0m[38;5;249mx[0m[38;5;249mt[0m[38;5;249m.[0m[38;5;249mc[0m[38;5;249me[0m[38;5;249ml[0m[38;5;249ml[0m[38;5;249m}[0m[38;5;249m [0m[38;5;249m/[0m[38;5;249m>[0m[38;5;249m,[0m
+ [38;5;240m   │[0m                                                ──┬─  
+ [38;5;240m   │[0m                                                  ╰─── `>` expected
+[38;5;246m────╯[0m
+[39m
+  Plugin: [35mvite:oxc[39m
+  File: [36mC:/cereda-systems/cereda-table/src/shared/data-table/lib/auto-group-column.ts[39m
+      at transformWithOxc (file:///C:/cereda-systems/cereda-table/node_modules/vite/dist/node/chunks/node.js:3343:19)
+      at TransformPluginContext.transform (file:///C:/cereda-systems/cereda-table/node_modules/vite/dist/node/chunks/node.js:3411:26)
+      at EnvironmentPluginContainer.transform (file:///C:/cereda-systems/cereda-table/node_modules/vite/dist/node/chunks/node.js:30164:51)
+      at async loadAndTransform (file:///C:/cereda-systems/cereda-table/node_modules/vite/dist/node/chunks/node.js:24512:26)
+      at async viteTransformMiddleware (file:///C:/cereda-systems/cereda-table/node_modules/vite/dist/node/chunks/node.js:24306:20)
+[2m16:05:45[22m [31m[1m[vite][22m[39m [31mInternal server error: Transform failed with 1 error:
+
+[31m[PARSE_ERROR] Error:[0m Expected `>` but found `Identifier`
+    [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/shared/data-table/lib/auto-group-column.ts:25:48 [38;5;246m][0m
+    [38;5;246m│[0m
+ [38;5;246m25 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249mc[0m[38;5;249me[0m[38;5;249ml[0m[38;5;249ml[0m[38;5;249m:[0m[38;5;249m [0m[38;5;249m([0m[38;5;249mc[0m[38;5;249mo[0m[38;5;249mn[0m[38;5;249mt[0m[38;5;249me[0m[38;5;249mx[0m[38;5;249mt[0m[38;5;249m)[0m[38;5;249m [0m[38;5;249m=[0m[38;5;249m>[0m[38;5;249m [0m[38;5;249m<[0m[38;5;249mD[0m[38;5;249ma[0m[38;5;249mt[0m[38;5;249ma[0m[38;5;249mT[0m[38;5;249ma[0m[38;5;249mb[0m[38;5;249ml[0m[38;5;249me[0m[38;5;249mA[0m[38;5;249mu[0m[38;5;249mt[0m[38;5;249mo[0m[38;5;249mG[0m[38;5;249mr[0m[38;5;249mo[0m[38;5;249mu[0m[38;5;249mp[0m[38;5;249mC[0m[38;5;249me[0m[38;5;249ml[0m[38;5;249ml[0m[38;5;249m [0mcell[38;5;249m=[0m[38;5;249m{[0m[38;5;249mc[0m[38;5;249mo[0m[38;5;249mn[0m[38;5;249mt[0m[38;5;249me[0m[38;5;249mx[0m[38;5;249mt[0m[38;5;249m.[0m[38;5;249mc[0m[38;5;249me[0m[38;5;249ml[0m[38;5;249ml[0m[38;5;249m}[0m[38;5;249m [0m[38;5;249m/[0m[38;5;249m>[0m[38;5;249m,[0m
+ [38;5;240m   │[0m                                                ──┬─  
+ [38;5;240m   │[0m                                                  ╰─── `>` expected
+[38;5;246m────╯[0m
+[39m
+  Plugin: [35mvite:oxc[39m
+  File: [36mC:/cereda-systems/cereda-table/src/shared/data-table/lib/auto-group-column.ts[39m
+      at transformWithOxc (file:///C:/cereda-systems/cereda-table/node_modules/vite/dist/node/chunks/node.js:3343:19)
+      at TransformPluginContext.transform (file:///C:/cereda-systems/cereda-table/node_modules/vite/dist/node/chunks/node.js:3411:26)
+      at EnvironmentPluginContainer.transform (file:///C:/cereda-systems/cereda-table/node_modules/vite/dist/node/chunks/node.js:30164:51)
+      at async loadAndTransform (file:///C:/cereda-systems/cereda-table/node_modules/vite/dist/node/chunks/node.js:24512:26)
+[2m16:05:45[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m Pre-transform error: Transform failed with 1 error:
+
+[31m[PARSE_ERROR] Error:[0m Expected `>` but found `Identifier`
+    [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/shared/data-table/lib/auto-group-column.ts:25:48 [38;5;246m][0m
+    [38;5;246m│[0m
+ [38;5;246m25 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249mc[0m[38;5;249me[0m[38;5;249ml[0m[38;5;249ml[0m[38;5;249m:[0m[38;5;249m [0m[38;5;249m([0m[38;5;249mc[0m[38;5;249mo[0m[38;5;249mn[0m[38;5;249mt[0m[38;5;249me[0m[38;5;249mx[0m[38;5;249mt[0m[38;5;249m)[0m[38;5;249m [0m[38;5;249m=[0m[38;5;249m>[0m[38;5;249m [0m[38;5;249m<[0m[38;5;249mD[0m[38;5;249ma[0m[38;5;249mt[0m[38;5;249ma[0m[38;5;249mT[0m[38;5;249ma[0m[38;5;249mb[0m[38;5;249ml[0m[38;5;249me[0m[38;5;249mA[0m[38;5;249mu[0m[38;5;249mt[0m[38;5;249mo[0m[38;5;249mG[0m[38;5;249mr[0m[38;5;249mo[0m[38;5;249mu[0m[38;5;249mp[0m[38;5;249mC[0m[38;5;249me[0m[38;5;249ml[0m[38;5;249ml[0m[38;5;249m [0mcell[38;5;249m=[0m[38;5;249m{[0m[38;5;249mc[0m[38;5;249mo[0m[38;5;249mn[0m[38;5;249mt[0m[38;5;249me[0m[38;5;249mx[0m[38;5;249mt[0m[38;5;249m.[0m[38;5;249mc[0m[38;5;249me[0m[38;5;249ml[0m[38;5;249ml[0m[38;5;249m}[0m[38;5;249m [0m[38;5;249m/[0m[38;5;249m>[0m[38;5;249m,[0m
+ [38;5;240m   │[0m                                                ──┬─  
+ [38;5;240m   │[0m                                                  ╰─── `>` expected
+[38;5;246m────╯[0m
+
+  Plugin: [35mvite:oxc[39m
+  File: [36mC:/cereda-systems/cereda-table/src/shared/data-table/lib/auto-group-column.ts[39m
+[2m16:05:55[22m [31m[1m[vite][22m[39m [31mInternal server error: Transform failed with 1 error:
+
+[31m[PARSE_ERROR] Error:[0m Expected `>` but found `Identifier`
+    [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/shared/data-table/lib/auto-group-column.ts:25:48 [38;5;246m][0m
+    [38;5;246m│[0m
+ [38;5;246m25 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249mc[0m[38;5;249me[0m[38;5;249ml[0m[38;5;249ml[0m[38;5;249m:[0m[38;5;249m [0m[38;5;249m([0m[38;5;249mc[0m[38;5;249mo[0m[38;5;249mn[0m[38;5;249mt[0m[38;5;249me[0m[38;5;249mx[0m[38;5;249mt[0m[38;5;249m)[0m[38;5;249m [0m[38;5;249m=[0m[38;5;249m>[0m[38;5;249m [0m[38;5;249m<[0m[38;5;249mD[0m[38;5;249ma[0m[38;5;249mt[0m[38;5;249ma[0m[38;5;249mT[0m[38;5;249ma[0m[38;5;249mb[0m[38;5;249ml[0m[38;5;249me[0m[38;5;249mA[0m[38;5;249mu[0m[38;5;249mt[0m[38;5;249mo[0m[38;5;249mG[0m[38;5;249mr[0m[38;5;249mo[0m[38;5;249mu[0m[38;5;249mp[0m[38;5;249mC[0m[38;5;249me[0m[38;5;249ml[0m[38;5;249ml[0m[38;5;249m [0mcell[38;5;249m=[0m[38;5;249m{[0m[38;5;249mc[0m[38;5;249mo[0m[38;5;249mn[0m[38;5;249mt[0m[38;5;249me[0m[38;5;249mx[0m[38;5;249mt[0m[38;5;249m.[0m[38;5;249mc[0m[38;5;249me[0m[38;5;249ml[0m[38;5;249ml[0m[38;5;249m}[0m[38;5;249m [0m[38;5;249m/[0m[38;5;249m>[0m[38;5;249m,[0m
+ [38;5;240m   │[0m                                                ──┬─  
+ [38;5;240m   │[0m                                                  ╰─── `>` expected
+[38;5;246m────╯[0m
+[39m
+  Plugin: [35mvite:oxc[39m
+  File: [36mC:/cereda-systems/cereda-table/src/shared/data-table/lib/auto-group-column.ts[39m
+      at transformWithOxc (file:///C:/cereda-systems/cereda-table/node_modules/vite/dist/node/chunks/node.js:3343:19)
+      at TransformPluginContext.transform (file:///C:/cereda-systems/cereda-table/node_modules/vite/dist/node/chunks/node.js:3411:26)
+      at EnvironmentPluginContainer.transform (file:///C:/cereda-systems/cereda-table/node_modules/vite/dist/node/chunks/node.js:30164:51)
+      at async loadAndTransform (file:///C:/cereda-systems/cereda-table/node_modules/vite/dist/node/chunks/node.js:24512:26)
+      at async viteTransformMiddleware (file:///C:/cereda-systems/cereda-table/node_modules/vite/dist/node/chunks/node.js:24306:20)
+[2m16:05:55[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m Pre-transform error: Transform failed with 1 error:
+
+[31m[PARSE_ERROR] Error:[0m Expected `>` but found `Identifier`
+    [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/shared/data-table/lib/auto-group-column.ts:25:48 [38;5;246m][0m
+    [38;5;246m│[0m
+ [38;5;246m25 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249mc[0m[38;5;249me[0m[38;5;249ml[0m[38;5;249ml[0m[38;5;249m:[0m[38;5;249m [0m[38;5;249m([0m[38;5;249mc[0m[38;5;249mo[0m[38;5;249mn[0m[38;5;249mt[0m[38;5;249me[0m[38;5;249mx[0m[38;5;249mt[0m[38;5;249m)[0m[38;5;249m [0m[38;5;249m=[0m[38;5;249m>[0m[38;5;249m [0m[38;5;249m<[0m[38;5;249mD[0m[38;5;249ma[0m[38;5;249mt[0m[38;5;249ma[0m[38;5;249mT[0m[38;5;249ma[0m[38;5;249mb[0m[38;5;249ml[0m[38;5;249me[0m[38;5;249mA[0m[38;5;249mu[0m[38;5;249mt[0m[38;5;249mo[0m[38;5;249mG[0m[38;5;249mr[0m[38;5;249mo[0m[38;5;249mu[0m[38;5;249mp[0m[38;5;249mC[0m[38;5;249me[0m[38;5;249ml[0m[38;5;249ml[0m[38;5;249m [0mcell[38;5;249m=[0m[38;5;249m{[0m[38;5;249mc[0m[38;5;249mo[0m[38;5;249mn[0m[38;5;249mt[0m[38;5;249me[0m[38;5;249mx[0m[38;5;249mt[0m[38;5;249m.[0m[38;5;249mc[0m[38;5;249me[0m[38;5;249ml[0m[38;5;249ml[0m[38;5;249m}[0m[38;5;249m [0m[38;5;249m/[0m[38;5;249m>[0m[38;5;249m,[0m
+ [38;5;240m   │[0m                                                ──┬─  
+ [38;5;240m   │[0m                                                  ╰─── `>` expected
+[38;5;246m────╯[0m
+
+  Plugin: [35mvite:oxc[39m
+  File: [36mC:/cereda-systems/cereda-table/src/shared/data-table/lib/auto-group-column.ts[39m
+[2m16:06:26[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m Pre-transform error: Failed to load url /src/shared/data-table/lib/auto-group-column.ts (resolved id: C:/cereda-systems/cereda-table/src/shared/data-table/lib/auto-group-column.ts) in C:/cereda-systems/cereda-table/src/shared/data-table/hooks/use-data-table.ts. Does the file exist?
+[2m16:06:26[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m Pre-transform error: Failed to load url /src/shared/data-table/lib/auto-group-column.ts (resolved id: C:/cereda-systems/cereda-table/src/shared/data-table/lib/auto-group-column.ts) in C:/cereda-systems/cereda-table/src/shared/data-table/hooks/use-data-table.ts. Does the file exist?
+[2m16:06:26[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m Pre-transform error: Failed to load url /src/shared/data-table/lib/auto-group-column.ts (resolved id: C:/cereda-systems/cereda-table/src/shared/data-table/lib/auto-group-column.ts) in C:/cereda-systems/cereda-table/src/shared/data-table/hooks/use-data-table.ts. Does the file exist?
+[2m16:06:26[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m Pre-transform error: Failed to load url /src/shared/data-table/lib/auto-group-column.ts (resolved id: C:/cereda-systems/cereda-table/src/shared/data-table/lib/auto-group-column.ts) in C:/cereda-systems/cereda-table/src/shared/data-table/hooks/use-data-table.ts. Does the file exist?
+[2m16:06:26[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m Pre-transform error: Failed to load url /src/shared/data-table/lib/auto-group-column.ts (resolved id: C:/cereda-systems/cereda-table/src/shared/data-table/lib/auto-group-column.ts) in C:/cereda-systems/cereda-table/src/shared/data-table/hooks/use-data-table.ts. Does the file exist?
+[2m16:06:26[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m Pre-transform error: Failed to load url /src/shared/data-table/lib/auto-group-column.ts (resolved id: C:/cereda-systems/cereda-table/src/shared/data-table/lib/auto-group-column.ts) in C:/cereda-systems/cereda-table/src/shared/data-table/hooks/use-data-table.ts. Does the file exist?
+[2m16:06:26[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m Pre-transform error: Failed to load url /src/shared/data-table/lib/auto-group-column.ts (resolved id: C:/cereda-systems/cereda-table/src/shared/data-table/lib/auto-group-column.ts) in C:/cereda-systems/cereda-table/src/shared/data-table/hooks/use-data-table.ts. Does the file exist?
+[2m16:06:26[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m Pre-transform error: Failed to load url /src/shared/data-table/lib/auto-group-column.ts (resolved id: C:/cereda-systems/cereda-table/src/shared/data-table/lib/auto-group-column.ts) in C:/cereda-systems/cereda-table/src/shared/data-table/hooks/use-data-table.ts. Does the file exist?
+[2m16:06:50[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m Pre-transform error: Failed to load url /src/shared/data-table/lib/auto-group-column.ts (resolved id: C:/cereda-systems/cereda-table/src/shared/data-table/lib/auto-group-column.ts) in C:/cereda-systems/cereda-table/src/shared/data-table/hooks/use-data-table.ts. Does the file exist?
+[2m16:06:50[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m Pre-transform error: Failed to load url /src/shared/data-table/lib/auto-group-column.ts (resolved id: C:/cereda-systems/cereda-table/src/shared/data-table/lib/auto-group-column.ts) in C:/cereda-systems/cereda-table/src/shared/data-table/hooks/use-data-table.ts. Does the file exist?
+[2m16:06:50[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m Pre-transform error: Failed to load url /src/shared/data-table/lib/auto-group-column.ts (resolved id: C:/cereda-systems/cereda-table/src/shared/data-table/lib/auto-group-column.ts) in C:/cereda-systems/cereda-table/src/shared/data-table/hooks/use-data-table.ts. Does the file exist?
+[2m16:06:50[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m Pre-transform error: Failed to load url /src/shared/data-table/lib/auto-group-column.ts (resolved id: C:/cereda-systems/cereda-table/src/shared/data-table/lib/auto-group-column.ts) in C:/cereda-systems/cereda-table/src/shared/data-table/hooks/use-data-table.ts. Does the file exist?
+[2m16:06:54[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m Pre-transform error: Failed to load url /src/shared/data-table/lib/auto-group-column.ts (resolved id: C:/cereda-systems/cereda-table/src/shared/data-table/lib/auto-group-column.ts) in C:/cereda-systems/cereda-table/src/shared/data-table/hooks/use-data-table.ts. Does the file exist?
+[2m16:06:54[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m Pre-transform error: Failed to load url /src/shared/data-table/lib/auto-group-column.ts (resolved id: C:/cereda-systems/cereda-table/src/shared/data-table/lib/auto-group-column.ts) in C:/cereda-systems/cereda-table/src/shared/data-table/hooks/use-data-table.ts. Does the file exist?
+[2m16:06:54[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m Pre-transform error: Failed to load url /src/shared/data-table/lib/auto-group-column.ts (resolved id: C:/cereda-systems/cereda-table/src/shared/data-table/lib/auto-group-column.ts) in C:/cereda-systems/cereda-table/src/shared/data-table/hooks/use-data-table.ts. Does the file exist?
+[2m16:06:54[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m Pre-transform error: Failed to load url /src/shared/data-table/lib/auto-group-column.ts (resolved id: C:/cereda-systems/cereda-table/src/shared/data-table/lib/auto-group-column.ts) in C:/cereda-systems/cereda-table/src/shared/data-table/hooks/use-data-table.ts. Does the file exist?
+[2m16:17:29[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m Pre-transform error: Failed to load url /src/shared/data-table/lib/auto-group-column.ts (resolved id: C:/cereda-systems/cereda-table/src/shared/data-table/lib/auto-group-column.ts) in C:/cereda-systems/cereda-table/src/shared/data-table/lib/column-ordering.ts. Does the file exist?
+[2m16:17:29[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m Pre-transform error: Failed to load url /src/shared/data-table/lib/auto-group-column.ts (resolved id: C:/cereda-systems/cereda-table/src/shared/data-table/lib/auto-group-column.ts) in C:/cereda-systems/cereda-table/src/shared/data-table/lib/column-ordering.ts. Does the file exist?
+[2m16:17:29[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m Pre-transform error: Failed to load url /src/shared/data-table/lib/auto-group-column.ts (resolved id: C:/cereda-systems/cereda-table/src/shared/data-table/lib/auto-group-column.ts) in C:/cereda-systems/cereda-table/src/shared/data-table/lib/column-ordering.ts. Does the file exist?
+[2m16:17:54[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m Pre-transform error: Failed to load url /src/shared/data-table/lib/auto-group-column.ts (resolved id: C:/cereda-systems/cereda-table/src/shared/data-table/lib/auto-group-column.ts) in C:/cereda-systems/cereda-table/src/shared/data-table/lib/column-ordering.ts. Does the file exist?
+[2m16:18:21[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m Pre-transform error: Failed to load url /src/shared/data-table/lib/auto-group-column.ts (resolved id: C:/cereda-systems/cereda-table/src/shared/data-table/lib/auto-group-column.ts) in C:/cereda-systems/cereda-table/src/shared/data-table/lib/column-ordering.ts. Does the file exist?
+[2m16:19:02[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m Pre-transform error: Failed to load url /src/shared/data-table/lib/auto-group-column.ts (resolved id: C:/cereda-systems/cereda-table/src/shared/data-table/lib/auto-group-column.ts) in C:/cereda-systems/cereda-table/src/shared/data-table/lib/column-ordering.ts. Does the file exist?
+[2m16:19:02[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m Pre-transform error: Failed to load url /src/shared/data-table/lib/auto-group-column.ts (resolved id: C:/cereda-systems/cereda-table/src/shared/data-table/lib/auto-group-column.ts) in C:/cereda-systems/cereda-table/src/shared/data-table/lib/column-ordering.ts. Does the file exist?
+[2m20:23:55[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m Pre-transform error: Failed to load url /src/shared/data-table/lib/auto-group-column.ts (resolved id: C:/cereda-systems/cereda-table/src/shared/data-table/lib/auto-group-column.ts) in C:/cereda-systems/cereda-table/src/shared/data-table/lib/column-ordering.ts. Does the file exist?
+[2m20:23:55[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m Pre-transform error: Failed to load url /src/shared/data-table/lib/auto-group-column.ts (resolved id: C:/cereda-systems/cereda-table/src/shared/data-table/lib/auto-group-column.ts) in C:/cereda-systems/cereda-table/src/shared/data-table/lib/column-ordering.ts. Does the file exist?
+[2m20:24:35[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m Pre-transform error: Failed to load url /src/shared/data-table/lib/auto-group-column.ts (resolved id: C:/cereda-systems/cereda-table/src/shared/data-table/lib/auto-group-column.ts) in C:/cereda-systems/cereda-table/src/shared/data-table/lib/column-ordering.ts. Does the file exist?
+[2m20:24:35[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m Pre-transform error: Failed to load url /src/shared/data-table/lib/auto-group-column.ts (resolved id: C:/cereda-systems/cereda-table/src/shared/data-table/lib/auto-group-column.ts) in C:/cereda-systems/cereda-table/src/shared/data-table/lib/column-ordering.ts. Does the file exist?

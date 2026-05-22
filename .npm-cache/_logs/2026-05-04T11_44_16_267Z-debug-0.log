@@ -1,0 +1,42 @@
+0 verbose cli C:\nvm4w\nodejs\node.exe C:\nvm4w\nodejs\node_modules\npm\bin\npm-cli.js
+1 info using npm@11.5.1
+2 info using node@v24.7.0
+3 silly config load:file:C:\Users\bielkin\AppData\Local\nvm\v24.7.0\node_modules\npm\npmrc
+4 silly config load:file:C:\cereda-systems\cereda-table\.npmrc
+5 silly config load:file:C:\Users\bielkin\.npmrc
+6 silly config load:file:C:\Users\bielkin\AppData\Roaming\npm\etc\npmrc
+7 verbose title npm install eslint @eslint/js typescript-eslint eslint-plugin-react-hooks eslint-plugin-simple-import-sort globals
+8 verbose argv "install" "--save-dev" "eslint" "@eslint/js" "typescript-eslint" "eslint-plugin-react-hooks" "eslint-plugin-simple-import-sort" "globals" "--no-audit" "--no-fund"
+9 verbose logfile logs-max:10 dir:C:\cereda-systems\cereda-table\.npm-cache\_logs\2026-05-04T11_44_16_267Z-
+10 verbose logfile C:\cereda-systems\cereda-table\.npm-cache\_logs\2026-05-04T11_44_16_267Z-debug-0.log
+11 silly logfile done cleaning log files
+12 silly packumentCache heap:4496293888 maxSize:1124073472 maxEntrySize:562036736
+13 silly idealTree buildDeps
+14 silly fetch manifest eslint@*
+15 silly packumentCache full:https://registry.npmjs.org/eslint cache-miss
+16 verbose shrinkwrap failed to load node_modules/.package-lock.json out of date, updated: node_modules
+17 http fetch GET https://registry.npmjs.org/npm attempt 1 failed with EACCES
+18 http fetch GET https://registry.npmjs.org/eslint attempt 1 failed with EACCES
+19 http fetch GET https://registry.npmjs.org/npm attempt 2 failed with EACCES
+20 http fetch GET https://registry.npmjs.org/eslint attempt 2 failed with EACCES
+21 http fetch GET https://registry.npmjs.org/npm attempt 3 failed with EACCES
+22 http fetch GET https://registry.npmjs.org/eslint attempt 3 failed with EACCES
+23 silly fetch manifest @eslint/js@*
+24 silly packumentCache full:https://registry.npmjs.org/@eslint%2fjs cache-miss
+25 http fetch GET https://registry.npmjs.org/@eslint%2fjs attempt 1 failed with EACCES
+26 http fetch GET https://registry.npmjs.org/@eslint%2fjs attempt 2 failed with EACCES
+27 http fetch GET https://registry.npmjs.org/@eslint%2fjs attempt 3 failed with EACCES
+28 silly fetch manifest typescript-eslint@*
+29 silly packumentCache full:https://registry.npmjs.org/typescript-eslint cache-miss
+30 http fetch GET https://registry.npmjs.org/typescript-eslint attempt 1 failed with EACCES
+31 http fetch GET https://registry.npmjs.org/typescript-eslint attempt 2 failed with EACCES
+32 http fetch GET https://registry.npmjs.org/typescript-eslint attempt 3 failed with EACCES
+33 silly fetch manifest eslint-plugin-react-hooks@*
+34 silly packumentCache full:https://registry.npmjs.org/eslint-plugin-react-hooks cache-miss
+35 http fetch GET https://registry.npmjs.org/eslint-plugin-react-hooks attempt 1 failed with EACCES
+36 http fetch GET https://registry.npmjs.org/eslint-plugin-react-hooks attempt 2 failed with EACCES
+37 http fetch GET https://registry.npmjs.org/eslint-plugin-react-hooks attempt 3 failed with EACCES
+38 silly fetch manifest eslint-plugin-simple-import-sort@*
+39 silly packumentCache full:https://registry.npmjs.org/eslint-plugin-simple-import-sort cache-miss
+40 http fetch GET https://registry.npmjs.org/eslint-plugin-simple-import-sort attempt 1 failed with EACCES
+41 http fetch GET https://registry.npmjs.org/eslint-plugin-simple-import-sort attempt 2 failed with EACCES
