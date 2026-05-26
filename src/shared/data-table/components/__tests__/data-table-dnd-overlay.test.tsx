@@ -13,9 +13,9 @@ describe('DataTableDndOverlayPreview', () => {
     );
 
     expect(screen.getByText('Department')).toBeInTheDocument();
-    expect(document.body.querySelector('.data-table__dnd-overlay-icon')).toBeInTheDocument();
-    expect(document.body.querySelector('.data-table__dnd-overlay')).toBeInTheDocument();
-    expect(document.body.querySelector('.data-table__dnd-overlay--pill')).not.toBeInTheDocument();
+    expect(document.body.querySelector('.cereda-table__dnd-overlay-icon')).toBeInTheDocument();
+    expect(document.body.querySelector('.cereda-table__dnd-overlay')).toBeInTheDocument();
+    expect(document.body.querySelector('.cereda-table__dnd-overlay--pill')).not.toBeInTheDocument();
     expect(screen.queryByRole('textbox')).not.toBeInTheDocument();
     expect(screen.queryByText('Grouped by')).not.toBeInTheDocument();
     expect(screen.queryByText('then by')).not.toBeInTheDocument();
@@ -30,8 +30,9 @@ describe('DataTableDndOverlayPreview', () => {
     );
 
     expect(screen.getByText('Status')).toBeInTheDocument();
-    expect(document.body.querySelector('.data-table__dnd-overlay-icon')).toBeInTheDocument();
-    expect(document.body.querySelector('.data-table__dnd-overlay--pill')).toBeInTheDocument();
+    expect(document.body.querySelector('.cereda-table__dnd-overlay-icon')).toBeInTheDocument();
+    expect(document.body.querySelector('.cereda-table__dnd-overlay--pill')).toBeInTheDocument();
     expect(screen.queryByRole('textbox')).not.toBeInTheDocument();
   });
 });
+

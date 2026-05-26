@@ -15,8 +15,8 @@ export function DataTableRow<TData extends object>({
     <tr
       className={
         isGrouped
-          ? 'data-table__row data-table__row--grouped'
-          : 'data-table__row'
+          ? 'cereda-table__row cereda-table__row--grouped'
+          : 'cereda-table__row'
       }
       data-selected={row.getIsSelected() || undefined}
       data-grouped={isGrouped || undefined}
@@ -27,3 +27,4 @@ export function DataTableRow<TData extends object>({
     </tr>
   );
 }
+

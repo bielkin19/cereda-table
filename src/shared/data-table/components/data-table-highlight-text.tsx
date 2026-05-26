@@ -16,7 +16,7 @@ export function DataTableHighlightText({ text, term }: DataTableHighlightTextPro
     <>
       {segments.map((segment, index) =>
         segment.match ? (
-          <mark key={index} className="data-table__highlight">
+          <mark key={index} className="cereda-table__highlight">
             {segment.text}
           </mark>
         ) : (
@@ -26,3 +26,4 @@ export function DataTableHighlightText({ text, term }: DataTableHighlightTextPro
     </>
   );
 }
+

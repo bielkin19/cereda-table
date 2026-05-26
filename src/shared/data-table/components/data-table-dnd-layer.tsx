@@ -396,7 +396,7 @@ export function DataTableDndLayer<TData extends object>({
 
     const targetElement = document.elementFromPoint(point.x, point.y);
     const targetHeaderCell = targetElement?.closest<HTMLElement>(
-      '.data-table__header-cell[data-column-id]',
+      '.cereda-table__header-cell[data-column-id]',
     );
 
     if (!targetHeaderCell) {
@@ -516,3 +516,4 @@ export function DataTableDndLayer<TData extends object>({
     </DataTableDndStateProvider>
   );
 }
+

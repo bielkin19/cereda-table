@@ -491,14 +491,14 @@ function getRenderedNames(container: HTMLElement): string[] {
 }
 
 function getRenderedHeaderLabels(container: HTMLElement): string[] {
-  return Array.from(container.querySelectorAll('thead .data-table__header-label')).map(
+  return Array.from(container.querySelectorAll('thead .cereda-table__header-label')).map(
     (element) => element.textContent ?? '',
   );
 }
 
 function getRenderedColumnHeaderButtonLabels(container: HTMLElement): string[] {
   return Array.from(
-    container.querySelectorAll('th[aria-sort] .data-table__header-main-surface'),
+    container.querySelectorAll('th[aria-sort] .cereda-table__header-main-surface'),
   ).map(
     (button) => button.textContent?.replace(/\s+/g, ' ').trim() ?? '',
   );
@@ -1172,14 +1172,14 @@ describe('DataTable - column resizing', () => {
       />,
     );
 
-    expect(container.querySelector('.data-table__body-scroll')).toBeInTheDocument();
+    expect(container.querySelector('.cereda-table__body-scroll')).toBeInTheDocument();
     expect(container.querySelector('table')).toHaveStyle({
       width: '632px',
       tableLayout: 'fixed',
     });
 
     const headers = container.querySelectorAll('thead th');
-    const bodyCells = container.querySelectorAll('tbody tr:not(.data-table__loading-row) td');
+    const bodyCells = container.querySelectorAll('tbody tr:not(.cereda-table__loading-row) td');
 
     expect(headers[1]).toHaveStyle({
       width: '180px',
@@ -1298,7 +1298,7 @@ describe('DataTable - column resizing', () => {
     });
     expect(screen.getByRole('button', { name: `Drag ${label} column` })).toBeInTheDocument();
     expect(
-      container.querySelector('.data-table__header-groupable-indicator'),
+      container.querySelector('.cereda-table__header-groupable-indicator'),
     ).toBeInTheDocument();
     expect(getEffectiveColumnSize(40, undefined, 220, label)).toBe(estimateColumnMinSize(label));
   });
@@ -1322,7 +1322,7 @@ describe('DataTable - column resizing', () => {
       maxWidth: '260px',
     });
     const visibleBodyCells = container.querySelectorAll(
-      'tbody tr:not(.data-table__loading-row) td',
+      'tbody tr:not(.cereda-table__loading-row) td',
     );
     expect(visibleBodyCells[1]).toHaveStyle({
       width: '220px',
@@ -1397,7 +1397,7 @@ describe('DataTable - column resizing', () => {
       />,
     );
 
-    expect(container.querySelector('.data-table__body-scroll')).toBeInTheDocument();
+    expect(container.querySelector('.cereda-table__body-scroll')).toBeInTheDocument();
     expect(container.querySelectorAll('thead th')).toHaveLength(0);
     expect(container.querySelector('table')).toHaveStyle({
       width: '100%',
@@ -1469,9 +1469,9 @@ describe('DataTable - grouping', () => {
     );
     expect(
       screen.getByRole('button', { name: 'Ungroup Status' }).closest(
-        '.data-table__columns-menu-group-item',
+        '.cereda-table__columns-menu-group-item',
       ),
-    ).toHaveClass('data-table__columns-menu-group-item--grouped');
+    ).toHaveClass('cereda-table__columns-menu-group-item--grouped');
     expect(screen.getByRole('button', { name: 'Ungroup Department' })).toHaveAttribute(
       'aria-pressed',
       'true',
@@ -4037,7 +4037,7 @@ describe('DataTable - empty state', () => {
 
   it('empty-state panel is visible when data is empty', () => {
     render(<DataTable data={[]} columns={columns} />);
-    const panel = screen.getByText('No results found').closest('.data-table__empty-panel');
+    const panel = screen.getByText('No results found').closest('.cereda-table__empty-panel');
     expect(panel).toBeInTheDocument();
   });
 
@@ -4050,7 +4050,7 @@ describe('DataTable - empty state', () => {
 describe('DataTable - loading state', () => {
   it('renders skeleton rows when isLoading is true', () => {
     const { container } = render(<DataTable data={[]} columns={columns} isLoading />);
-    expect(container.querySelectorAll('.data-table__skeleton').length).toBeGreaterThan(0);
+    expect(container.querySelectorAll('.cereda-table__skeleton').length).toBeGreaterThan(0);
   });
 
   it('does not render the empty state while loading', () => {
@@ -4073,7 +4073,7 @@ describe('DataTable - loading state', () => {
       <DataTable data={[]} columns={columns} isLoading renderLoading={custom} />,
     );
     expect(screen.getByText('Loading')).toBeInTheDocument();
-    expect(container.querySelectorAll('.data-table__skeleton')).toHaveLength(0);
+    expect(container.querySelectorAll('.cereda-table__skeleton')).toHaveLength(0);
   });
 });
 
@@ -4380,7 +4380,7 @@ describe('DataTable - edge cases', () => {
         columnVisibility={{ id: false, name: false }}
       />,
     );
-    const panel = screen.getByText('No results found').closest('.data-table__empty-panel');
+    const panel = screen.getByText('No results found').closest('.cereda-table__empty-panel');
     expect(panel).toBeInTheDocument();
   });
 
@@ -4388,4 +4388,5 @@ describe('DataTable - edge cases', () => {
     expect(() => render(<DataTable data={[]} columns={[]} />)).not.toThrow();
   });
 });
+
 

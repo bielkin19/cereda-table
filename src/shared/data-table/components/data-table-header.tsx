@@ -26,7 +26,7 @@ function DataTableFilterCell<TData extends object>({
   if (isDataTableRowNumberColumnId(header.column.id)) {
     return (
       <th
-        className="data-table__th data-table__row-number-th data-table__row-number-th--filter"
+        className="cereda-table__th cereda-table__row-number-th cereda-table__row-number-th--filter"
         style={getColumnSizeStyle(48, 48, 48)}
         data-column-id={header.column.id}
       />
@@ -48,12 +48,12 @@ function DataTableFilterCell<TData extends object>({
 
   return (
     <th
-      className="data-table__th data-table__filter-cell"
+      className="cereda-table__th cereda-table__filter-cell"
       style={style}
       data-column-id={header.column.id}
     >
       {canFilter ? (
-        <div className="data-table__header-filter">
+        <div className="cereda-table__header-filter">
           <DataTableColumnFilter
             column={header.column}
             table={header.getContext().table}
@@ -86,9 +86,9 @@ export function DataTableHeader<TData extends object>({
       : [];
 
   return (
-    <thead className="data-table__head">
+    <thead className="cereda-table__head">
       {headerGroups.map((headerGroup, index) => (
-        <tr key={headerGroup.id} className="data-table__header-row">
+        <tr key={headerGroup.id} className="cereda-table__header-row">
           {index === leafHeaderGroupIndex ? (
             <SortableContext
               items={leafHeaderIds}
@@ -116,7 +116,7 @@ export function DataTableHeader<TData extends object>({
         </tr>
       ))}
       {enableColumnFilters && leafHeaderGroup ? (
-        <tr key={`${leafHeaderGroup.id}-filters`} className="data-table__filter-row">
+        <tr key={`${leafHeaderGroup.id}-filters`} className="cereda-table__filter-row">
           {leafHeaderGroup.headers.map((header) => (
             <DataTableFilterCell key={header.id} header={header} />
           ))}
@@ -125,3 +125,4 @@ export function DataTableHeader<TData extends object>({
     </thead>
   );
 }
+

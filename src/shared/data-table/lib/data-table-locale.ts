@@ -367,10 +367,11 @@ export const DEFAULT_DATA_TABLE_LOCALE: DataTableLocale = {
 export function createLocale(overrides: DataTableLocaleOverrides): DataTableLocale {
   const result = {} as DataTableLocale;
   for (const key of Object.keys(DEFAULT_DATA_TABLE_LOCALE) as (keyof DataTableLocale)[]) {
-    (result as Record<string, unknown>)[key] = {
+    (result as unknown as Record<keyof DataTableLocale, unknown>)[key] = {
       ...DEFAULT_DATA_TABLE_LOCALE[key],
       ...(overrides[key] ?? {}),
     };
   }
   return result;
 }
+

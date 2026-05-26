@@ -50,7 +50,7 @@ export function DataTableHeaderCell<TData extends object>({
     return (
       <th
         key={header.id}
-        className="data-table__th data-table__row-number-th"
+        className="cereda-table__th cereda-table__row-number-th"
         style={getColumnSizeStyle(48, 48, 48)}
         data-column-id={header.column.id}
         aria-label={locale.columnHeader.rowNumberAriaLabel}
@@ -132,8 +132,8 @@ function DataTableSortableHeaderCell<TData extends object>({
   style.transition = transition;
 
   const thClassName = isDragging
-    ? 'data-table__th data-table__header-cell data-table__header-cell--dragging'
-    : 'data-table__th data-table__header-cell';
+    ? 'cereda-table__th cereda-table__header-cell cereda-table__header-cell--dragging'
+    : 'cereda-table__th cereda-table__header-cell';
 
   if (isPlaceholder) {
     return (
@@ -141,7 +141,7 @@ function DataTableSortableHeaderCell<TData extends object>({
         ref={setNodeRef}
         key={header.id}
         colSpan={header.colSpan}
-        className="data-table__th data-table__header-cell"
+        className="cereda-table__th cereda-table__header-cell"
         style={style}
         data-column-id={header.column.id}
       />
@@ -171,8 +171,8 @@ function DataTableSortableHeaderCell<TData extends object>({
         <div
           className={
             headerDragPreview.marker.placement === 'before'
-              ? 'data-table__header-insertion-marker data-table__header-insertion-marker--before'
-              : 'data-table__header-insertion-marker data-table__header-insertion-marker--after'
+              ? 'cereda-table__header-insertion-marker cereda-table__header-insertion-marker--before'
+              : 'cereda-table__header-insertion-marker cereda-table__header-insertion-marker--after'
           }
           data-placement={headerDragPreview.marker.placement}
           aria-hidden="true"
@@ -181,7 +181,7 @@ function DataTableSortableHeaderCell<TData extends object>({
 
       {/* Entire header-main is the drag activator when reordering is enabled */}
       <div
-        className="data-table__header-main"
+        className="cereda-table__header-main"
         ref={canReorder ? setActivatorNodeRef : undefined}
         data-reorderable={canReorder || undefined}
         {...(canReorder ? { ...attributes, ...listeners } : {})}
@@ -189,8 +189,8 @@ function DataTableSortableHeaderCell<TData extends object>({
       >
         {/* Drag affordance icon — visual only, not interactive */}
         {canReorder ? (
-          <span className="data-table__column-header-drag-handle" aria-hidden="true">
-            <GripVertical className="data-table__column-header-drag-handle-icon" />
+          <span className="cereda-table__column-header-drag-handle" aria-hidden="true">
+            <GripVertical className="cereda-table__column-header-drag-handle-icon" />
           </span>
         ) : null}
 
@@ -198,36 +198,36 @@ function DataTableSortableHeaderCell<TData extends object>({
         {canSort ? (
           <button
             type="button"
-            className="data-table__header-main-surface data-table__header-main-surface--sortable"
+            className="cereda-table__header-main-surface cereda-table__header-main-surface--sortable"
             onClick={header.column.getToggleSortingHandler()}
             aria-label={sortLabel}
             title={sortLabel}
             aria-pressed={sortState !== 'none'}
             data-sort-state={sortState}
           >
-            <span className="data-table__header-label">{headerContent}</span>
+            <span className="cereda-table__header-label">{headerContent}</span>
             <DataTableSortIcon state={sortState} />
           </button>
         ) : (
-          <div className="data-table__header-main-surface data-table__header-main-surface--static">
-            <span className="data-table__header-label">{headerContent}</span>
+          <div className="cereda-table__header-main-surface cereda-table__header-main-surface--static">
+            <span className="cereda-table__header-label">{headerContent}</span>
           </div>
         )}
 
         {isGroupable ? (
           <span
-            className="data-table__header-groupable-indicator"
+            className="cereda-table__header-groupable-indicator"
             title={locale.columnHeader.canBeGroupedTitle}
             aria-hidden="true"
           >
-            <Layers className="data-table__header-groupable-indicator-icon" aria-hidden="true" />
+            <Layers className="cereda-table__header-groupable-indicator-icon" aria-hidden="true" />
           </span>
         ) : null}
 
         {canResize ? (
           <button
             type="button"
-            className={`data-table__column-resize-handle${isResizing ? ' data-table__column-resize-handle--resizing' : ''}`}
+            className={`cereda-table__column-resize-handle${isResizing ? ' cereda-table__column-resize-handle--resizing' : ''}`}
             onPointerDownCapture={(e) => e.stopPropagation()}
             onMouseDown={handleResizeStart}
             onTouchStart={handleResizeStart}
@@ -239,3 +239,4 @@ function DataTableSortableHeaderCell<TData extends object>({
     </th>
   );
 }
+

@@ -113,7 +113,7 @@ export function DataTableSavedViewsMenu<TData extends object>({
     function handleBackdropPointerDown(event: PointerEvent) {
       if (
         event.target instanceof Element &&
-        event.target.classList.contains('data-table__popover-backdrop')
+        event.target.classList.contains('cereda-table__popover-backdrop')
       ) {
         setOpen(false);
       }
@@ -130,14 +130,14 @@ export function DataTableSavedViewsMenu<TData extends object>({
       <div
         className={
           open
-            ? 'data-table__saved-views-menu data-table__popover-root--open'
-            : 'data-table__saved-views-menu'
+            ? 'cereda-table__saved-views-menu cereda-table__popover-root--open'
+            : 'cereda-table__saved-views-menu'
         }
       >
         <Popover.Trigger asChild>
           <button
             type="button"
-            className="data-table__toolbar-button"
+            className="cereda-table__toolbar-button"
             aria-haspopup="dialog"
             aria-expanded={open}
             disabled={!canOpenMenu}
@@ -156,7 +156,7 @@ export function DataTableSavedViewsMenu<TData extends object>({
           <>
             <Popover.Portal>
               <div
-                className="data-table__popover-backdrop"
+                className="cereda-table__popover-backdrop"
                 onPointerDown={() => setOpen(false)}
                 aria-hidden="true"
               />
@@ -165,18 +165,18 @@ export function DataTableSavedViewsMenu<TData extends object>({
             <Popover.Content
               role="dialog"
               aria-label={locale.savedViews.panelTitle}
-              className="data-table__saved-views-menu-panel"
+              className="cereda-table__saved-views-menu-panel"
               sideOffset={8}
               align="end"
             >
-            <div className="data-table__saved-views-menu-section">
-              <div className="data-table__saved-views-menu-section-title">
+            <div className="cereda-table__saved-views-menu-section">
+              <div className="cereda-table__saved-views-menu-section-title">
                 {locale.savedViews.saveSectionTitle}
               </div>
-              <label className="data-table__saved-views-field">
-                <span className="data-table__saved-views-label">{locale.savedViews.nameLabel}</span>
+              <label className="cereda-table__saved-views-field">
+                <span className="cereda-table__saved-views-label">{locale.savedViews.nameLabel}</span>
                 <input
-                  className="data-table__saved-views-input"
+                  className="cereda-table__saved-views-input"
                   type="text"
                   value={draftName}
                   onChange={(event) => setDraftName(event.currentTarget.value)}
@@ -186,7 +186,7 @@ export function DataTableSavedViewsMenu<TData extends object>({
               </label>
               <button
                 type="button"
-                className="data-table__saved-views-action"
+                className="cereda-table__saved-views-action"
                 onClick={handleSaveCurrentView}
               >
                 <Save aria-hidden="true" />
@@ -194,26 +194,26 @@ export function DataTableSavedViewsMenu<TData extends object>({
               </button>
             </div>
 
-            <div className="data-table__saved-views-menu-section">
-              <div className="data-table__saved-views-menu-section-title">
+            <div className="cereda-table__saved-views-menu-section">
+              <div className="cereda-table__saved-views-menu-section-title">
                 {locale.savedViews.listSectionTitle}
               </div>
               {savedViewsDocument.views.length === 0 ? (
-                <div className="data-table__saved-views-empty">
+                <div className="cereda-table__saved-views-empty">
                   {locale.savedViews.noViews}
                 </div>
               ) : (
-                <DataTableScrollArea className="data-table__scroll-area--saved-views">
-                  <ul className="data-table__saved-views-list">
+                <DataTableScrollArea className="cereda-table__scroll-area--saved-views">
+                  <ul className="cereda-table__saved-views-list">
                     {savedViewsDocument.views.map((savedView) => (
-                      <li key={savedView.id} className="data-table__saved-views-item">
-                        <div className="data-table__saved-views-item-name">
+                      <li key={savedView.id} className="cereda-table__saved-views-item">
+                        <div className="cereda-table__saved-views-item-name">
                           {savedView.name}
                         </div>
-                        <div className="data-table__saved-views-item-actions">
+                        <div className="cereda-table__saved-views-item-actions">
                           <button
                             type="button"
-                            className="data-table__saved-views-item-action"
+                            className="cereda-table__saved-views-item-action"
                             onClick={() => handleApplySavedView(savedView)}
                             aria-label={locale.savedViews.applyAriaLabel(savedView.name)}
                           >
@@ -222,7 +222,7 @@ export function DataTableSavedViewsMenu<TData extends object>({
                           </button>
                           <button
                             type="button"
-                            className="data-table__saved-views-item-action data-table__saved-views-item-action--secondary"
+                            className="cereda-table__saved-views-item-action cereda-table__saved-views-item-action--secondary"
                             onClick={() => handleDeleteSavedView(savedView)}
                             aria-label={locale.savedViews.deleteAriaLabel(savedView.name)}
                           >
@@ -237,10 +237,10 @@ export function DataTableSavedViewsMenu<TData extends object>({
               )}
             </div>
 
-            <div className="data-table__saved-views-menu-actions">
+            <div className="cereda-table__saved-views-menu-actions">
               <button
                 type="button"
-                className="data-table__saved-views-action data-table__saved-views-action--secondary"
+                className="cereda-table__saved-views-action cereda-table__saved-views-action--secondary"
                 onClick={handleResetTableState}
               >
                 <RotateCcw aria-hidden="true" />
@@ -255,3 +255,4 @@ export function DataTableSavedViewsMenu<TData extends object>({
     </Popover.Root>
   );
 }
+

@@ -64,17 +64,17 @@ export function DataTableToolbar<TData extends object>({
     <div
       className={
         activePopover
-          ? 'data-table__toolbar-inner data-table__toolbar-inner--popover-open'
-          : 'data-table__toolbar-inner'
+          ? 'cereda-table__toolbar-inner cereda-table__toolbar-inner--popover-open'
+          : 'cereda-table__toolbar-inner'
       }
     >
       {enableGlobalFilter ? (
-        <div className="data-table__toolbar-section data-table__toolbar-section--search">
+        <div className="cereda-table__toolbar-section cereda-table__toolbar-section--search">
           <DataTableGlobalSearch table={table} />
         </div>
       ) : null}
       {hasActions ? (
-        <div className="data-table__toolbar-section data-table__toolbar-section--actions">
+        <div className="cereda-table__toolbar-section cereda-table__toolbar-section--actions">
           {enableSavedViews ? (
             <DataTableSavedViewsMenu
               table={table}
@@ -113,3 +113,4 @@ export function DataTableToolbar<TData extends object>({
     </div>
   );
 }
+

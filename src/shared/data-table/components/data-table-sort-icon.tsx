@@ -10,5 +10,6 @@ export function DataTableSortIcon({ state }: DataTableSortIconProps) {
   const Icon =
     state === 'asc' ? ArrowUp : state === 'desc' ? ArrowDown : ArrowUpDown;
 
-  return <Icon className="data-table__sort-icon" aria-hidden="true" />;
+  return <Icon className="cereda-table__sort-icon" aria-hidden="true" />;
 }
+

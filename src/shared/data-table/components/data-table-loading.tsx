@@ -15,10 +15,10 @@ export function DataTableLoading({
   return (
     <>
       {Array.from({ length: safeRowCount }, (_, rowIndex) => (
-        <tr key={rowIndex} className="data-table__loading-row">
+        <tr key={rowIndex} className="cereda-table__loading-row">
           {Array.from({ length: safeColCount }, (_, colIndex) => (
-            <td key={colIndex} className="data-table__loading-cell">
-              <div className="data-table__skeleton" />
+            <td key={colIndex} className="cereda-table__loading-cell">
+              <div className="cereda-table__skeleton" />
             </td>
           ))}
         </tr>
@@ -26,3 +26,4 @@ export function DataTableLoading({
     </>
   );
 }
+

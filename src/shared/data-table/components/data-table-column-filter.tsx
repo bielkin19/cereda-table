@@ -97,7 +97,7 @@ export function DataTableTextFilter<TData extends object>({
 
   return (
     <div
-      className="data-table__column-filter data-table__column-filter--text"
+      className="cereda-table__column-filter cereda-table__column-filter--text"
       {...stopPointerAndMousePropagation}
     >
       <DataTableFacetFilterPopover
@@ -112,7 +112,7 @@ export function DataTableTextFilter<TData extends object>({
       >
         {() => (
           <input
-            className="data-table__column-filter-input"
+            className="cereda-table__column-filter-input"
             type="text"
             placeholder={
               Array.isArray(inFilterValue)
@@ -169,12 +169,12 @@ export function DataTableNumberFilter<TData extends object>({
 
   return (
     <div
-      className="data-table__column-filter data-table__column-filter--number"
+      className="cereda-table__column-filter cereda-table__column-filter--number"
       {...stopPointerAndMousePropagation}
     >
-      <div className="data-table__column-filter-range">
+      <div className="cereda-table__column-filter-range">
         <input
-          className="data-table__column-filter-input"
+          className="cereda-table__column-filter-input"
           type="number"
           step="any"
           inputMode="decimal"
@@ -184,7 +184,7 @@ export function DataTableNumberFilter<TData extends object>({
           onChange={(event) => handleChange('min', event)}
         />
         <input
-          className="data-table__column-filter-input"
+          className="cereda-table__column-filter-input"
           type="number"
           step="any"
           inputMode="decimal"
@@ -197,7 +197,7 @@ export function DataTableNumberFilter<TData extends object>({
       {canClear ? (
         <button
           type="button"
-          className="data-table__column-filter-clear"
+          className="cereda-table__column-filter-clear"
           onClick={handleClear}
           aria-label={locale.columnFilter.clearAriaLabel(label)}
         >
@@ -227,7 +227,7 @@ export function DataTableDateFilter<TData extends object>({
 
   return (
     <div
-      className="data-table__column-filter data-table__column-filter--date"
+      className="cereda-table__column-filter cereda-table__column-filter--date"
       {...stopPointerAndMousePropagation}
     >
       <DataTableDatePicker
@@ -270,10 +270,10 @@ export function DataTableDateRangeFilter<TData extends object>({
 
   return (
     <div
-      className="data-table__column-filter data-table__column-filter--date-range"
+      className="cereda-table__column-filter cereda-table__column-filter--date-range"
       {...stopPointerAndMousePropagation}
     >
-      <div className="data-table__column-filter-range">
+      <div className="cereda-table__column-filter-range">
         <DataTableDatePicker
           label={locale.columnFilter.fromAriaLabel(label)}
           placeholder={locale.columnFilter.fromPlaceholder}
@@ -292,7 +292,7 @@ export function DataTableDateRangeFilter<TData extends object>({
       {canClear ? (
         <button
           type="button"
-          className="data-table__column-filter-clear"
+          className="cereda-table__column-filter-clear"
           onClick={handleClear}
           aria-label={locale.columnFilter.clearAriaLabel(label)}
         >
@@ -339,7 +339,7 @@ export function DataTableSelectFilter<TData extends object>({
 
   return (
     <div
-      className="data-table__column-filter data-table__column-filter--select"
+      className="cereda-table__column-filter cereda-table__column-filter--select"
       {...stopPointerAndMousePropagation}
     >
       <DataTableFacetFilterPopover
@@ -354,7 +354,7 @@ export function DataTableSelectFilter<TData extends object>({
         {(openFilter) => (
           <button
             type="button"
-            className="data-table__column-filter-input data-table__column-filter-value"
+            className="cereda-table__column-filter-input cereda-table__column-filter-value"
             onClick={openFilter}
             aria-label={locale.columnFilter.filterAriaLabel(label)}
           >
@@ -400,7 +400,7 @@ export function DataTableMultiSelectFilter<TData extends object>({
 
   return (
     <div
-      className="data-table__column-filter data-table__column-filter--multi-select"
+      className="cereda-table__column-filter cereda-table__column-filter--multi-select"
       {...stopPointerAndMousePropagation}
     >
       <DataTableFacetFilterPopover
@@ -415,7 +415,7 @@ export function DataTableMultiSelectFilter<TData extends object>({
         {(openFilter) => (
           <button
             type="button"
-            className="data-table__column-filter-input data-table__column-filter-value"
+            className="cereda-table__column-filter-input cereda-table__column-filter-value"
             onClick={openFilter}
             aria-label={locale.columnFilter.filterAriaLabel(label)}
           >
@@ -465,7 +465,7 @@ export function DataTableBooleanFilter<TData extends object>({
 
   return (
     <div
-      className="data-table__column-filter data-table__column-filter--boolean"
+      className="cereda-table__column-filter cereda-table__column-filter--boolean"
       {...stopPointerAndMousePropagation}
     >
       <DataTableFacetFilterPopover
@@ -480,7 +480,7 @@ export function DataTableBooleanFilter<TData extends object>({
         {(openFilter) => (
           <button
             type="button"
-            className="data-table__column-filter-input data-table__column-filter-value"
+            className="cereda-table__column-filter-input cereda-table__column-filter-value"
             onClick={openFilter}
             aria-label={locale.columnFilter.filterAriaLabel(label)}
           >
@@ -531,4 +531,5 @@ export function DataTableColumnFilter<TData extends object>({
 
   return <DataTableBooleanFilter column={column} table={table} />;
 }
+
 

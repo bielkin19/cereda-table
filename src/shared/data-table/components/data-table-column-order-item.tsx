@@ -57,31 +57,31 @@ export function DataTableColumnOrderItem<TData extends object>({
       style={style}
       className={
         isDragging
-          ? 'data-table__column-order-item data-table__column-order-item--dragging'
-          : 'data-table__column-order-item'
+          ? 'cereda-table__column-order-item cereda-table__column-order-item--dragging'
+          : 'cereda-table__column-order-item'
       }
     >
       <button
         type="button"
         ref={setActivatorNodeRef}
-        className="data-table__column-order-drag-handle"
+        className="cereda-table__column-order-drag-handle"
         aria-label={locale.columnOrder.dragAriaLabel(label)}
         title={locale.columnOrder.dragAriaLabel(label)}
         {...attributes}
         {...listeners}
       >
         <GripVertical
-          className="data-table__column-order-drag-handle-icon"
+          className="cereda-table__column-order-drag-handle-icon"
           aria-hidden="true"
         />
       </button>
 
-      <span className="data-table__column-order-label">{label}</span>
+      <span className="cereda-table__column-order-label">{label}</span>
       <span
         className={
           isGroupable
-            ? 'data-table__column-order-capability data-table__column-order-capability--groupable'
-            : 'data-table__column-order-capability data-table__column-order-capability--move-only'
+            ? 'cereda-table__column-order-capability cereda-table__column-order-capability--groupable'
+            : 'cereda-table__column-order-capability cereda-table__column-order-capability--move-only'
         }
         role="img"
         aria-label={groupableLabel}
@@ -90,10 +90,10 @@ export function DataTableColumnOrderItem<TData extends object>({
         {groupableLabel}
       </span>
 
-      <div className="data-table__column-order-actions">
+      <div className="cereda-table__column-order-actions">
         <button
           type="button"
-          className="data-table__column-order-action"
+          className="cereda-table__column-order-action"
           onClick={onMoveLeft}
           disabled={isFirst}
           aria-label={locale.columnOrder.moveLeftAriaLabel(label)}
@@ -103,7 +103,7 @@ export function DataTableColumnOrderItem<TData extends object>({
         </button>
         <button
           type="button"
-          className="data-table__column-order-action"
+          className="cereda-table__column-order-action"
           onClick={onMoveRight}
           disabled={isLast}
           aria-label={locale.columnOrder.moveRightAriaLabel(label)}
@@ -115,3 +115,4 @@ export function DataTableColumnOrderItem<TData extends object>({
     </div>
   );
 }
+

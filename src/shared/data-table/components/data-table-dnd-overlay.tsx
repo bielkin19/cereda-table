@@ -86,8 +86,8 @@ export function DataTableDndOverlayPreview({
   const Icon = getOverlayIcon(dragData, isInvalidDrop, activeOverData);
 
   const className = dragData.zone === 'grouping-panel'
-    ? 'data-table__dnd-overlay data-table__dnd-overlay--pill'
-    : 'data-table__dnd-overlay';
+    ? 'cereda-table__dnd-overlay cereda-table__dnd-overlay--pill'
+    : 'cereda-table__dnd-overlay';
 
   if (typeof document === 'undefined') {
     return null;
@@ -106,9 +106,10 @@ export function DataTableDndOverlayPreview({
         transform: 'translate3d(calc(-50% + 12px), calc(-50% - 10px), 0)',
       }}
     >
-      <Icon className="data-table__dnd-overlay-icon" aria-hidden="true" />
-      <span className="data-table__dnd-overlay-label">{label}</span>
+      <Icon className="cereda-table__dnd-overlay-icon" aria-hidden="true" />
+      <span className="cereda-table__dnd-overlay-label">{label}</span>
     </div>,
     portalTarget,
   );
 }
+

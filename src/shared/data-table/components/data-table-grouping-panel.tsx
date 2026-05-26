@@ -55,35 +55,35 @@ export function DataTableGroupingPanel<TData extends object>({
     dndState.activeDragData.groupable !== true;
 
   const panelModifier =
-    isOver && isGroupableDragActive ? 'data-table__grouping-panel--drop-target' :
-    isGroupableDragActive ? 'data-table__grouping-panel--can-drop' :
-    isDraggingNonGroupableHeader ? 'data-table__grouping-panel--deny' :
+    isOver && isGroupableDragActive ? 'cereda-table__grouping-panel--drop-target' :
+    isGroupableDragActive ? 'cereda-table__grouping-panel--can-drop' :
+    isDraggingNonGroupableHeader ? 'cereda-table__grouping-panel--deny' :
     null;
   const panelClassName = panelModifier
-    ? `data-table__grouping-panel ${panelModifier}`
-    : 'data-table__grouping-panel';
+    ? `cereda-table__grouping-panel ${panelModifier}`
+    : 'cereda-table__grouping-panel';
 
   return (
     <section className={panelClassName} aria-label={locale.groupingPanel.ariaLabel}>
-      <div ref={setNodeRef} className="data-table__grouping-panel-drop-surface" />
-      <div className="data-table__grouping-panel-content">
+      <div ref={setNodeRef} className="cereda-table__grouping-panel-drop-surface" />
+      <div className="cereda-table__grouping-panel-content">
         {groupedColumns.length === 0 ? (
-          <div className="data-table__grouping-panel-empty">
-            <Layers className="data-table__grouping-panel-empty-icon" aria-hidden="true" />
+          <div className="cereda-table__grouping-panel-empty">
+            <Layers className="cereda-table__grouping-panel-empty-icon" aria-hidden="true" />
             {locale.groupingPanel.dropHint}
           </div>
         ) : (
           <>
-            <DataTableScrollArea className="data-table__grouping-panel-scroll" scrollbars="horizontal">
+            <DataTableScrollArea className="cereda-table__grouping-panel-scroll" scrollbars="horizontal">
               <SortableContext items={groupingIds} strategy={rectSortingStrategy}>
-                <ul className="data-table__grouping-pill-list">
+                <ul className="cereda-table__grouping-pill-list">
                   {groupedColumns.map((column, index) => (
                     <Fragment key={column.id}>
                       {index > 0 ? (
                         <li
                           role="presentation"
                           aria-hidden="true"
-                          className="data-table__grouping-panel-separator"
+                          className="cereda-table__grouping-panel-separator"
                         >
                           <ChevronRight aria-hidden="true" />
                         </li>
@@ -105,7 +105,7 @@ export function DataTableGroupingPanel<TData extends object>({
             </DataTableScrollArea>
             <button
               type="button"
-              className="data-table__grouping-panel-clear"
+              className="cereda-table__grouping-panel-clear"
               onClick={() => table.resetGrouping(true)}
               onPointerDown={(event) => {
                 event.stopPropagation();
@@ -120,3 +120,4 @@ export function DataTableGroupingPanel<TData extends object>({
     </section>
   );
 }
+

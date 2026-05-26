@@ -36,20 +36,20 @@ export function DataTableAutoGroupHeaderCell<TData extends object>({
     <th
       key={header.id}
       colSpan={header.colSpan}
-      className="data-table__th data-table__header-cell"
+      className="cereda-table__th cereda-table__header-cell"
       style={style}
       data-column-id={header.column.id}
       data-resizing={isResizing || undefined}
     >
-      <div className="data-table__header-content">
-        <div className="data-table__header-main data-table__header-main--auto-group">
-          <div className="data-table__header-control data-table__header-control--static">
-            <span className="data-table__header-label">{locale.autoGroup.headerLabel}</span>
+      <div className="cereda-table__header-content">
+        <div className="cereda-table__header-main cereda-table__header-main--auto-group">
+          <div className="cereda-table__header-control cereda-table__header-control--static">
+            <span className="cereda-table__header-label">{locale.autoGroup.headerLabel}</span>
           </div>
           {canResize ? (
             <button
               type="button"
-              className={`data-table__column-resize-handle${isResizing ? ' data-table__column-resize-handle--resizing' : ''}`}
+              className={`cereda-table__column-resize-handle${isResizing ? ' cereda-table__column-resize-handle--resizing' : ''}`}
               onPointerDownCapture={(e) => e.stopPropagation()}
               onMouseDown={handleResizeStart}
               onTouchStart={handleResizeStart}
@@ -62,3 +62,4 @@ export function DataTableAutoGroupHeaderCell<TData extends object>({
     </th>
   );
 }
+

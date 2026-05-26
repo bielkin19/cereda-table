@@ -74,15 +74,15 @@ export function DataTablePagination<TData extends object>({
   const pageNumbers = hasKnownPageCount ? getPageNumbers(currentPage, pageCount) : null;
 
   return (
-    <nav className="data-table__pagination" aria-label={locale.pagination.label}>
-      <span className="data-table__pagination-row-count">
+    <nav className="cereda-table__pagination" aria-label={locale.pagination.label}>
+      <span className="cereda-table__pagination-row-count">
         {locale.pagination.rowCount(rowCount)}
       </span>
 
-      <div className="data-table__pagination-controls">
+      <div className="cereda-table__pagination-controls">
         <button
           type="button"
-          className="data-table__pagination-button"
+          className="cereda-table__pagination-button"
           onClick={() => table.firstPage()}
           disabled={!table.getCanPreviousPage()}
           aria-label={locale.pagination.firstPage}
@@ -91,7 +91,7 @@ export function DataTablePagination<TData extends object>({
         </button>
         <button
           type="button"
-          className="data-table__pagination-button"
+          className="cereda-table__pagination-button"
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
           aria-label={locale.pagination.previousPage}
@@ -100,17 +100,17 @@ export function DataTablePagination<TData extends object>({
         </button>
 
         {pageNumbers ? (
-          <div className="data-table__pagination-pages" role="group" aria-label={locale.pagination.pageNumbers}>
+          <div className="cereda-table__pagination-pages" role="group" aria-label={locale.pagination.pageNumbers}>
             {pageNumbers.map((item, index) =>
               item === 'ellipsis' ? (
-                <span key={`ellipsis-${index}`} className="data-table__pagination-ellipsis" aria-hidden="true">
+                <span key={`ellipsis-${index}`} className="cereda-table__pagination-ellipsis" aria-hidden="true">
                   &hellip;
                 </span>
               ) : (
                 <button
                   key={item}
                   type="button"
-                  className="data-table__pagination-button"
+                  className="cereda-table__pagination-button"
                   aria-label={locale.pagination.pageAriaLabel(item)}
                   aria-current={item === currentPage ? 'page' : undefined}
                   data-active={item === currentPage || undefined}
@@ -122,14 +122,14 @@ export function DataTablePagination<TData extends object>({
             )}
           </div>
         ) : (
-          <span className="data-table__pagination-page-info">
+          <span className="cereda-table__pagination-page-info">
             {locale.pagination.page(currentPage)}
           </span>
         )}
 
         <button
           type="button"
-          className="data-table__pagination-button"
+          className="cereda-table__pagination-button"
           onClick={() => table.nextPage()}
           disabled={!table.getCanNextPage()}
           aria-label={locale.pagination.nextPage}
@@ -138,7 +138,7 @@ export function DataTablePagination<TData extends object>({
         </button>
         <button
           type="button"
-          className="data-table__pagination-button"
+          className="cereda-table__pagination-button"
           onClick={() => table.lastPage()}
           disabled={!hasKnownPageCount || !table.getCanNextPage()}
           aria-label={locale.pagination.lastPage}
@@ -147,12 +147,12 @@ export function DataTablePagination<TData extends object>({
         </button>
       </div>
 
-      <label className="data-table__pagination-size">
-        <span className="data-table__pagination-size-label">{locale.pagination.rowsPerPage}</span>
+      <label className="cereda-table__pagination-size">
+        <span className="cereda-table__pagination-size-label">{locale.pagination.rowsPerPage}</span>
         <DataTableSelect
           ariaLabel={locale.pagination.rowsPerPage}
-          className="data-table__pagination-size-select"
-          contentClassName="data-table__select-content data-table__select-content--pagination"
+          className="cereda-table__pagination-size-select"
+          contentClassName="cereda-table__select-content cereda-table__select-content--pagination"
           onValueChange={handlePageSizeChange}
           options={options.map((option) => ({ value: String(option), label: String(option) }))}
           value={String(pageSize)}
@@ -161,3 +161,4 @@ export function DataTablePagination<TData extends object>({
     </nav>
   );
 }
+

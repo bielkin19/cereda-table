@@ -45,7 +45,7 @@ export function DataTableCell<TData extends object>({
   if (isRowNumberColumn) {
     return (
       <td
-        className="data-table__td data-table__row-number-td"
+        className="cereda-table__td cereda-table__row-number-td"
         data-column-id={cell.column.id}
         style={getColumnSizeStyle(48, 48, 48)}
       >
@@ -58,7 +58,7 @@ export function DataTableCell<TData extends object>({
     return (
       <td
         key={cell.id}
-        className="data-table__td data-table__td--auto-group"
+        className="cereda-table__td cereda-table__td--auto-group"
         data-column-id={cell.column.id}
         style={getColumnSizeStyle(
           cell.column.getSize(),
@@ -76,7 +76,7 @@ export function DataTableCell<TData extends object>({
     return (
       <td
         key={cell.id}
-        className="data-table__td data-table__td--placeholder"
+        className="cereda-table__td cereda-table__td--placeholder"
         data-column-id={cell.column.id}
         style={getColumnSizeStyle(
           cell.column.getSize(),
@@ -92,7 +92,7 @@ export function DataTableCell<TData extends object>({
     return (
       <td
         key={cell.id}
-        className="data-table__td data-table__td--aggregated"
+        className="cereda-table__td cereda-table__td--aggregated"
         data-column-id={cell.column.id}
         style={getColumnSizeStyle(
           cell.column.getSize(),
@@ -115,7 +115,7 @@ export function DataTableCell<TData extends object>({
   return (
     <td
       key={cell.id}
-      className="data-table__td"
+      className="cereda-table__td"
       data-column-id={cell.column.id}
       style={getColumnSizeStyle(
         cell.column.getSize(),
@@ -128,3 +128,4 @@ export function DataTableCell<TData extends object>({
     </td>
   );
 }
+

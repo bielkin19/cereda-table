@@ -19,7 +19,7 @@ export function DataTableBody<TData extends object>({
   const visibleColumnCount = table.getVisibleLeafColumns().length;
 
   return (
-    <tbody className="data-table__body">
+    <tbody className="cereda-table__body">
       {isLoading &&
         (renderLoading ?? <DataTableLoading columnCount={visibleColumnCount} />)}
 
@@ -28,3 +28,4 @@ export function DataTableBody<TData extends object>({
     </tbody>
   );
 }
+

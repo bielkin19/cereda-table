@@ -123,26 +123,26 @@ export function DataTableGroupingPanelItem<TData extends object>({
       style={style}
       className={
         isDragging
-          ? 'data-table__grouping-pill data-table__grouping-pill--dragging'
-          : 'data-table__grouping-pill'
+          ? 'cereda-table__grouping-pill cereda-table__grouping-pill--dragging'
+          : 'cereda-table__grouping-pill'
       }
       data-dragging={isDragging || undefined}
       aria-label={locale.groupingPanel.itemAriaLabel(label, index + 1, total)}
       aria-posinset={index + 1}
       aria-setsize={total}
     >
-      <span className="data-table__grouping-pill-chip">
+      <span className="cereda-table__grouping-pill-chip">
         <button
           type="button"
           ref={setActivatorNodeRef}
-          className="data-table__grouping-pill-handle"
+          className="cereda-table__grouping-pill-handle"
           aria-label={dragLabel}
           title={dragLabel}
           {...attributes}
           {...listeners}
         >
           <Grip
-            className="data-table__grouping-pill-handle-icon"
+            className="cereda-table__grouping-pill-handle-icon"
             aria-hidden="true"
           />
         </button>
@@ -150,7 +150,7 @@ export function DataTableGroupingPanelItem<TData extends object>({
         {canSort ? (
           <button
             type="button"
-            className="data-table__grouping-pill-body"
+            className="cereda-table__grouping-pill-body"
             onPointerDown={handleBodyPointerDown}
             onPointerMove={handleBodyPointerMove}
             onPointerUp={handleBodyPointerUp}
@@ -161,18 +161,18 @@ export function DataTableGroupingPanelItem<TData extends object>({
             data-sort-state={sortState || 'none'}
             title={sortButtonLabel}
           >
-            <span className="data-table__grouping-pill-label">{label}</span>
-            <SortIcon className="data-table__grouping-pill-sort-icon" aria-hidden="true" />
+            <span className="cereda-table__grouping-pill-label">{label}</span>
+            <SortIcon className="cereda-table__grouping-pill-sort-icon" aria-hidden="true" />
           </button>
         ) : (
-          <span className="data-table__grouping-pill-body data-table__grouping-pill-body--static">
-            <span className="data-table__grouping-pill-label">{label}</span>
+          <span className="cereda-table__grouping-pill-body cereda-table__grouping-pill-body--static">
+            <span className="cereda-table__grouping-pill-label">{label}</span>
           </span>
         )}
 
         <button
           type="button"
-          className="data-table__grouping-pill-remove"
+          className="cereda-table__grouping-pill-remove"
           onClick={onRemove}
           onPointerDown={(event) => {
             event.stopPropagation();
@@ -186,3 +186,4 @@ export function DataTableGroupingPanelItem<TData extends object>({
     </li>
   );
 }
+

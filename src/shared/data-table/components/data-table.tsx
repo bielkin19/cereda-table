@@ -141,7 +141,7 @@ export function DataTable<TData extends object>({
   const tableContent = (
     <DataTableSearchProvider table={table}>
       {hasToolbar ? (
-        <div className="data-table__toolbar">
+        <div className="cereda-table__toolbar">
           <DataTableToolbar
             table={table}
             enableColumnOrdering={enableColumnOrdering}
@@ -157,8 +157,8 @@ export function DataTable<TData extends object>({
         </div>
       ) : null}
       {enableGrouping ? <DataTableGroupingPanel table={table} /> : null}
-      <div className="data-table__body-scroll">
-        <table className="data-table" style={tableStyle}>
+      <div className="cereda-table__body-scroll">
+        <table className="cereda-table" style={tableStyle}>
           <DataTableHeader
             headerGroups={headerGroups}
             enableColumnFilters={enableColumnFilters}
@@ -173,7 +173,7 @@ export function DataTable<TData extends object>({
         </table>
       </div>
       {isEmpty ? (
-        <div className="data-table__empty-panel">
+        <div className="cereda-table__empty-panel">
           {renderEmpty ?? (
             <DataTableEmpty
               activeFilterCount={activeFilterCount}
@@ -188,11 +188,11 @@ export function DataTable<TData extends object>({
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   const wrapperStyle = bodyHeight != null
-    ? ({ '--dt-body-max-height': typeof bodyHeight === 'number' ? `${bodyHeight}px` : bodyHeight } as React.CSSProperties)
+    ? ({ '--cereda-table-body-max-height': typeof bodyHeight === 'number' ? `${bodyHeight}px` : bodyHeight } as React.CSSProperties)
     : undefined;
 
   const wrapperContent = (
-    <div ref={wrapperRef} className="data-table__wrapper" style={wrapperStyle}>
+    <div ref={wrapperRef} className="cereda-table__wrapper" style={wrapperStyle}>
       <DataTableDndLayer
         table={table}
         wrapperRef={wrapperRef}
@@ -214,3 +214,4 @@ export function DataTable<TData extends object>({
     <DataTableLocaleProvider locale={locale}>{wrapperContent}</DataTableLocaleProvider>
   ) : wrapperContent;
 }
+

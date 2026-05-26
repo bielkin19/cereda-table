@@ -22,7 +22,7 @@ export function DataTableColumnOrderList<TData extends object>({
 
   return (
     <SortableContext items={sortableIds} strategy={verticalListSortingStrategy}>
-      <div className="data-table__column-order-list">
+      <div className="cereda-table__column-order-list">
         {columns.map((column, index) => (
           <DataTableColumnOrderItem
             key={column.id}
@@ -41,3 +41,4 @@ export function DataTableColumnOrderList<TData extends object>({
     </SortableContext>
   );
 }
+

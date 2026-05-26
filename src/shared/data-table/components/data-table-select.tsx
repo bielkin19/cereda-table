@@ -31,9 +31,9 @@ export function DataTableSelect({
   return (
     <Select.Root value={value} onValueChange={onValueChange}>
       <Select.Trigger className={className} aria-label={ariaLabel}>
-        <Select.Value placeholder={placeholder} className="data-table__select-value" />
-        <Select.Icon className="data-table__select-icon" aria-hidden="true">
-          <ChevronDown className="data-table__select-icon-mark" aria-hidden="true" />
+        <Select.Value placeholder={placeholder} className="cereda-table__select-value" />
+        <Select.Icon className="cereda-table__select-icon" aria-hidden="true">
+          <ChevronDown className="cereda-table__select-icon-mark" aria-hidden="true" />
         </Select.Icon>
       </Select.Trigger>
 
@@ -44,25 +44,25 @@ export function DataTableSelect({
           sideOffset={sideOffset}
           align="start"
         >
-          <Select.ScrollUpButton className="data-table__select-scroll-button">
+          <Select.ScrollUpButton className="cereda-table__select-scroll-button">
             <ChevronUp aria-hidden="true" />
           </Select.ScrollUpButton>
-          <Select.Viewport className="data-table__select-viewport">
+          <Select.Viewport className="cereda-table__select-viewport">
             {options.map((option) => (
               <Select.Item
                 key={option.value}
                 value={option.value}
                 disabled={option.disabled}
-                className="data-table__select-item"
+                className="cereda-table__select-item"
               >
                 <Select.ItemText>{option.label}</Select.ItemText>
-                <Select.ItemIndicator className="data-table__select-item-indicator">
+                <Select.ItemIndicator className="cereda-table__select-item-indicator">
                   <Check aria-hidden="true" />
                 </Select.ItemIndicator>
               </Select.Item>
             ))}
           </Select.Viewport>
-          <Select.ScrollDownButton className="data-table__select-scroll-button">
+          <Select.ScrollDownButton className="cereda-table__select-scroll-button">
             <ChevronDown aria-hidden="true" />
           </Select.ScrollDownButton>
         </Select.Content>
@@ -70,3 +70,4 @@ export function DataTableSelect({
     </Select.Root>
   );
 }
+

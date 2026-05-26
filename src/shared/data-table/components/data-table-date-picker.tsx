@@ -133,22 +133,22 @@ function DataTableCalendar({ max, min, onChange, value }: DataTableCalendarProps
   }
 
   return (
-    <div className="data-table__calendar">
-      <div className="data-table__calendar-header">
+    <div className="cereda-table__calendar">
+      <div className="cereda-table__calendar-header">
         <button
           type="button"
-          className="data-table__calendar-nav"
+          className="cereda-table__calendar-nav"
           onClick={prevMonth}
           aria-label={locale.datePicker.prevMonthAriaLabel}
         >
           <ChevronLeft aria-hidden="true" />
         </button>
-        <span className="data-table__calendar-month-label">
+        <span className="cereda-table__calendar-month-label">
           {locale.datePicker.months[viewMonth]} {viewYear}
         </span>
         <button
           type="button"
-          className="data-table__calendar-nav"
+          className="cereda-table__calendar-nav"
           onClick={nextMonth}
           aria-label={locale.datePicker.nextMonthAriaLabel}
         >
@@ -156,22 +156,22 @@ function DataTableCalendar({ max, min, onChange, value }: DataTableCalendarProps
         </button>
       </div>
 
-      <div className="data-table__calendar-grid" role="grid" aria-label={locale.datePicker.calendarAriaLabel}>
+      <div className="cereda-table__calendar-grid" role="grid" aria-label={locale.datePicker.calendarAriaLabel}>
         {locale.datePicker.weekdays.map((label) => (
           <span
             key={label}
-            className="data-table__calendar-weekday"
+            className="cereda-table__calendar-weekday"
             role="columnheader"
           >
             {label}
           </span>
         ))}
         {days.map((day) => {
-          let className = 'data-table__calendar-day';
-          if (!day.isCurrentMonth) className += ' data-table__calendar-day--outside';
-          if (day.isToday && !day.isSelected) className += ' data-table__calendar-day--today';
-          if (day.isSelected) className += ' data-table__calendar-day--selected';
-          if (day.isDisabled) className += ' data-table__calendar-day--disabled';
+          let className = 'cereda-table__calendar-day';
+          if (!day.isCurrentMonth) className += ' cereda-table__calendar-day--outside';
+          if (day.isToday && !day.isSelected) className += ' cereda-table__calendar-day--today';
+          if (day.isSelected) className += ' cereda-table__calendar-day--selected';
+          if (day.isDisabled) className += ' cereda-table__calendar-day--disabled';
 
           return (
             <button
@@ -226,19 +226,19 @@ export function DataTableDatePicker({
 
   return (
     <Popover.Root open={open} onOpenChange={setOpen}>
-      <div className="data-table__date-picker">
+      <div className="cereda-table__date-picker">
         <Popover.Trigger asChild>
           <button
             type="button"
             className={
               displayText
-                ? 'data-table__date-picker-trigger'
-                : 'data-table__date-picker-trigger data-table__date-picker-trigger--empty'
+                ? 'cereda-table__date-picker-trigger'
+                : 'cereda-table__date-picker-trigger cereda-table__date-picker-trigger--empty'
             }
             aria-label={`${label}: ${displayText || placeholder || locale.datePicker.selectDatePlaceholder}`}
           >
-            <CalendarDays className="data-table__date-picker-icon" aria-hidden="true" />
-            <span className="data-table__date-picker-trigger-text">
+            <CalendarDays className="cereda-table__date-picker-icon" aria-hidden="true" />
+            <span className="cereda-table__date-picker-trigger-text">
               {displayText || placeholder || label}
             </span>
           </button>
@@ -246,7 +246,7 @@ export function DataTableDatePicker({
         {/* Visually hidden date input — keeps keyboard entry and programmatic change events working */}
         <input
           type="date"
-          className="data-table__date-picker-hidden-input"
+          className="cereda-table__date-picker-hidden-input"
           aria-label={inputLabel ?? label}
           value={value}
           min={min}
@@ -257,7 +257,7 @@ export function DataTableDatePicker({
         {onClear && value ? (
           <button
             type="button"
-            className="data-table__column-filter-clear"
+            className="cereda-table__column-filter-clear"
             onClick={onClear}
             aria-label={locale.datePicker.clearAriaLabel(label)}
           >
@@ -269,7 +269,7 @@ export function DataTableDatePicker({
       {open ? (
         <Popover.Portal>
           <Popover.Content
-            className="data-table__date-picker-popover"
+            className="cereda-table__date-picker-popover"
             sideOffset={6}
             align="start"
           >
@@ -285,3 +285,4 @@ export function DataTableDatePicker({
     </Popover.Root>
   );
 }
+

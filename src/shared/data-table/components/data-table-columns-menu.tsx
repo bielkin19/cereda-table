@@ -74,7 +74,7 @@ export function DataTableColumnsMenu<TData extends object>({
     function handleBackdropPointerDown(event: PointerEvent) {
       if (
         event.target instanceof Element &&
-        event.target.classList.contains('data-table__popover-backdrop')
+        event.target.classList.contains('cereda-table__popover-backdrop')
       ) {
         setOpen(false);
       }
@@ -91,8 +91,8 @@ export function DataTableColumnsMenu<TData extends object>({
       <div
         className={
           open
-            ? 'data-table__columns-menu data-table__popover-root--open'
-            : 'data-table__columns-menu'
+            ? 'cereda-table__columns-menu cereda-table__popover-root--open'
+            : 'cereda-table__columns-menu'
         }
       >
         <Popover.Trigger asChild>
@@ -100,20 +100,20 @@ export function DataTableColumnsMenu<TData extends object>({
             type="button"
             className={
               open
-                ? 'data-table__toolbar-button data-table__toolbar-button--columns data-table__toolbar-button--active'
-                : 'data-table__toolbar-button data-table__toolbar-button--columns'
+                ? 'cereda-table__toolbar-button cereda-table__toolbar-button--columns cereda-table__toolbar-button--active'
+                : 'cereda-table__toolbar-button cereda-table__toolbar-button--columns'
             }
             aria-label={locale.columns.buttonLabel}
             title={locale.columns.buttonLabel}
           >
             <Columns3
-              className="data-table__toolbar-button-icon"
+              className="cereda-table__toolbar-button-icon"
               aria-hidden="true"
             />
-            <span className="data-table__toolbar-button-label">{locale.columns.buttonLabel}</span>
+            <span className="cereda-table__toolbar-button-label">{locale.columns.buttonLabel}</span>
             {hiddenColumnCount > 0 || groupedColumnIds.length > 0 ? (
               <span
-                className="data-table__toolbar-button-count"
+                className="cereda-table__toolbar-button-count"
                 aria-hidden="true"
               >
                 {hiddenColumnCount + groupedColumnIds.length}
@@ -126,7 +126,7 @@ export function DataTableColumnsMenu<TData extends object>({
           <>
             <Popover.Portal>
               <div
-                className="data-table__popover-backdrop"
+                className="cereda-table__popover-backdrop"
                 onPointerDown={() => setOpen(false)}
                 aria-hidden="true"
               />
@@ -135,16 +135,16 @@ export function DataTableColumnsMenu<TData extends object>({
             <Popover.Content
               role="menu"
               aria-label={locale.columns.panelAriaLabel}
-              className="data-table__columns-menu-panel"
+              className="cereda-table__columns-menu-panel"
               sideOffset={8}
               align="end"
             >
-            <div className="data-table__columns-menu-header">
-              <div className="data-table__columns-menu-heading">
+            <div className="cereda-table__columns-menu-header">
+              <div className="cereda-table__columns-menu-heading">
                 <Columns3 aria-hidden="true" />
                 <div>
-                  <div className="data-table__columns-menu-title">{locale.columns.panelTitle}</div>
-                  <div className="data-table__columns-menu-subtitle">
+                  <div className="cereda-table__columns-menu-title">{locale.columns.panelTitle}</div>
+                  <div className="cereda-table__columns-menu-subtitle">
                     {locale.columns.visibleCount(visibleColumnCount)}
                     {hiddenColumnCount > 0 ? `, ${locale.columns.hiddenCount(hiddenColumnCount)}` : ''}
                     {groupedColumnIds.length > 0
@@ -156,7 +156,7 @@ export function DataTableColumnsMenu<TData extends object>({
               <Popover.Close asChild>
                 <button
                   type="button"
-                  className="data-table__columns-menu-close"
+                  className="cereda-table__columns-menu-close"
                   aria-label={locale.columns.panelClose}
                   title={locale.columns.panelCloseTitle}
                 >
@@ -165,23 +165,23 @@ export function DataTableColumnsMenu<TData extends object>({
               </Popover.Close>
             </div>
 
-            <div className="data-table__columns-menu-overview" aria-label={locale.columns.summaryAriaLabel}>
+            <div className="cereda-table__columns-menu-overview" aria-label={locale.columns.summaryAriaLabel}>
               {enableColumnVisibility ? (
-                <div className="data-table__columns-menu-stat">
+                <div className="cereda-table__columns-menu-stat">
                   <Eye aria-hidden="true" />
                   <span>{locale.columns.statVisible}</span>
                   <strong>{visibleColumnCount}</strong>
                 </div>
               ) : null}
               {enableColumnOrdering ? (
-                <div className="data-table__columns-menu-stat">
+                <div className="cereda-table__columns-menu-stat">
                   <GripVertical aria-hidden="true" />
                   <span>{locale.columns.statOrder}</span>
                   <strong>{leafColumns.length}</strong>
                 </div>
               ) : null}
               {enableGrouping ? (
-                <div className="data-table__columns-menu-stat">
+                <div className="cereda-table__columns-menu-stat">
                   <GitBranch aria-hidden="true" />
                   <span>{locale.columns.statGrouped}</span>
                   <strong>{groupedColumnIds.length}</strong>
@@ -190,8 +190,8 @@ export function DataTableColumnsMenu<TData extends object>({
             </div>
 
             <DataTableScrollArea
-              className="data-table__scroll-area--columns-menu"
-              viewportClassName="data-table__columns-menu-list"
+              className="cereda-table__scroll-area--columns-menu"
+              viewportClassName="cereda-table__columns-menu-list"
             >
               {enableGrouping ? (
                 <DataTableColumnsGroupingSection table={table} columns={leafColumns} />
@@ -213,10 +213,10 @@ export function DataTableColumnsMenu<TData extends object>({
               ) : null}
             </DataTableScrollArea>
 
-            <div className="data-table__columns-menu-actions">
+            <div className="cereda-table__columns-menu-actions">
               <button
                 type="button"
-                className="data-table__columns-menu-action"
+                className="cereda-table__columns-menu-action"
                 onClick={handleReset}
               >
                 <RotateCcw aria-hidden="true" />
@@ -225,7 +225,7 @@ export function DataTableColumnsMenu<TData extends object>({
               {enableColumnOrdering ? (
                 <button
                   type="button"
-                  className="data-table__columns-menu-action data-table__columns-menu-action--secondary"
+                  className="cereda-table__columns-menu-action cereda-table__columns-menu-action--secondary"
                   onClick={handleResetOrder}
                 >
                   <RotateCcw aria-hidden="true" />
@@ -235,7 +235,7 @@ export function DataTableColumnsMenu<TData extends object>({
               {enableGrouping && hasGrouping ? (
                 <button
                   type="button"
-                  className="data-table__columns-menu-action data-table__columns-menu-action--secondary"
+                  className="cereda-table__columns-menu-action cereda-table__columns-menu-action--secondary"
                   onClick={handleClearGrouping}
                 >
                   {locale.columns.clearGrouping}
@@ -257,10 +257,10 @@ function DataTableColumnsOrderingSection<TData extends object>({
 }: DataTableColumnsOrderingSectionProps<TData>) {
   const locale = useDataTableLocale();
   return (
-    <div className="data-table__columns-menu-section">
-      <div className="data-table__columns-menu-section-title">{locale.columns.orderSectionTitle}</div>
+    <div className="cereda-table__columns-menu-section">
+      <div className="cereda-table__columns-menu-section-title">{locale.columns.orderSectionTitle}</div>
       {columns.length === 0 ? (
-        <div className="data-table__columns-menu-empty">
+        <div className="cereda-table__columns-menu-empty">
           {locale.columns.noOrderableColumns}
         </div>
       ) : (
@@ -277,10 +277,10 @@ function DataTableColumnsVisibilitySection<TData extends object>({
 }: DataTableColumnsVisibilitySectionProps<TData>) {
   const locale = useDataTableLocale();
   return columns.length === 0 ? (
-    <div className="data-table__columns-menu-empty">{locale.columns.noHidableColumns}</div>
+    <div className="cereda-table__columns-menu-empty">{locale.columns.noHidableColumns}</div>
   ) : (
-    <div className="data-table__columns-menu-section">
-      <div className="data-table__columns-menu-section-title">
+    <div className="cereda-table__columns-menu-section">
+      <div className="cereda-table__columns-menu-section-title">
         {locale.columns.visibilitySectionTitle}
       </div>
       {columns.map((column) => {
@@ -293,19 +293,19 @@ function DataTableColumnsVisibilitySection<TData extends object>({
             key={column.id}
             className={
               isGroupedSource
-                ? 'data-table__columns-menu-item data-table__columns-menu-item--grouped'
-                : 'data-table__columns-menu-item'
+                ? 'cereda-table__columns-menu-item cereda-table__columns-menu-item--grouped'
+                : 'cereda-table__columns-menu-item'
             }
             checked={isVisible}
             onCheckedChange={() => column.toggleVisibility()}
             ariaDescribedBy={isGroupedSource ? `${column.id}-grouped-hint` : undefined}
             label={label}
-            labelClassName="data-table__columns-menu-item-label"
+            labelClassName="cereda-table__columns-menu-item-label"
           >
             {isGroupedSource ? (
               <span
                 id={`${column.id}-grouped-hint`}
-                className="data-table__columns-menu-item-badge"
+                className="cereda-table__columns-menu-item-badge"
                 aria-hidden="true"
                 title={locale.columns.groupedBadge}
               >
@@ -318,3 +318,4 @@ function DataTableColumnsVisibilitySection<TData extends object>({
     </div>
   );
 }
+

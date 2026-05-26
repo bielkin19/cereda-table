@@ -53,21 +53,21 @@ export function DataTableFacetFilterPopover({
 
   return (
     <Popover.Root open={open} onOpenChange={handleOpenChange}>
-      <div className="data-table__column-filter-facet">
+      <div className="cereda-table__column-filter-facet">
         {children(openFilter)}
         <Popover.Trigger asChild>
           <button
             type="button"
             className={
               selectedKeys.length > 0
-                ? 'data-table__column-filter-facet-button data-table__column-filter-facet-button--active'
-                : 'data-table__column-filter-facet-button'
+                ? 'cereda-table__column-filter-facet-button cereda-table__column-filter-facet-button--active'
+                : 'cereda-table__column-filter-facet-button'
             }
             aria-label={locale.facetFilter.openAriaLabel(label)}
             title={locale.facetFilter.openAriaLabel(label)}
           >
             <Funnel
-              className="data-table__column-filter-facet-icon"
+              className="cereda-table__column-filter-facet-icon"
               aria-hidden="true"
             />
           </button>
@@ -80,12 +80,12 @@ export function DataTableFacetFilterPopover({
             id={popoverId}
             role="dialog"
             aria-label={locale.facetFilter.dialogAriaLabel(label)}
-            className="data-table__column-filter-popover data-table__column-filter-popover--facet"
+            className="cereda-table__column-filter-popover cereda-table__column-filter-popover--facet"
             sideOffset={6}
             align="start"
           >
           <input
-            className="data-table__column-filter-popover-search"
+            className="cereda-table__column-filter-popover-search"
             type="search"
             value={searchValue}
             onChange={(event) => setSearchValue(event.currentTarget.value)}
@@ -94,20 +94,20 @@ export function DataTableFacetFilterPopover({
           />
 
           <DataTableScrollArea
-            className="data-table__scroll-area--column-filter-options"
-            viewportClassName="data-table__column-filter-options"
+            className="cereda-table__scroll-area--column-filter-options"
+            viewportClassName="cereda-table__column-filter-options"
             viewportRole="group"
           >
             <DataTableCheckboxField
-              className="data-table__column-filter-option"
+              className="cereda-table__column-filter-option"
               checked={allSelected}
               onCheckedChange={onToggleAll}
               ariaLabel={locale.facetFilter.selectAllAriaLabel(label)}
               label={locale.facetFilter.selectAllLabel}
-              labelClassName="data-table__column-filter-option-label"
+              labelClassName="cereda-table__column-filter-option-label"
             />
             {visibleOptions.length === 0 ? (
-              <div className="data-table__column-filter-option-empty">
+              <div className="cereda-table__column-filter-option-empty">
                 {locale.facetFilter.noValues}
               </div>
             ) : (
@@ -117,12 +117,12 @@ export function DataTableFacetFilterPopover({
                 return (
                   <DataTableCheckboxField
                     key={option.key}
-                    className="data-table__column-filter-option"
+                    className="cereda-table__column-filter-option"
                     checked={allSelected || checked}
                     onCheckedChange={(nextChecked) => onToggle(option, nextChecked)}
                     ariaLabel={option.label}
                     label={option.label}
-                    labelClassName="data-table__column-filter-option-label"
+                    labelClassName="cereda-table__column-filter-option-label"
                   />
                 );
               })
@@ -132,7 +132,7 @@ export function DataTableFacetFilterPopover({
           {shouldShowClear ? (
             <button
               type="button"
-              className="data-table__column-filter-clear"
+              className="cereda-table__column-filter-clear"
               onClick={onClear}
               aria-label={locale.facetFilter.clearAriaLabel(label)}
             >
@@ -145,3 +145,4 @@ export function DataTableFacetFilterPopover({
     </Popover.Root>
   );
 }
+

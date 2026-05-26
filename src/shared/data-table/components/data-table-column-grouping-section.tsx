@@ -36,10 +36,10 @@ export function DataTableColumnsGroupingSection<TData extends object>({
   const orderedColumns = [...groupedColumns, ...ungroupedColumns];
 
   return groupableColumns.length === 0 ? (
-    <div className="data-table__columns-menu-empty">{locale.groupingSection.noGroupableColumns}</div>
+    <div className="cereda-table__columns-menu-empty">{locale.groupingSection.noGroupableColumns}</div>
   ) : (
-    <div className="data-table__columns-menu-section">
-      <div className="data-table__columns-menu-section-title">{locale.groupingSection.sectionTitle}</div>
+    <div className="cereda-table__columns-menu-section">
+      <div className="cereda-table__columns-menu-section-title">{locale.groupingSection.sectionTitle}</div>
       {orderedColumns.map((column) => (
         <DataTableColumnsGroupingItem
           key={column.id}
@@ -90,38 +90,38 @@ function DataTableColumnsGroupingItem<TData extends object>({
       className={
         isDragging
           ? isGrouped
-            ? 'data-table__columns-menu-group-item data-table__columns-menu-group-item--grouped data-table__columns-menu-group-item--dragging'
-            : 'data-table__columns-menu-group-item data-table__columns-menu-group-item--dragging'
+            ? 'cereda-table__columns-menu-group-item cereda-table__columns-menu-group-item--grouped cereda-table__columns-menu-group-item--dragging'
+            : 'cereda-table__columns-menu-group-item cereda-table__columns-menu-group-item--dragging'
           : isGrouped
-            ? 'data-table__columns-menu-group-item data-table__columns-menu-group-item--grouped'
-            : 'data-table__columns-menu-group-item'
+            ? 'cereda-table__columns-menu-group-item cereda-table__columns-menu-group-item--grouped'
+            : 'cereda-table__columns-menu-group-item'
       }
     >
       <button
         ref={setActivatorNodeRef}
         type="button"
-        className="data-table__columns-menu-group-drag-handle"
+        className="cereda-table__columns-menu-group-drag-handle"
         aria-label={locale.groupingSection.dragAriaLabel(label)}
         title={locale.groupingSection.dragAriaLabel(label)}
         {...attributes}
         {...listeners}
       >
         <GripVertical
-          className="data-table__columns-menu-group-drag-handle-icon"
+          className="cereda-table__columns-menu-group-drag-handle-icon"
           aria-hidden="true"
         />
       </button>
 
-      <div className="data-table__columns-menu-group-labels">
-        <span className="data-table__columns-menu-group-label">{label}</span>
+      <div className="cereda-table__columns-menu-group-labels">
+        <span className="cereda-table__columns-menu-group-label">{label}</span>
         {isGrouped ? (
-          <span className="data-table__columns-menu-group-badge">{locale.groupingSection.groupedBadge}</span>
+          <span className="cereda-table__columns-menu-group-badge">{locale.groupingSection.groupedBadge}</span>
         ) : null}
       </div>
 
       <button
         type="button"
-        className="data-table__columns-menu-action"
+        className="cereda-table__columns-menu-action"
         onClick={onToggleGrouping}
         onPointerDown={(event) => {
           event.stopPropagation();
@@ -135,3 +135,4 @@ function DataTableColumnsGroupingItem<TData extends object>({
     </div>
   );
 }
+

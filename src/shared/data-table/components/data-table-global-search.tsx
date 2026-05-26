@@ -27,10 +27,10 @@ export function DataTableGlobalSearch<TData extends object>({
   }
 
   return (
-    <div className="data-table__global-search">
-      <Search className="data-table__global-search-icon" aria-hidden="true" />
+    <div className="cereda-table__global-search">
+      <Search className="cereda-table__global-search-icon" aria-hidden="true" />
       <input
-        className="data-table__global-search-input"
+        className="cereda-table__global-search-input"
         type="text"
         placeholder={locale.search.placeholder}
         value={value}
@@ -41,7 +41,7 @@ export function DataTableGlobalSearch<TData extends object>({
       {value ? (
         <button
           type="button"
-          className="data-table__global-search-clear"
+          className="cereda-table__global-search-clear"
           onClick={handleClear}
           aria-label={locale.search.clearAriaLabel}
         >
@@ -51,3 +51,4 @@ export function DataTableGlobalSearch<TData extends object>({
     </div>
   );
 }
+

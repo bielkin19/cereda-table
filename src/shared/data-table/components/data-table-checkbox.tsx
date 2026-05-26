@@ -27,18 +27,18 @@ export function DataTableCheckboxField({
   const checkboxId = `data-table-checkbox-${generatedId}`;
 
   return (
-    <div className={className ?? 'data-table__checkbox-field'}>
+    <div className={className ?? 'cereda-table__checkbox-field'}>
       <Checkbox.Root
         id={checkboxId}
         checked={checked}
-        className="data-table__checkbox"
+        className="cereda-table__checkbox"
         onCheckedChange={(nextChecked) => {
           onCheckedChange(nextChecked === true);
         }}
         aria-describedby={ariaDescribedBy}
         aria-label={ariaLabel}
       >
-        <Checkbox.Indicator className="data-table__checkbox-indicator">
+        <Checkbox.Indicator className="cereda-table__checkbox-indicator">
           {checked === 'indeterminate' ? (
             <Minus aria-hidden="true" />
           ) : (
@@ -47,7 +47,7 @@ export function DataTableCheckboxField({
         </Checkbox.Indicator>
       </Checkbox.Root>
       <label
-        className={labelClassName ?? 'data-table__checkbox-label'}
+        className={labelClassName ?? 'cereda-table__checkbox-label'}
         htmlFor={checkboxId}
       >
         {label}
@@ -56,3 +56,4 @@ export function DataTableCheckboxField({
     </div>
   );
 }
+

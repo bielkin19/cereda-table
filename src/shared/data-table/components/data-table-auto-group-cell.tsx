@@ -47,18 +47,18 @@ export function DataTableAutoGroupCell<TData extends object>({
   const locale = useDataTableLocale();
   const row = cell.row;
   const style = {
-    '--data-table-auto-group-indent': `${row.depth * 16}px`,
+    '--cereda-table-auto-group-indent': `${row.depth * 16}px`,
   } as CSSProperties;
   const groupingColumnId = row.groupingColumnId;
 
   if (!row.getIsGrouped()) {
     return (
       <div
-        className="data-table__auto-group-cell data-table__auto-group-cell--leaf"
+        className="cereda-table__auto-group-cell cereda-table__auto-group-cell--leaf"
         style={style}
         aria-hidden="true"
       >
-        <span className="data-table__auto-group-spacer" />
+        <span className="cereda-table__auto-group-spacer" />
       </div>
     );
   }
@@ -88,27 +88,28 @@ export function DataTableAutoGroupCell<TData extends object>({
 
   return (
     <div
-      className="data-table__auto-group-cell data-table__auto-group-cell--grouped"
+      className="cereda-table__auto-group-cell cereda-table__auto-group-cell--grouped"
       style={style}
     >
       <button
         type="button"
-        className="data-table__group-toggle data-table__group-toggle--auto-group"
+        className="cereda-table__group-toggle cereda-table__group-toggle--auto-group"
         onClick={row.getToggleExpandedHandler()}
         aria-expanded={expanded}
         aria-label={ariaLabel}
       >
         {expanded ? (
-          <ChevronDown className="data-table__group-toggle-icon" aria-hidden="true" />
+          <ChevronDown className="cereda-table__group-toggle-icon" aria-hidden="true" />
         ) : (
-          <ChevronRight className="data-table__group-toggle-icon" aria-hidden="true" />
+          <ChevronRight className="cereda-table__group-toggle-icon" aria-hidden="true" />
         )}
-        <span className="data-table__group-toggle-label">{label}:</span>{' '}
-        <span className="data-table__group-toggle-value">
+        <span className="cereda-table__group-toggle-label">{label}:</span>{' '}
+        <span className="cereda-table__group-toggle-value">
           {formattedValue}
         </span>{' '}
-        <span className="data-table__group-count">({childCount})</span>
+        <span className="cereda-table__group-count">({childCount})</span>
       </button>
     </div>
   );
 }
+

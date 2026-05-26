@@ -20,15 +20,15 @@ export function DataTableScrollArea({
     <ScrollArea.Root
       className={
         className
-          ? `data-table__scroll-area ${className}`
-          : 'data-table__scroll-area'
+          ? `cereda-table__scroll-area ${className}`
+          : 'cereda-table__scroll-area'
       }
     >
       <ScrollArea.Viewport
         className={
           viewportClassName
-            ? `data-table__scroll-area-viewport ${viewportClassName}`
-            : 'data-table__scroll-area-viewport'
+            ? `cereda-table__scroll-area-viewport ${viewportClassName}`
+            : 'cereda-table__scroll-area-viewport'
         }
         role={viewportRole}
       >
@@ -36,23 +36,24 @@ export function DataTableScrollArea({
       </ScrollArea.Viewport>
       {(scrollbars === 'both' || scrollbars === 'vertical') && (
         <ScrollArea.Scrollbar
-          className="data-table__scroll-area-scrollbar"
+          className="cereda-table__scroll-area-scrollbar"
           orientation="vertical"
         >
-          <ScrollArea.Thumb className="data-table__scroll-area-thumb" />
+          <ScrollArea.Thumb className="cereda-table__scroll-area-thumb" />
         </ScrollArea.Scrollbar>
       )}
       {(scrollbars === 'both' || scrollbars === 'horizontal') && (
         <ScrollArea.Scrollbar
-          className="data-table__scroll-area-scrollbar"
+          className="cereda-table__scroll-area-scrollbar"
           orientation="horizontal"
         >
-          <ScrollArea.Thumb className="data-table__scroll-area-thumb" />
+          <ScrollArea.Thumb className="cereda-table__scroll-area-thumb" />
         </ScrollArea.Scrollbar>
       )}
       {scrollbars === 'both' && (
-        <ScrollArea.Corner className="data-table__scroll-area-corner" />
+        <ScrollArea.Corner className="cereda-table__scroll-area-corner" />
       )}
     </ScrollArea.Root>
   );
 }
+

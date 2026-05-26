@@ -195,7 +195,7 @@ export function DataTableFiltersMenu<TData extends object>({
     function handleBackdropPointerDown(event: PointerEvent) {
       if (
         event.target instanceof Element &&
-        event.target.classList.contains('data-table__popover-backdrop')
+        event.target.classList.contains('cereda-table__popover-backdrop')
       ) {
         handleOpenChange(false);
       }
@@ -216,8 +216,8 @@ export function DataTableFiltersMenu<TData extends object>({
       <div
         className={
           open
-            ? 'data-table__filters-menu data-table__popover-root--open'
-            : 'data-table__filters-menu'
+            ? 'cereda-table__filters-menu cereda-table__popover-root--open'
+            : 'cereda-table__filters-menu'
         }
       >
         <Popover.Trigger asChild>
@@ -225,8 +225,8 @@ export function DataTableFiltersMenu<TData extends object>({
             type="button"
             className={
               activeFilterCount > 0
-                ? 'data-table__toolbar-button data-table__toolbar-button--active'
-                : 'data-table__toolbar-button'
+                ? 'cereda-table__toolbar-button cereda-table__toolbar-button--active'
+                : 'cereda-table__toolbar-button'
             }
             aria-haspopup="dialog"
             aria-expanded={open}
@@ -240,7 +240,7 @@ export function DataTableFiltersMenu<TData extends object>({
             <SlidersHorizontal aria-hidden="true" />
             {locale.filters.buttonLabel}
             {activeFilterCount > 0 ? (
-              <span className="data-table__toolbar-button-count">
+              <span className="cereda-table__toolbar-button-count">
                 {activeFilterCount}
               </span>
             ) : null}
@@ -251,7 +251,7 @@ export function DataTableFiltersMenu<TData extends object>({
           <>
             <Popover.Portal>
               <div
-                className="data-table__popover-backdrop"
+                className="cereda-table__popover-backdrop"
                 onPointerDown={() => handleOpenChange(false)}
                 aria-hidden="true"
               />
@@ -260,21 +260,21 @@ export function DataTableFiltersMenu<TData extends object>({
             <Popover.Content
               role="dialog"
               aria-label={locale.filters.panelTitle}
-              className="data-table__filters-menu-panel"
+              className="cereda-table__filters-menu-panel"
               sideOffset={8}
               align="end"
             >
-            <div className="data-table__filters-menu-header">
+            <div className="cereda-table__filters-menu-header">
               <div>
-                <div className="data-table__filters-menu-title">{locale.filters.panelTitle}</div>
-                <div className="data-table__filters-menu-subtitle">
+                <div className="cereda-table__filters-menu-title">{locale.filters.panelTitle}</div>
+                <div className="cereda-table__filters-menu-subtitle">
                   {locale.filters.panelSubtitle}
                 </div>
               </div>
               {activeFilterCount > 0 ? (
                 <button
                   type="button"
-                  className="data-table__filters-menu-clear"
+                  className="cereda-table__filters-menu-clear"
                   onClick={handleClearAllFilters}
                 >
                   {locale.filters.clearAll}
@@ -282,10 +282,10 @@ export function DataTableFiltersMenu<TData extends object>({
               ) : null}
             </div>
 
-            <DataTableScrollArea className="data-table__scroll-area--filters-menu-builder">
-              <div className="data-table__filters-menu-builder">
+            <DataTableScrollArea className="cereda-table__scroll-area--filters-menu-builder">
+              <div className="cereda-table__filters-menu-builder">
                 {visibleFilterColumns.length === 0 ? (
-                  <div className="data-table__filters-menu-empty">
+                  <div className="cereda-table__filters-menu-empty">
                     {locale.filters.noFilters}
                   </div>
                 ) : (
@@ -297,17 +297,17 @@ export function DataTableFiltersMenu<TData extends object>({
                     return (
                       <section
                         key={column.id}
-                        className="data-table__filters-menu-filter-block"
+                        className="cereda-table__filters-menu-filter-block"
                         aria-label={locale.filters.sectionAriaLabel(label)}
                       >
-                        <div className="data-table__filters-menu-filter-header">
-                          <div className="data-table__filters-menu-filter-title">
+                        <div className="cereda-table__filters-menu-filter-header">
+                          <div className="cereda-table__filters-menu-filter-title">
                             {label}
                           </div>
-                          <div className="data-table__filters-menu-filter-actions">
+                          <div className="cereda-table__filters-menu-filter-actions">
                             <button
                               type="button"
-                              className="data-table__filters-menu-icon-button"
+                              className="cereda-table__filters-menu-icon-button"
                               onClick={() => handleToggleFilterCollapsed(column.id)}
                               aria-label={
                                 isCollapsed
@@ -319,7 +319,7 @@ export function DataTableFiltersMenu<TData extends object>({
                             </button>
                             <button
                               type="button"
-                              className="data-table__filters-menu-icon-button"
+                              className="cereda-table__filters-menu-icon-button"
                               onClick={() => handleRemoveFilter(column)}
                               aria-label={locale.filters.removeAriaLabel(label)}
                             >
@@ -339,24 +339,24 @@ export function DataTableFiltersMenu<TData extends object>({
                 )}
 
                 {isAddingFilter ? (
-                  <div className="data-table__filters-menu-add-panel">
-                    <div className="data-table__filters-menu-add-title">
+                  <div className="cereda-table__filters-menu-add-panel">
+                    <div className="cereda-table__filters-menu-add-title">
                       {locale.filters.chooseField}
                     </div>
                     {inactiveFilterColumns.length === 0 ? (
-                      <div className="data-table__filters-menu-empty">
+                      <div className="cereda-table__filters-menu-empty">
                         {locale.filters.noAvailableFilters}
                       </div>
                     ) : (
-                      <div className="data-table__filters-menu-column-list">
+                      <div className="cereda-table__filters-menu-column-list">
                         {inactiveFilterColumns.map((column) => (
                           <button
                             key={column.id}
                             type="button"
-                            className="data-table__filters-menu-column"
+                            className="cereda-table__filters-menu-column"
                             onClick={() => handleAddFilter(column)}
                           >
-                            <span className="data-table__filters-menu-column-label">
+                            <span className="cereda-table__filters-menu-column-label">
                               {getColumnFilterLabel(column)}
                             </span>
                           </button>
@@ -368,7 +368,7 @@ export function DataTableFiltersMenu<TData extends object>({
 
                 <button
                   type="button"
-                  className="data-table__filters-menu-add"
+                  className="cereda-table__filters-menu-add"
                   onClick={() => setIsAddingFilter((current) => !current)}
                 >
                   {isAddingFilter ? (
@@ -390,3 +390,4 @@ export function DataTableFiltersMenu<TData extends object>({
     </Popover.Root>
   );
 }
+
