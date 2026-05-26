@@ -212,6 +212,17 @@ export interface DataTableProps<TData extends object>
   bodyHeight?: number | string;
   isLoading?: boolean;
   /**
+   * Whether to render the Filters toolbar button.
+   * Defaults to `true` when `enableColumnFilters` is set.
+   * Set to `false` to enable filtering via column headers only.
+   */
+  showFiltersButton?: boolean;
+  /**
+   * Whether to render the Columns toolbar button (visibility / ordering / grouping).
+   * Defaults to `true` when any columns-related feature is enabled.
+   */
+  showColumnsButton?: boolean;
+  /**
    * Replaces the default empty-state row. Must render valid `<tbody>` content
    * (i.e. one or more `<tr>` elements).
    */

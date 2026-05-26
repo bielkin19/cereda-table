@@ -408,10 +408,21 @@ export function applyDataTableSizingDefaultsToColumns<TData extends object>(
         };
       }
 
+      const explicitMin = normalizeBound(column.minSize);
+      const explicitMax = normalizeBound(column.maxSize);
+      const isFixedWidth =
+        explicitMin !== undefined &&
+        explicitMax !== undefined &&
+        explicitMin === explicitMax;
+
+      if (isFixedWidth) {
+        return { ...column, size: explicitMin, minSize: explicitMin, maxSize: explicitMax };
+      }
+
       const intrinsicMinSize = options?.includeHeaderControlReserve === true
         ? getDefaultColumnMinSize({
             label: getColumnDefLabel(column),
-            explicitMinSize: normalizeBound(column.minSize),
+            explicitMinSize: explicitMin,
             canSort: column.enableSorting !== false,
             canGroup:
               options?.enableGrouping === true &&
@@ -423,17 +434,16 @@ export function applyDataTableSizingDefaultsToColumns<TData extends object>(
           })
         : Math.max(
             estimateColumnMinSize(getColumnDefLabel(column)),
-            normalizeBound(column.minSize) ?? 0,
+            explicitMin ?? 0,
           );
 
       const currentSize =
         typeof column.size === 'number' && Number.isFinite(column.size)
           ? column.size
           : 0;
-      const normalizedMaxSize = normalizeBound(column.maxSize);
       const effectiveMaxSize =
-        normalizedMaxSize !== undefined
-          ? Math.max(normalizedMaxSize, intrinsicMinSize)
+        explicitMax !== undefined
+          ? Math.max(explicitMax, intrinsicMinSize)
           : undefined;
 
       return {

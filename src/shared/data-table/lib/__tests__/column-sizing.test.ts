@@ -231,6 +231,25 @@ describe('column sizing helpers', () => {
     expect(columns[0]?.size).toBe(columns[0]?.minSize);
   });
 
+  it('honours fixed-width columns (minSize === maxSize) without applying DEFAULT_HEADER_MIN_SIZE', () => {
+    const columns = applyDataTableSizingDefaultsToColumns(
+      [
+        {
+          accessorKey: 'actions',
+          header: 'Actions',
+          size: 48,
+          minSize: 48,
+          maxSize: 48,
+        },
+      ],
+      { includeHeaderControlReserve: true },
+    );
+
+    expect(columns[0]?.size).toBe(48);
+    expect(columns[0]?.minSize).toBe(48);
+    expect(columns[0]?.maxSize).toBe(48);
+  });
+
   it('clamps a column sizing state to the current column minimum sizes', () => {
     const columns = [
       {

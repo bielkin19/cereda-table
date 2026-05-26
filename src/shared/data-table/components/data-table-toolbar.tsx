@@ -20,6 +20,8 @@ interface DataTableToolbarProps<TData extends object> {
   storageKey?: string;
   defaultViewName?: string;
   savedViewsStorage?: DataTableSavedViewsStorage;
+  showFiltersButton?: boolean;
+  showColumnsButton?: boolean;
 }
 
 export function DataTableToolbar<TData extends object>({
@@ -33,6 +35,8 @@ export function DataTableToolbar<TData extends object>({
   storageKey,
   defaultViewName,
   savedViewsStorage,
+  showFiltersButton = true,
+  showColumnsButton = true,
 }: DataTableToolbarProps<TData>) {
   const [activePopover, setActivePopover] =
     useState<DataTableToolbarPopover | null>(null);
@@ -49,9 +53,12 @@ export function DataTableToolbar<TData extends object>({
   }
 
   const hasColumnsMenu =
-    enableColumnOrdering || enableColumnVisibility || enableGrouping;
+    (enableColumnOrdering || enableColumnVisibility || enableGrouping) &&
+    showColumnsButton;
   const hasActions =
-    hasColumnsMenu || enableColumnFilters === true || enableSavedViews === true;
+    hasColumnsMenu ||
+    (enableColumnFilters === true && showFiltersButton) ||
+    enableSavedViews === true;
 
   function handlePopoverOpenChange(
     popover: DataTableToolbarPopover,
@@ -87,7 +94,7 @@ export function DataTableToolbar<TData extends object>({
               }
             />
           ) : null}
-          {enableColumnFilters ? (
+          {enableColumnFilters && showFiltersButton ? (
             <DataTableFiltersMenu
               table={table}
               open={activePopover === 'filters'}

@@ -86,6 +86,13 @@ function DataTableSortableHeaderCell<TData extends object>({
     (typeof header.column.columnDef.header === 'string'
       ? header.column.columnDef.header
       : header.column.id);
+  // Without column.id fallback: empty string means "no text label" (icon-only / blank header).
+  const resolvedLabel =
+    header.column.columnDef.meta?.label ??
+    (typeof header.column.columnDef.header === 'string'
+      ? header.column.columnDef.header
+      : '');
+  const hasLabel = resolvedLabel.trim().length > 0;
   const isGroupable =
     header.column.getCanGroup() &&
     header.column.columnDef.meta?.enableGrouping !== false;
@@ -125,7 +132,7 @@ function DataTableSortableHeaderCell<TData extends object>({
         header.column.getCanGroup() && header.column.columnDef.meta?.enableGrouping !== false,
         label,
       ),
-      disabled: isPlaceholder || !canReorder,
+      disabled: isPlaceholder || !canReorder || !hasLabel,
     });
 
   style.transform = headerDragPreview?.isHeaderDragActive ? undefined : CSS.Transform.toString(transform);
@@ -145,6 +152,32 @@ function DataTableSortableHeaderCell<TData extends object>({
         style={style}
         data-column-id={header.column.id}
       />
+    );
+  }
+
+  if (!hasLabel) {
+    return (
+      <th
+        ref={setNodeRef}
+        key={header.id}
+        colSpan={header.colSpan}
+        className="cereda-table__th cereda-table__header-cell"
+        style={style}
+        data-column-id={header.column.id}
+        data-resizing={isResizing || undefined}
+      >
+        {canResize ? (
+          <button
+            type="button"
+            className={`cereda-table__column-resize-handle${isResizing ? ' cereda-table__column-resize-handle--resizing' : ''}`}
+            onPointerDownCapture={(e) => e.stopPropagation()}
+            onMouseDown={handleResizeStart}
+            onTouchStart={handleResizeStart}
+            aria-label={resizeLabel}
+            title={resizeLabel}
+          />
+        ) : null}
+      </th>
     );
   }
 

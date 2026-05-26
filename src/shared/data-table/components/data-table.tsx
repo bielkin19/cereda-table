@@ -64,6 +64,8 @@ export function DataTable<TData extends object>({
   isLoading = false,
   renderEmpty,
   renderLoading,
+  showFiltersButton = true,
+  showColumnsButton = true,
 }: DataTableProps<TData>) {
   const table = useDataTable({
     data,
@@ -153,6 +155,8 @@ export function DataTable<TData extends object>({
             storageKey={storageKey}
             defaultViewName={defaultViewName}
             savedViewsStorage={savedViewsStorage}
+            showFiltersButton={showFiltersButton}
+            showColumnsButton={showColumnsButton}
           />
         </div>
       ) : null}
