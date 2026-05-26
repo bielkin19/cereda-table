@@ -14,9 +14,12 @@ export default defineConfig({
   ],
   build: {
     lib: {
-      entry: resolve(__dirname, 'src/shared/data-table/index.ts'),
+      entry: {
+        index: resolve(__dirname, 'src/shared/data-table/index.ts'),
+        locales: resolve(__dirname, 'src/shared/data-table/locales/index.ts'),
+      },
       formats: ['es'],
-      fileName: 'index',
+      fileName: (_format, entryName) => `${entryName}.js`,
       cssFileName: 'style',
     },
     rollupOptions: {

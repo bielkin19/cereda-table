@@ -6,6 +6,8 @@ import {
   filterPrimitiveOptionsBySearch,
   type PrimitiveOption,
 } from '../lib/filters/data-table-filter-options';
+import { DataTableCheckboxField } from './data-table-checkbox';
+import { useDataTableLocale } from './data-table-locale-context';
 import { DataTableScrollArea } from './data-table-scroll-area';
 
 interface DataTableFacetFilterPopoverProps {
@@ -31,6 +33,7 @@ export function DataTableFacetFilterPopover({
   options,
   selectedKeys,
 }: DataTableFacetFilterPopoverProps) {
+  const locale = useDataTableLocale();
   const [open, setOpen] = useState(false);
   const [searchValue, setSearchValue] = useState('');
   const popoverId = useId();
@@ -60,8 +63,8 @@ export function DataTableFacetFilterPopover({
                 ? 'data-table__column-filter-facet-button data-table__column-filter-facet-button--active'
                 : 'data-table__column-filter-facet-button'
             }
-            aria-label={`Open ${label} filter values`}
-            title={`Filter ${label}`}
+            aria-label={locale.facetFilter.openAriaLabel(label)}
+            title={locale.facetFilter.openAriaLabel(label)}
           >
             <Funnel
               className="data-table__column-filter-facet-icon"
@@ -72,21 +75,22 @@ export function DataTableFacetFilterPopover({
       </div>
 
       {open ? (
-        <Popover.Content
-          id={popoverId}
-          role="dialog"
-          aria-label={`Filter ${label}`}
-          className="data-table__column-filter-popover data-table__column-filter-popover--facet"
-          sideOffset={6}
-          align="start"
-        >
+        <Popover.Portal>
+          <Popover.Content
+            id={popoverId}
+            role="dialog"
+            aria-label={locale.facetFilter.dialogAriaLabel(label)}
+            className="data-table__column-filter-popover data-table__column-filter-popover--facet"
+            sideOffset={6}
+            align="start"
+          >
           <input
             className="data-table__column-filter-popover-search"
             type="search"
             value={searchValue}
             onChange={(event) => setSearchValue(event.currentTarget.value)}
-            placeholder="Search values"
-            aria-label={`Search ${label} values`}
+            placeholder={locale.facetFilter.searchPlaceholder}
+            aria-label={locale.facetFilter.searchAriaLabel(label)}
           />
 
           <DataTableScrollArea
@@ -94,39 +98,32 @@ export function DataTableFacetFilterPopover({
             viewportClassName="data-table__column-filter-options"
             viewportRole="group"
           >
-            <label className="data-table__column-filter-option">
-              <input
-                className="data-table__column-filter-option-input"
-                type="checkbox"
-                checked={allSelected}
-                onChange={(event) => onToggleAll(event.currentTarget.checked)}
-                aria-label={`Select all ${label} values`}
-              />
-              <span className="data-table__column-filter-option-label">
-                (Select All)
-              </span>
-            </label>
+            <DataTableCheckboxField
+              className="data-table__column-filter-option"
+              checked={allSelected}
+              onCheckedChange={onToggleAll}
+              ariaLabel={locale.facetFilter.selectAllAriaLabel(label)}
+              label={locale.facetFilter.selectAllLabel}
+              labelClassName="data-table__column-filter-option-label"
+            />
             {visibleOptions.length === 0 ? (
               <div className="data-table__column-filter-option-empty">
-                No values found.
+                {locale.facetFilter.noValues}
               </div>
             ) : (
               visibleOptions.map((option) => {
                 const checked = selectedKeys.includes(option.key);
 
                 return (
-                  <label key={option.key} className="data-table__column-filter-option">
-                    <input
-                      className="data-table__column-filter-option-input"
-                      type="checkbox"
-                      checked={allSelected || checked}
-                      onChange={(event) => onToggle(option, event.currentTarget.checked)}
-                      aria-label={option.label}
-                    />
-                    <span className="data-table__column-filter-option-label">
-                      {option.label}
-                    </span>
-                  </label>
+                  <DataTableCheckboxField
+                    key={option.key}
+                    className="data-table__column-filter-option"
+                    checked={allSelected || checked}
+                    onCheckedChange={(nextChecked) => onToggle(option, nextChecked)}
+                    ariaLabel={option.label}
+                    label={option.label}
+                    labelClassName="data-table__column-filter-option-label"
+                  />
                 );
               })
             )}
@@ -137,12 +134,13 @@ export function DataTableFacetFilterPopover({
               type="button"
               className="data-table__column-filter-clear"
               onClick={onClear}
-              aria-label={`Clear ${label} filter`}
+              aria-label={locale.facetFilter.clearAriaLabel(label)}
             >
               <X aria-hidden="true" />
             </button>
           ) : null}
-        </Popover.Content>
+          </Popover.Content>
+        </Popover.Portal>
       ) : null}
     </Popover.Root>
   );

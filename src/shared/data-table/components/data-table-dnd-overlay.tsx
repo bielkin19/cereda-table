@@ -85,10 +85,9 @@ export function DataTableDndOverlayPreview({
   const label = getOverlayLabel(dragData);
   const Icon = getOverlayIcon(dragData, isInvalidDrop, activeOverData);
 
-  const classNames = [
-    'data-table__dnd-overlay',
-    dragData.zone === 'grouping-panel' ? 'data-table__dnd-overlay--pill' : '',
-  ].filter(Boolean).join(' ');
+  const className = dragData.zone === 'grouping-panel'
+    ? 'data-table__dnd-overlay data-table__dnd-overlay--pill'
+    : 'data-table__dnd-overlay';
 
   if (typeof document === 'undefined') {
     return null;
@@ -98,7 +97,7 @@ export function DataTableDndOverlayPreview({
 
   return createPortal(
     <div
-      className={classNames}
+      className={className}
       aria-hidden="true"
       style={{
         position: 'fixed',

@@ -2,6 +2,8 @@ import type { Table } from '@tanstack/react-table';
 import { Search, X } from 'lucide-react';
 import type { ChangeEvent } from 'react';
 
+import { useDataTableLocale } from './data-table-locale-context';
+
 function getGlobalFilterValue(state: { globalFilter?: unknown }): string {
   return typeof state.globalFilter === 'string' ? state.globalFilter : '';
 }
@@ -13,6 +15,7 @@ interface DataTableGlobalSearchProps<TData extends object> {
 export function DataTableGlobalSearch<TData extends object>({
   table,
 }: DataTableGlobalSearchProps<TData>) {
+  const locale = useDataTableLocale();
   const value = getGlobalFilterValue(table.getState());
 
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
@@ -29,10 +32,10 @@ export function DataTableGlobalSearch<TData extends object>({
       <input
         className="data-table__global-search-input"
         type="text"
-        placeholder="Search..."
+        placeholder={locale.search.placeholder}
         value={value}
         onChange={handleChange}
-        aria-label="Search"
+        aria-label={locale.search.ariaLabel}
         role="searchbox"
       />
       {value ? (
@@ -40,7 +43,7 @@ export function DataTableGlobalSearch<TData extends object>({
           type="button"
           className="data-table__global-search-clear"
           onClick={handleClear}
-          aria-label="Clear search"
+          aria-label={locale.search.clearAriaLabel}
         >
           <X aria-hidden="true" />
         </button>

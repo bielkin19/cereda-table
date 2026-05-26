@@ -26,10 +26,6 @@ import {
   createDataTableAutoGroupColumn,
   isDataTableAutoGroupColumnId,
 } from '../lib/auto-group-column';
-import {
-  createDataTableRowNumberColumn,
-  isDataTableRowNumberColumnId,
-} from '../lib/row-number-column';
 import { applyDataTableFilterFnsToColumns } from '../lib/column-filters';
 import { getDefaultColumnOrderFromColumns } from '../lib/column-ordering';
 import {
@@ -48,6 +44,10 @@ import {
   upsertDataTableFilterRule,
 } from '../lib/filters/data-table-filter-normalization';
 import { resolveUpdater } from '../lib/resolve-updater';
+import {
+  createDataTableRowNumberColumn,
+  isDataTableRowNumberColumnId,
+} from '../lib/row-number-column';
 import type {
   DataTableFilterRule,
   UseDataTableOptions,

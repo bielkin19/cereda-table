@@ -13,6 +13,7 @@ import { normalizeGroupingIds, removeGroupingId } from '../lib/grouping-ordering
 import { useDataTableDndState } from './data-table-dnd-state-context';
 import { useDataTableGroupingDragPreview } from './data-table-grouping-drag-preview-context';
 import { DataTableGroupingPanelItem } from './data-table-grouping-panel-item';
+import { useDataTableLocale } from './data-table-locale-context';
 import { DataTableScrollArea } from './data-table-scroll-area';
 
 interface DataTableGroupingPanelProps<TData extends object> {
@@ -35,6 +36,7 @@ function getGroupedColumns<TData extends object>(
 export function DataTableGroupingPanel<TData extends object>({
   table,
 }: DataTableGroupingPanelProps<TData>) {
+  const locale = useDataTableLocale();
   const groupingPreview = useDataTableGroupingDragPreview();
   const groupingIds = normalizeGroupingIds(
     groupingPreview?.groupingOrder ?? table.getState().grouping,
@@ -52,23 +54,23 @@ export function DataTableGroupingPanel<TData extends object>({
     dndState?.activeDragData?.zone === 'column-header' &&
     dndState.activeDragData.groupable !== true;
 
-  let panelClassName = 'data-table__grouping-panel';
-  if (isOver && isGroupableDragActive) {
-    panelClassName += ' data-table__grouping-panel--drop-target';
-  } else if (isGroupableDragActive) {
-    panelClassName += ' data-table__grouping-panel--can-drop';
-  } else if (isDraggingNonGroupableHeader) {
-    panelClassName += ' data-table__grouping-panel--deny';
-  }
+  const panelModifier =
+    isOver && isGroupableDragActive ? 'data-table__grouping-panel--drop-target' :
+    isGroupableDragActive ? 'data-table__grouping-panel--can-drop' :
+    isDraggingNonGroupableHeader ? 'data-table__grouping-panel--deny' :
+    null;
+  const panelClassName = panelModifier
+    ? `data-table__grouping-panel ${panelModifier}`
+    : 'data-table__grouping-panel';
 
   return (
-    <section className={panelClassName} aria-label="Grouping">
+    <section className={panelClassName} aria-label={locale.groupingPanel.ariaLabel}>
       <div ref={setNodeRef} className="data-table__grouping-panel-drop-surface" />
       <div className="data-table__grouping-panel-content">
         {groupedColumns.length === 0 ? (
           <div className="data-table__grouping-panel-empty">
             <Layers className="data-table__grouping-panel-empty-icon" aria-hidden="true" />
-            Drag here to set row groups
+            {locale.groupingPanel.dropHint}
           </div>
         ) : (
           <>
@@ -110,7 +112,7 @@ export function DataTableGroupingPanel<TData extends object>({
               }}
             >
               <X aria-hidden="true" />
-              Clear all
+              {locale.groupingPanel.clearAll}
             </button>
           </>
         )}

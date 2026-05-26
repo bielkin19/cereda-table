@@ -1,7 +1,7 @@
 import * as Popover from '@radix-ui/react-popover';
 import type { Column, Table } from '@tanstack/react-table';
 import { ChevronDown, ChevronUp, Plus, SlidersHorizontal, X } from 'lucide-react';
-import { useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { isDataTableAutoGroupColumnId } from '../lib/auto-group-column';
 import { normalizeDataTableFilterRules } from '../lib/filters/data-table-filter-normalization';
@@ -19,10 +19,13 @@ import {
   DataTableSelectFilter,
   DataTableTextFilter,
 } from './data-table-column-filter';
+import { useDataTableLocale } from './data-table-locale-context';
 import { DataTableScrollArea } from './data-table-scroll-area';
 
 interface DataTableFiltersMenuProps<TData extends object> {
   table: Table<TData>;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
 }
 
 function getFilterableColumns<TData extends object>(table: Table<TData>) {
@@ -111,8 +114,12 @@ function DataTableFiltersMenuColumnEditor<TData extends object>({
 
 export function DataTableFiltersMenu<TData extends object>({
   table,
+  open: controlledOpen,
+  onOpenChange,
 }: DataTableFiltersMenuProps<TData>) {
-  const [open, setOpen] = useState(false);
+  const locale = useDataTableLocale();
+  const [uncontrolledOpen, setUncontrolledOpen] = useState(false);
+  const open = controlledOpen ?? uncontrolledOpen;
   const [isAddingFilter, setIsAddingFilter] = useState(false);
   const [collapsedFilterIds, setCollapsedFilterIds] = useState<string[]>([]);
   const [draftFilterColumnIds, setDraftFilterColumnIds] = useState<string[]>([]);
@@ -136,17 +143,16 @@ export function DataTableFiltersMenu<TData extends object>({
   );
   const activeFilterCount = activeFilterColumnIds.length;
 
-  if (filterableColumns.length === 0) {
-    return null;
-  }
-
-  function handleOpenChange(nextOpen: boolean) {
-    setOpen(nextOpen);
+  const handleOpenChange = useCallback((nextOpen: boolean) => {
+    if (controlledOpen === undefined) {
+      setUncontrolledOpen(nextOpen);
+    }
+    onOpenChange?.(nextOpen);
     if (!nextOpen) {
       setIsAddingFilter(false);
       setDraftFilterColumnIds([]);
     }
-  }
+  }, [controlledOpen, onOpenChange]);
 
   function handleClearAllFilters() {
     table.options.meta?.setFilterRules?.([]);
@@ -183,9 +189,37 @@ export function DataTableFiltersMenu<TData extends object>({
     );
   }
 
+  useEffect(() => {
+    if (!open) return;
+
+    function handleBackdropPointerDown(event: PointerEvent) {
+      if (
+        event.target instanceof Element &&
+        event.target.classList.contains('data-table__popover-backdrop')
+      ) {
+        handleOpenChange(false);
+      }
+    }
+
+    document.addEventListener('pointerdown', handleBackdropPointerDown, true);
+    return () => {
+      document.removeEventListener('pointerdown', handleBackdropPointerDown, true);
+    };
+  }, [handleOpenChange, open]);
+
+  if (filterableColumns.length === 0) {
+    return null;
+  }
+
   return (
     <Popover.Root open={open} onOpenChange={handleOpenChange}>
-      <div className="data-table__filters-menu">
+      <div
+        className={
+          open
+            ? 'data-table__filters-menu data-table__popover-root--open'
+            : 'data-table__filters-menu'
+        }
+      >
         <Popover.Trigger asChild>
           <button
             type="button"
@@ -198,13 +232,13 @@ export function DataTableFiltersMenu<TData extends object>({
             aria-expanded={open}
             aria-label={
               activeFilterCount > 0
-                ? `Filters, ${activeFilterCount} active`
-                : 'Filters'
+                ? locale.filters.activeAriaLabel(activeFilterCount)
+                : locale.filters.buttonLabel
             }
-            title="Filters"
+            title={locale.filters.buttonLabel}
           >
             <SlidersHorizontal aria-hidden="true" />
-            Filters
+            {locale.filters.buttonLabel}
             {activeFilterCount > 0 ? (
               <span className="data-table__toolbar-button-count">
                 {activeFilterCount}
@@ -214,18 +248,27 @@ export function DataTableFiltersMenu<TData extends object>({
         </Popover.Trigger>
 
         {open ? (
-          <Popover.Content
-            role="dialog"
-            aria-label="Filters"
-            className="data-table__filters-menu-panel"
-            sideOffset={8}
-            align="end"
-          >
+          <>
+            <Popover.Portal>
+              <div
+                className="data-table__popover-backdrop"
+                onPointerDown={() => handleOpenChange(false)}
+                aria-hidden="true"
+              />
+            </Popover.Portal>
+            <Popover.Portal>
+            <Popover.Content
+              role="dialog"
+              aria-label={locale.filters.panelTitle}
+              className="data-table__filters-menu-panel"
+              sideOffset={8}
+              align="end"
+            >
             <div className="data-table__filters-menu-header">
               <div>
-                <div className="data-table__filters-menu-title">Filters</div>
+                <div className="data-table__filters-menu-title">{locale.filters.panelTitle}</div>
                 <div className="data-table__filters-menu-subtitle">
-                  Add field filters and edit them in one list.
+                  {locale.filters.panelSubtitle}
                 </div>
               </div>
               {activeFilterCount > 0 ? (
@@ -234,7 +277,7 @@ export function DataTableFiltersMenu<TData extends object>({
                   className="data-table__filters-menu-clear"
                   onClick={handleClearAllFilters}
                 >
-                  Clear all
+                  {locale.filters.clearAll}
                 </button>
               ) : null}
             </div>
@@ -243,7 +286,7 @@ export function DataTableFiltersMenu<TData extends object>({
               <div className="data-table__filters-menu-builder">
                 {visibleFilterColumns.length === 0 ? (
                   <div className="data-table__filters-menu-empty">
-                    No filters added.
+                    {locale.filters.noFilters}
                   </div>
                 ) : (
                   visibleFilterColumns.map((column) => {
@@ -255,7 +298,7 @@ export function DataTableFiltersMenu<TData extends object>({
                       <section
                         key={column.id}
                         className="data-table__filters-menu-filter-block"
-                        aria-label={`${label} filter`}
+                        aria-label={locale.filters.sectionAriaLabel(label)}
                       >
                         <div className="data-table__filters-menu-filter-header">
                           <div className="data-table__filters-menu-filter-title">
@@ -268,8 +311,8 @@ export function DataTableFiltersMenu<TData extends object>({
                               onClick={() => handleToggleFilterCollapsed(column.id)}
                               aria-label={
                                 isCollapsed
-                                  ? `Expand ${label} filter`
-                                  : `Collapse ${label} filter`
+                                  ? locale.filters.expandAriaLabel(label)
+                                  : locale.filters.collapseAriaLabel(label)
                               }
                             >
                               <CollapseIcon aria-hidden="true" />
@@ -278,7 +321,7 @@ export function DataTableFiltersMenu<TData extends object>({
                               type="button"
                               className="data-table__filters-menu-icon-button"
                               onClick={() => handleRemoveFilter(column)}
-                              aria-label={`Remove ${label} filter`}
+                              aria-label={locale.filters.removeAriaLabel(label)}
                             >
                               <X aria-hidden="true" />
                             </button>
@@ -298,11 +341,11 @@ export function DataTableFiltersMenu<TData extends object>({
                 {isAddingFilter ? (
                   <div className="data-table__filters-menu-add-panel">
                     <div className="data-table__filters-menu-add-title">
-                      Choose a field
+                      {locale.filters.chooseField}
                     </div>
                     {inactiveFilterColumns.length === 0 ? (
                       <div className="data-table__filters-menu-empty">
-                        All available filters are already added.
+                        {locale.filters.noAvailableFilters}
                       </div>
                     ) : (
                       <div className="data-table__filters-menu-column-list">
@@ -329,17 +372,19 @@ export function DataTableFiltersMenu<TData extends object>({
                   onClick={() => setIsAddingFilter((current) => !current)}
                 >
                   {isAddingFilter ? (
-                    'Cancel'
+                    locale.filters.cancel
                   ) : (
                     <>
                       <Plus aria-hidden="true" />
-                      Add filter
+                      {locale.filters.addFilter}
                     </>
                   )}
                 </button>
               </div>
             </DataTableScrollArea>
-          </Popover.Content>
+            </Popover.Content>
+            </Popover.Portal>
+          </>
         ) : null}
       </div>
     </Popover.Root>

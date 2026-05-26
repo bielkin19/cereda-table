@@ -1,10 +1,13 @@
 import type { Table } from '@tanstack/react-table';
+import { useState } from 'react';
 
 import type { DataTableSavedViewsStorage } from '../types/data-table.types';
 import { DataTableColumnsMenu } from './data-table-columns-menu';
 import { DataTableFiltersMenu } from './data-table-filters-menu';
 import { DataTableGlobalSearch } from './data-table-global-search';
 import { DataTableSavedViewsMenu } from './data-table-saved-views-menu';
+
+type DataTableToolbarPopover = 'saved-views' | 'filters' | 'columns';
 
 interface DataTableToolbarProps<TData extends object> {
   table: Table<TData>;
@@ -31,6 +34,9 @@ export function DataTableToolbar<TData extends object>({
   defaultViewName,
   savedViewsStorage,
 }: DataTableToolbarProps<TData>) {
+  const [activePopover, setActivePopover] =
+    useState<DataTableToolbarPopover | null>(null);
+
   if (
     !enableColumnOrdering &&
     !enableColumnFilters &&
@@ -47,8 +53,21 @@ export function DataTableToolbar<TData extends object>({
   const hasActions =
     hasColumnsMenu || enableColumnFilters === true || enableSavedViews === true;
 
+  function handlePopoverOpenChange(
+    popover: DataTableToolbarPopover,
+    nextOpen: boolean,
+  ) {
+    setActivePopover(nextOpen ? popover : null);
+  }
+
   return (
-    <div className="data-table__toolbar-inner">
+    <div
+      className={
+        activePopover
+          ? 'data-table__toolbar-inner data-table__toolbar-inner--popover-open'
+          : 'data-table__toolbar-inner'
+      }
+    >
       {enableGlobalFilter ? (
         <div className="data-table__toolbar-section data-table__toolbar-section--search">
           <DataTableGlobalSearch table={table} />
@@ -62,15 +81,31 @@ export function DataTableToolbar<TData extends object>({
               storageKey={storageKey}
               defaultViewName={defaultViewName}
               savedViewsStorage={savedViewsStorage}
+              open={activePopover === 'saved-views'}
+              onOpenChange={(nextOpen) =>
+                handlePopoverOpenChange('saved-views', nextOpen)
+              }
             />
           ) : null}
-          {enableColumnFilters ? <DataTableFiltersMenu table={table} /> : null}
+          {enableColumnFilters ? (
+            <DataTableFiltersMenu
+              table={table}
+              open={activePopover === 'filters'}
+              onOpenChange={(nextOpen) =>
+                handlePopoverOpenChange('filters', nextOpen)
+              }
+            />
+          ) : null}
           {hasColumnsMenu ? (
             <DataTableColumnsMenu
               table={table}
               enableColumnOrdering={enableColumnOrdering}
               enableColumnVisibility={enableColumnVisibility}
               enableGrouping={enableGrouping}
+              open={activePopover === 'columns'}
+              onOpenChange={(nextOpen) =>
+                handlePopoverOpenChange('columns', nextOpen)
+              }
             />
           ) : null}
         </div>

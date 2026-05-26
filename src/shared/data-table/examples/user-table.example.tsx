@@ -1,6 +1,7 @@
 import {
   createDataTableConfig,
   DataTable,
+  type DataTableLocale,
 } from '../index';
 
 interface User {
@@ -425,13 +426,18 @@ const SAMPLE_USERS: User[] = [
   },
 ];
 
-export function UserTableExample() {
+interface UserTableExampleProps {
+  locale?: DataTableLocale;
+}
+
+export function UserTableExample({ locale }: UserTableExampleProps) {
   return (
     <DataTable<User>
       data={SAMPLE_USERS}
       {...userTableConfig}
       bodyHeight="60vh"
       enableRowNumbers
+      locale={locale}
     />
-);
+  );
 }

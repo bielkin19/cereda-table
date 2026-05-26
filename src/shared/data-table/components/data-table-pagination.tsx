@@ -1,6 +1,7 @@
 import type { Table } from '@tanstack/react-table';
 import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from 'lucide-react';
 
+import { useDataTableLocale } from './data-table-locale-context';
 import { DataTableSelect } from './data-table-select';
 
 interface DataTablePaginationProps<TData extends object> {
@@ -69,12 +70,13 @@ export function DataTablePagination<TData extends object>({
     table.setPagination((current) => ({ ...current, pageIndex: 0, pageSize: nextSize }));
   };
 
+  const locale = useDataTableLocale();
   const pageNumbers = hasKnownPageCount ? getPageNumbers(currentPage, pageCount) : null;
 
   return (
-    <nav className="data-table__pagination" aria-label="Pagination">
+    <nav className="data-table__pagination" aria-label={locale.pagination.label}>
       <span className="data-table__pagination-row-count">
-        {rowCount} row{rowCount === 1 ? '' : 's'}
+        {locale.pagination.rowCount(rowCount)}
       </span>
 
       <div className="data-table__pagination-controls">
@@ -83,7 +85,7 @@ export function DataTablePagination<TData extends object>({
           className="data-table__pagination-button"
           onClick={() => table.firstPage()}
           disabled={!table.getCanPreviousPage()}
-          aria-label="First page"
+          aria-label={locale.pagination.firstPage}
         >
           <ChevronsLeft aria-hidden="true" />
         </button>
@@ -92,13 +94,13 @@ export function DataTablePagination<TData extends object>({
           className="data-table__pagination-button"
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
-          aria-label="Previous page"
+          aria-label={locale.pagination.previousPage}
         >
           <ChevronLeft aria-hidden="true" />
         </button>
 
         {pageNumbers ? (
-          <div className="data-table__pagination-pages" role="group" aria-label="Page numbers">
+          <div className="data-table__pagination-pages" role="group" aria-label={locale.pagination.pageNumbers}>
             {pageNumbers.map((item, index) =>
               item === 'ellipsis' ? (
                 <span key={`ellipsis-${index}`} className="data-table__pagination-ellipsis" aria-hidden="true">
@@ -109,7 +111,7 @@ export function DataTablePagination<TData extends object>({
                   key={item}
                   type="button"
                   className="data-table__pagination-button"
-                  aria-label={`Page ${item}`}
+                  aria-label={locale.pagination.pageAriaLabel(item)}
                   aria-current={item === currentPage ? 'page' : undefined}
                   data-active={item === currentPage || undefined}
                   onClick={item === currentPage ? undefined : () => table.setPageIndex(item - 1)}
@@ -121,7 +123,7 @@ export function DataTablePagination<TData extends object>({
           </div>
         ) : (
           <span className="data-table__pagination-page-info">
-            Page {currentPage}
+            {locale.pagination.page(currentPage)}
           </span>
         )}
 
@@ -130,7 +132,7 @@ export function DataTablePagination<TData extends object>({
           className="data-table__pagination-button"
           onClick={() => table.nextPage()}
           disabled={!table.getCanNextPage()}
-          aria-label="Next page"
+          aria-label={locale.pagination.nextPage}
         >
           <ChevronRight aria-hidden="true" />
         </button>
@@ -139,16 +141,16 @@ export function DataTablePagination<TData extends object>({
           className="data-table__pagination-button"
           onClick={() => table.lastPage()}
           disabled={!hasKnownPageCount || !table.getCanNextPage()}
-          aria-label="Last page"
+          aria-label={locale.pagination.lastPage}
         >
           <ChevronsRight aria-hidden="true" />
         </button>
       </div>
 
       <label className="data-table__pagination-size">
-        <span className="data-table__pagination-size-label">Rows per page</span>
+        <span className="data-table__pagination-size-label">{locale.pagination.rowsPerPage}</span>
         <DataTableSelect
-          ariaLabel="Rows per page"
+          ariaLabel={locale.pagination.rowsPerPage}
           className="data-table__pagination-size-select"
           contentClassName="data-table__select-content data-table__select-content--pagination"
           onValueChange={handlePageSizeChange}

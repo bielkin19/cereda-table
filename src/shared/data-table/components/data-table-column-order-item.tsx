@@ -8,6 +8,7 @@ import {
   createDataTableDndData,
   getColumnOrderDndId,
 } from '../lib/data-table-dnd';
+import { useDataTableLocale } from './data-table-locale-context';
 
 interface DataTableColumnOrderItemProps<TData extends object> {
   column: Column<TData, unknown>;
@@ -24,6 +25,7 @@ export function DataTableColumnOrderItem<TData extends object>({
   onMoveLeft,
   onMoveRight,
 }: DataTableColumnOrderItemProps<TData>) {
+  const locale = useDataTableLocale();
   const label = column.columnDef.meta?.label ?? column.id;
   const isGroupable = column.getCanGroup() && column.columnDef.meta?.enableGrouping !== false;
   const {
@@ -47,6 +49,8 @@ export function DataTableColumnOrderItem<TData extends object>({
     transition,
   };
 
+  const groupableLabel = isGroupable ? locale.columnOrder.canBeGroupedLabel : locale.columnOrder.moveOnlyLabel;
+
   return (
     <div
       ref={setNodeRef}
@@ -61,8 +65,8 @@ export function DataTableColumnOrderItem<TData extends object>({
         type="button"
         ref={setActivatorNodeRef}
         className="data-table__column-order-drag-handle"
-        aria-label={`Drag ${label} to reorder`}
-        title={`Drag ${label} to reorder`}
+        aria-label={locale.columnOrder.dragAriaLabel(label)}
+        title={locale.columnOrder.dragAriaLabel(label)}
         {...attributes}
         {...listeners}
       >
@@ -80,10 +84,10 @@ export function DataTableColumnOrderItem<TData extends object>({
             : 'data-table__column-order-capability data-table__column-order-capability--move-only'
         }
         role="img"
-        aria-label={isGroupable ? 'Can be grouped' : 'Move only'}
-        title={isGroupable ? 'Can be grouped' : 'Move only'}
+        aria-label={groupableLabel}
+        title={groupableLabel}
       >
-        {isGroupable ? 'Group' : 'Move only'}
+        {groupableLabel}
       </span>
 
       <div className="data-table__column-order-actions">
@@ -92,25 +96,22 @@ export function DataTableColumnOrderItem<TData extends object>({
           className="data-table__column-order-action"
           onClick={onMoveLeft}
           disabled={isFirst}
-          aria-label={`Move ${label} left`}
+          aria-label={locale.columnOrder.moveLeftAriaLabel(label)}
         >
           <ArrowLeft aria-hidden="true" />
-          Left
+          {locale.columnOrder.leftLabel}
         </button>
         <button
           type="button"
           className="data-table__column-order-action"
           onClick={onMoveRight}
           disabled={isLast}
-          aria-label={`Move ${label} right`}
+          aria-label={locale.columnOrder.moveRightAriaLabel(label)}
         >
-          Right
+          {locale.columnOrder.rightLabel}
           <ArrowRight aria-hidden="true" />
         </button>
       </div>
     </div>
   );
 }
-
-
-

@@ -23,7 +23,9 @@ import {
   isSupportedFilterVariant,
   type PrimitiveOption,
 } from '../lib/filters/data-table-filter-options';
+import { DataTableDatePicker } from './data-table-date-picker';
 import { DataTableFacetFilterPopover } from './data-table-facet-filter-popover';
+import { useDataTableLocale } from './data-table-locale-context';
 
 export interface DataTableColumnFilterProps<TData extends object> {
   column: Column<TData, unknown>;
@@ -37,7 +39,17 @@ function stopPropagation(event: SyntheticEvent) {
 const stopPointerAndMousePropagation = {
   onClick: stopPropagation,
   onMouseDown: stopPropagation,
-  onPointerDown: stopPropagation,
+  // Portal children (e.g. popover checkboxes) bubble through the React tree but
+  // are NOT in this DOM subtree. Stopping propagation unconditionally here calls
+  // nativeEvent.stopPropagation(), which prevents the Radix DismissableLayer's
+  // document-level listener from resetting its inside-click flag — causing the
+  // popover to need two outside clicks to close. Only stop when the target is
+  // actually inside this DOM node.
+  onPointerDown: (event: SyntheticEvent) => {
+    if ((event.currentTarget).contains(event.target as Node)) {
+      event.stopPropagation();
+    }
+  },
 };
 
 
@@ -45,6 +57,7 @@ export function DataTableTextFilter<TData extends object>({
   column,
   table,
 }: DataTableColumnFilterProps<TData>) {
+  const locale = useDataTableLocale();
   const label = getColumnFilterLabel(column);
   const filterValue = getColumnFilterRuleValue(column, table, 'contains');
   const inFilterValue = getColumnFilterRuleValue(column, table, 'in');
@@ -106,7 +119,7 @@ export function DataTableTextFilter<TData extends object>({
                 ? getFacetSummary(options, selectedKeys, allSelected)
                 : label
             }
-            aria-label={`Filter ${label}`}
+            aria-label={locale.columnFilter.filterAriaLabel(label)}
             value={value}
             onChange={handleChange}
           />
@@ -120,6 +133,7 @@ export function DataTableNumberFilter<TData extends object>({
   column,
   table,
 }: DataTableColumnFilterProps<TData>) {
+  const locale = useDataTableLocale();
   const label = getColumnFilterLabel(column);
   const value = getRangeFilterRuleValue(
     getColumnFilterRuleValue(column, table, 'between'),
@@ -164,8 +178,8 @@ export function DataTableNumberFilter<TData extends object>({
           type="number"
           step="any"
           inputMode="decimal"
-          placeholder="Min"
-          aria-label={`Minimum ${label} filter`}
+          placeholder={locale.columnFilter.minPlaceholder}
+          aria-label={locale.columnFilter.minAriaLabel(label)}
           value={minValue}
           onChange={(event) => handleChange('min', event)}
         />
@@ -174,8 +188,8 @@ export function DataTableNumberFilter<TData extends object>({
           type="number"
           step="any"
           inputMode="decimal"
-          placeholder="Max"
-          aria-label={`Maximum ${label} filter`}
+          placeholder={locale.columnFilter.maxPlaceholder}
+          aria-label={locale.columnFilter.maxAriaLabel(label)}
           value={maxValue}
           onChange={(event) => handleChange('max', event)}
         />
@@ -185,7 +199,7 @@ export function DataTableNumberFilter<TData extends object>({
           type="button"
           className="data-table__column-filter-clear"
           onClick={handleClear}
-          aria-label={`Clear ${label} filter`}
+          aria-label={locale.columnFilter.clearAriaLabel(label)}
         >
           <X aria-hidden="true" />
         </button>
@@ -198,12 +212,13 @@ export function DataTableDateFilter<TData extends object>({
   column,
   table,
 }: DataTableColumnFilterProps<TData>) {
+  const locale = useDataTableLocale();
   const label = getColumnFilterLabel(column);
   const value =
     normalizeDateFilterValue(getColumnFilterRuleValue(column, table, 'equals')) ?? '';
 
-  function handleChange(event: ChangeEvent<HTMLInputElement>) {
-    setColumnFilterRuleValue(column, event.currentTarget.value, 'equals');
+  function handleChange(ymd: string) {
+    setColumnFilterRuleValue(column, ymd, 'equals');
   }
 
   function handleClear() {
@@ -215,23 +230,13 @@ export function DataTableDateFilter<TData extends object>({
       className="data-table__column-filter data-table__column-filter--date"
       {...stopPointerAndMousePropagation}
     >
-      <input
-        className="data-table__column-filter-input"
-        type="date"
-        aria-label={`Filter ${label}`}
+      <DataTableDatePicker
+        label={label}
+        inputLabel={locale.columnFilter.inputLabel(label)}
         value={value}
         onChange={handleChange}
+        onClear={handleClear}
       />
-      {value ? (
-        <button
-          type="button"
-          className="data-table__column-filter-clear"
-          onClick={handleClear}
-          aria-label={`Clear ${label} filter`}
-        >
-          <X aria-hidden="true" />
-        </button>
-      ) : null}
     </div>
   );
 }
@@ -240,35 +245,23 @@ export function DataTableDateRangeFilter<TData extends object>({
   column,
   table,
 }: DataTableColumnFilterProps<TData>) {
+  const locale = useDataTableLocale();
   const label = getColumnFilterLabel(column);
   const value = getRangeFilterRuleValue(
     getColumnFilterRuleValue(column, table, 'between'),
   );
-  const fromValue = value?.from !== undefined ? String(value.from) : '';
-  const toValue = value?.to !== undefined ? String(value.to) : '';
+  const fromValue = typeof value?.from === 'string' ? value.from : '';
+  const toValue = typeof value?.to === 'string' ? value.to : '';
   const canClear = fromValue.length > 0 || toValue.length > 0;
 
-  function handleChange(
-    side: 'from' | 'to',
-    event: ChangeEvent<HTMLInputElement>,
-  ) {
-    const nextFrom =
-      side === 'from'
-        ? normalizeDateFilterValue(event.currentTarget.value)
-        : value?.from;
-    const nextTo =
-      side === 'to' ? normalizeDateFilterValue(event.currentTarget.value) : value?.to;
+  function handleChangeFrom(ymd: string) {
+    const normalized = normalizeDateRangeFilterValue({ from: ymd, to: value?.to });
+    setColumnFilterRuleValue(column, normalized ?? undefined, 'between');
+  }
 
-    const normalizedRange = normalizeDateRangeFilterValue({
-      from: nextFrom,
-      to: nextTo,
-    });
-    const nextValue =
-      normalizedRange === undefined
-        ? undefined
-        : { from: normalizedRange.from, to: normalizedRange.to };
-
-    setColumnFilterRuleValue(column, nextValue, 'between');
+  function handleChangeTo(ymd: string) {
+    const normalized = normalizeDateRangeFilterValue({ from: value?.from, to: ymd });
+    setColumnFilterRuleValue(column, normalized ?? undefined, 'between');
   }
 
   function handleClear() {
@@ -281,19 +274,19 @@ export function DataTableDateRangeFilter<TData extends object>({
       {...stopPointerAndMousePropagation}
     >
       <div className="data-table__column-filter-range">
-        <input
-          className="data-table__column-filter-input"
-          type="date"
-          aria-label={`From ${label}`}
+        <DataTableDatePicker
+          label={locale.columnFilter.fromAriaLabel(label)}
+          placeholder={locale.columnFilter.fromPlaceholder}
           value={fromValue}
-          onChange={(event) => handleChange('from', event)}
+          onChange={handleChangeFrom}
+          max={toValue || undefined}
         />
-        <input
-          className="data-table__column-filter-input"
-          type="date"
-          aria-label={`To ${label}`}
+        <DataTableDatePicker
+          label={locale.columnFilter.toAriaLabel(label)}
+          placeholder={locale.columnFilter.toPlaceholder}
           value={toValue}
-          onChange={(event) => handleChange('to', event)}
+          onChange={handleChangeTo}
+          min={fromValue || undefined}
         />
       </div>
       {canClear ? (
@@ -301,7 +294,7 @@ export function DataTableDateRangeFilter<TData extends object>({
           type="button"
           className="data-table__column-filter-clear"
           onClick={handleClear}
-          aria-label={`Clear ${label} filter`}
+          aria-label={locale.columnFilter.clearAriaLabel(label)}
         >
           <X aria-hidden="true" />
         </button>
@@ -314,6 +307,7 @@ export function DataTableSelectFilter<TData extends object>({
   column,
   table,
 }: DataTableColumnFilterProps<TData>) {
+  const locale = useDataTableLocale();
   const label = getColumnFilterLabel(column);
   const inValue = getColumnFilterRuleValue(column, table, 'in');
   const filterValue = inValue;
@@ -362,7 +356,7 @@ export function DataTableSelectFilter<TData extends object>({
             type="button"
             className="data-table__column-filter-input data-table__column-filter-value"
             onClick={openFilter}
-            aria-label={`Filter ${label}`}
+            aria-label={locale.columnFilter.filterAriaLabel(label)}
           >
             {getFacetSummary(options, selectedKeys, allSelected)}
           </button>
@@ -376,6 +370,7 @@ export function DataTableMultiSelectFilter<TData extends object>({
   column,
   table,
 }: DataTableColumnFilterProps<TData>) {
+  const locale = useDataTableLocale();
   const label = getColumnFilterLabel(column);
   const filterValue = getColumnFilterRuleValue(column, table, 'in');
   const options = getPrimitiveFilterOptions(column, table);
@@ -422,7 +417,7 @@ export function DataTableMultiSelectFilter<TData extends object>({
             type="button"
             className="data-table__column-filter-input data-table__column-filter-value"
             onClick={openFilter}
-            aria-label={`Filter ${label}`}
+            aria-label={locale.columnFilter.filterAriaLabel(label)}
           >
             {getFacetSummary(options, selectedKeys, allSelected)}
           </button>
@@ -436,11 +431,12 @@ export function DataTableBooleanFilter<TData extends object>({
   column,
   table,
 }: DataTableColumnFilterProps<TData>) {
+  const locale = useDataTableLocale();
   const label = getColumnFilterLabel(column);
   const filterValue = getColumnFilterRuleValue(column, table, 'in');
   const options: PrimitiveOption[] = [
-    { key: getPrimitiveFilterKey(true), value: true, label: 'Yes' },
-    { key: getPrimitiveFilterKey(false), value: false, label: 'No' },
+    { key: getPrimitiveFilterKey(true), value: true, label: locale.columnFilter.booleanTrue },
+    { key: getPrimitiveFilterKey(false), value: false, label: locale.columnFilter.booleanFalse },
   ];
   const selectedValues = normalizePrimitiveArray(filterValue) ?? [];
   const selectedKeys = selectedValues.map((entry) => getPrimitiveFilterKey(entry));
@@ -486,7 +482,7 @@ export function DataTableBooleanFilter<TData extends object>({
             type="button"
             className="data-table__column-filter-input data-table__column-filter-value"
             onClick={openFilter}
-            aria-label={`Filter ${label}`}
+            aria-label={locale.columnFilter.filterAriaLabel(label)}
           >
             {getFacetSummary(options, selectedKeys, allSelected)}
           </button>

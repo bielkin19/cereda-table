@@ -14,6 +14,8 @@ import type {
 } from '@tanstack/react-table';
 import type { ReactNode } from 'react';
 
+import type { DataTableLocale } from '../lib/data-table-locale';
+
 /**
  * Selects whether the table runs client-side row modeling or defers sorting,
  * filtering, grouping, and pagination semantics to the caller/server.
@@ -205,6 +207,8 @@ export interface DataTableSavedViewsStorage {
  */
 export interface DataTableProps<TData extends object>
   extends UseDataTableOptions<TData> {
+  /** Localization strings. Merges on top of the parent locale context when provided. */
+  locale?: DataTableLocale;
   bodyHeight?: number | string;
   isLoading?: boolean;
   /**

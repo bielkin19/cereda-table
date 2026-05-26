@@ -15,10 +15,9 @@ import { sortableKeyboardCoordinates } from '@dnd-kit/sortable';
 import { getEventCoordinates } from '@dnd-kit/utilities';
 import type { ColumnOrderState, Table } from '@tanstack/react-table';
 import type { GroupingState } from '@tanstack/react-table';
-import React, { type ReactNode, useCallback, useEffect, useRef, useState } from 'react';
+import React, { type ReactNode, useCallback, useEffect, useId, useRef, useState } from 'react';
 
 import { isDataTableAutoGroupColumnId } from '../lib/auto-group-column';
-import { isDataTableRowNumberColumnId } from '../lib/row-number-column';
 import { getPreviewColumnOrderFromVisibleColumns } from '../lib/column-ordering';
 import {
   type DataTableDndData,
@@ -32,6 +31,7 @@ import {
   normalizeGroupingIds,
   reorderGroupingIds,
 } from '../lib/grouping-ordering';
+import { isDataTableRowNumberColumnId } from '../lib/row-number-column';
 import { DataTableDndOverlay } from './data-table-dnd-overlay';
 import { DataTableDndStateProvider } from './data-table-dnd-state-context';
 import { DataTableGroupingDragPreviewProvider } from './data-table-grouping-drag-preview-context';
@@ -61,6 +61,7 @@ export function DataTableDndLayer<TData extends object>({
   children,
 }: DataTableDndLayerProps<TData>) {
   const shouldEnableDnd = enableColumnOrdering === true || enableGrouping === true;
+  const dndId = useId();
   const [activeDragData, setActiveDragData] = useState<DataTableDndData | null>(null);
   const [activeDragPosition, setActiveDragPosition] = useState<Coordinates | null>(null);
   const [activeOverData, setActiveOverData] = useState<DataTableDndData | null>(null);
@@ -297,7 +298,7 @@ export function DataTableDndLayer<TData extends object>({
     return () => {
       window.removeEventListener('pointermove', handlePointerMove);
     };
-  }, [activeDragData, syncHeaderInsertionMarker]);
+  }, [activeDragData, syncHeaderInsertionMarker, externalWrapperRef]);
 
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
@@ -485,6 +486,7 @@ export function DataTableDndLayer<TData extends object>({
           isGroupingDragActive={activeDragData?.zone === 'grouping-panel'}
         >
           <DndContext
+            id={dndId}
             collisionDetection={collisionDetection}
             sensors={sensors}
             onDragMove={handleDragMove}

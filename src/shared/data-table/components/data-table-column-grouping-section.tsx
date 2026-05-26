@@ -9,6 +9,7 @@ import {
   getGroupingMenuDndId,
 } from '../lib/data-table-dnd';
 import { normalizeGroupingIds } from '../lib/grouping-ordering';
+import { useDataTableLocale } from './data-table-locale-context';
 
 interface DataTableColumnsGroupingSectionProps<TData extends object> {
   table: Table<TData>;
@@ -23,6 +24,7 @@ export function DataTableColumnsGroupingSection<TData extends object>({
   table,
   columns,
 }: DataTableColumnsGroupingSectionProps<TData>) {
+  const locale = useDataTableLocale();
   const groupableColumns = columns.filter(canGroupColumn);
   const groupedIds = normalizeGroupingIds(table.getState().grouping);
   const groupedColumns = groupedIds
@@ -34,10 +36,10 @@ export function DataTableColumnsGroupingSection<TData extends object>({
   const orderedColumns = [...groupedColumns, ...ungroupedColumns];
 
   return groupableColumns.length === 0 ? (
-    <div className="data-table__columns-menu-empty">No columns can be grouped.</div>
+    <div className="data-table__columns-menu-empty">{locale.groupingSection.noGroupableColumns}</div>
   ) : (
     <div className="data-table__columns-menu-section">
-      <div className="data-table__columns-menu-section-title">Grouping</div>
+      <div className="data-table__columns-menu-section-title">{locale.groupingSection.sectionTitle}</div>
       {orderedColumns.map((column) => (
         <DataTableColumnsGroupingItem
           key={column.id}
@@ -61,6 +63,7 @@ function DataTableColumnsGroupingItem<TData extends object>({
   isGrouped,
   onToggleGrouping,
 }: DataTableColumnsGroupingItemProps<TData>) {
+  const locale = useDataTableLocale();
   const label = column.columnDef.meta?.label ?? column.id;
   const {
     attributes,
@@ -98,8 +101,8 @@ function DataTableColumnsGroupingItem<TData extends object>({
         ref={setActivatorNodeRef}
         type="button"
         className="data-table__columns-menu-group-drag-handle"
-        aria-label={`Drag ${label} to grouping panel`}
-        title={`Drag ${label} to grouping panel`}
+        aria-label={locale.groupingSection.dragAriaLabel(label)}
+        title={locale.groupingSection.dragAriaLabel(label)}
         {...attributes}
         {...listeners}
       >
@@ -112,7 +115,7 @@ function DataTableColumnsGroupingItem<TData extends object>({
       <div className="data-table__columns-menu-group-labels">
         <span className="data-table__columns-menu-group-label">{label}</span>
         {isGrouped ? (
-          <span className="data-table__columns-menu-group-badge">Grouped</span>
+          <span className="data-table__columns-menu-group-badge">{locale.groupingSection.groupedBadge}</span>
         ) : null}
       </div>
 
@@ -123,15 +126,12 @@ function DataTableColumnsGroupingItem<TData extends object>({
         onPointerDown={(event) => {
           event.stopPropagation();
         }}
-        aria-label={`${isGrouped ? 'Ungroup' : 'Group'} ${label}`}
+        aria-label={isGrouped ? locale.groupingSection.ungroupAriaLabel(label) : locale.groupingSection.groupAriaLabel(label)}
         aria-pressed={isGrouped}
       >
         {isGrouped ? <Minus aria-hidden="true" /> : <Plus aria-hidden="true" />}
-        {isGrouped ? 'Ungroup' : 'Group'}
+        {isGrouped ? locale.groupingSection.ungroupLabel : locale.groupingSection.groupLabel}
       </button>
     </div>
   );
 }
-
-
-

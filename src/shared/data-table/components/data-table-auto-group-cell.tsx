@@ -2,13 +2,20 @@ import type { Cell } from '@tanstack/react-table';
 import { ChevronDown, ChevronRight } from 'lucide-react';
 import type { CSSProperties } from 'react';
 
-function formatGroupedValue(value: unknown): string {
+import { useDataTableLocale } from './data-table-locale-context';
+
+function formatGroupedValue(
+  value: unknown,
+  booleanTrue: string,
+  booleanFalse: string,
+  emptyValue: string,
+): string {
   if (typeof value === 'boolean') {
-    return value ? 'Yes' : 'No';
+    return value ? booleanTrue : booleanFalse;
   }
 
   if (value === null || value === undefined || value === '') {
-    return 'Empty';
+    return emptyValue;
   }
 
   if (typeof value === 'string' || typeof value === 'number') {
@@ -24,10 +31,10 @@ function formatGroupedValue(value: unknown): string {
   }
 
   if (typeof value === 'object') {
-    return JSON.stringify(value) ?? 'Object';
+    return JSON.stringify(value) ?? emptyValue;
   }
 
-  return 'Object';
+  return emptyValue;
 }
 
 interface DataTableAutoGroupCellProps<TData extends object> {
@@ -37,6 +44,7 @@ interface DataTableAutoGroupCellProps<TData extends object> {
 export function DataTableAutoGroupCell<TData extends object>({
   cell,
 }: DataTableAutoGroupCellProps<TData>) {
+  const locale = useDataTableLocale();
   const row = cell.row;
   const style = {
     '--data-table-auto-group-indent': `${row.depth * 16}px`,
@@ -62,13 +70,21 @@ export function DataTableAutoGroupCell<TData extends object>({
     groupingColumn?.columnDef.meta?.label ??
     (typeof groupingColumn?.columnDef.header === 'string'
       ? groupingColumn.columnDef.header
-      : groupingColumnId ?? 'Group');
+      : groupingColumnId ?? locale.autoGroup.fallbackGroupLabel);
   const groupValue = groupingColumnId
     ? row.getGroupingValue(groupingColumnId)
     : row.groupingValue;
   const expanded = row.getIsExpanded();
   const childCount = row.getLeafRows().length;
-  const childCountLabel = childCount === 1 ? 'row' : 'rows';
+  const formattedValue = formatGroupedValue(
+    groupValue,
+    locale.autoGroup.booleanTrue,
+    locale.autoGroup.booleanFalse,
+    locale.autoGroup.emptyValue,
+  );
+  const ariaLabel = expanded
+    ? locale.autoGroup.collapseAriaLabel(label, formattedValue, childCount)
+    : locale.autoGroup.expandAriaLabel(label, formattedValue, childCount);
 
   return (
     <div
@@ -80,7 +96,7 @@ export function DataTableAutoGroupCell<TData extends object>({
         className="data-table__group-toggle data-table__group-toggle--auto-group"
         onClick={row.getToggleExpandedHandler()}
         aria-expanded={expanded}
-        aria-label={`${expanded ? 'Collapse' : 'Expand'} ${label} group ${formatGroupedValue(groupValue)} (${childCount} ${childCountLabel})`}
+        aria-label={ariaLabel}
       >
         {expanded ? (
           <ChevronDown className="data-table__group-toggle-icon" aria-hidden="true" />
@@ -89,7 +105,7 @@ export function DataTableAutoGroupCell<TData extends object>({
         )}
         <span className="data-table__group-toggle-label">{label}:</span>{' '}
         <span className="data-table__group-toggle-value">
-          {formatGroupedValue(groupValue)}
+          {formattedValue}
         </span>{' '}
         <span className="data-table__group-count">({childCount})</span>
       </button>

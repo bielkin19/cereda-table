@@ -2,6 +2,7 @@ import type { Header } from '@tanstack/react-table';
 import type { MouseEvent, TouchEvent } from 'react';
 
 import { getColumnSizeStyle } from '../lib/column-sizing';
+import { useDataTableLocale } from './data-table-locale-context';
 
 interface DataTableAutoGroupHeaderCellProps<TData extends object> {
   header: Header<TData, unknown>;
@@ -12,16 +13,16 @@ export function DataTableAutoGroupHeaderCell<TData extends object>({
   header,
   enableColumnResizing,
 }: DataTableAutoGroupHeaderCellProps<TData>) {
+  const locale = useDataTableLocale();
   const isResizing = header.column.getIsResizing();
   const canResize = enableColumnResizing === true && header.column.getCanResize();
   const resizeHandler = header.getResizeHandler();
-  const resizeHandleLabel = 'Resize Group column';
   const style = {
     ...getColumnSizeStyle(
       header.getSize(),
       header.column.columnDef.minSize,
       header.column.columnDef.maxSize,
-      'Group',
+      locale.autoGroup.headerLabel,
     ),
   };
 
@@ -43,7 +44,7 @@ export function DataTableAutoGroupHeaderCell<TData extends object>({
       <div className="data-table__header-content">
         <div className="data-table__header-main data-table__header-main--auto-group">
           <div className="data-table__header-control data-table__header-control--static">
-            <span className="data-table__header-label">Group</span>
+            <span className="data-table__header-label">{locale.autoGroup.headerLabel}</span>
           </div>
           {canResize ? (
             <button
@@ -52,8 +53,8 @@ export function DataTableAutoGroupHeaderCell<TData extends object>({
               onPointerDownCapture={(e) => e.stopPropagation()}
               onMouseDown={handleResizeStart}
               onTouchStart={handleResizeStart}
-              aria-label={resizeHandleLabel}
-              title={resizeHandleLabel}
+              aria-label={locale.autoGroup.resizeHeaderAriaLabel}
+              title={locale.autoGroup.resizeHeaderAriaLabel}
             />
           ) : null}
         </div>

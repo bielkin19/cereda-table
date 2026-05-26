@@ -1,12 +1,14 @@
 import * as Popover from '@radix-ui/react-popover';
 import type { Column, Table } from '@tanstack/react-table';
-import { Columns3, RotateCcw } from 'lucide-react';
-import { useState } from 'react';
+import { Columns3, Eye, GitBranch, GripVertical, RotateCcw, X } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 import { isDataTableAutoGroupColumnId } from '../lib/auto-group-column';
 import { resetColumnOrder } from '../lib/column-ordering';
+import { DataTableCheckboxField } from './data-table-checkbox';
 import { DataTableColumnsGroupingSection } from './data-table-column-grouping-section';
 import { DataTableColumnOrderList } from './data-table-column-order-list';
+import { useDataTableLocale } from './data-table-locale-context';
 import { DataTableScrollArea } from './data-table-scroll-area';
 
 interface DataTableColumnsMenuProps<TData extends object> {
@@ -14,6 +16,8 @@ interface DataTableColumnsMenuProps<TData extends object> {
   enableColumnOrdering?: boolean;
   enableColumnVisibility?: boolean;
   enableGrouping?: boolean;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
 }
 
 interface DataTableColumnsOrderingSectionProps<TData extends object> {
@@ -32,8 +36,13 @@ export function DataTableColumnsMenu<TData extends object>({
   enableColumnOrdering,
   enableColumnVisibility,
   enableGrouping,
+  open: controlledOpen,
+  onOpenChange,
 }: DataTableColumnsMenuProps<TData>) {
-  const [open, setOpen] = useState(false);
+  const locale = useDataTableLocale();
+  const [uncontrolledOpen, setUncontrolledOpen] = useState(false);
+  const open = controlledOpen ?? uncontrolledOpen;
+  const setOpen = onOpenChange ?? setUncontrolledOpen;
   const leafColumns = table
     .getAllLeafColumns()
     .filter((column) => !isDataTableAutoGroupColumnId(column.id));
@@ -42,6 +51,10 @@ export function DataTableColumnsMenu<TData extends object>({
   const userColumnVisibilityState =
     table.options.meta?.getUserColumnVisibilityState?.() ?? table.getState().columnVisibility;
   const groupedColumnIds = table.getState().grouping;
+  const visibleColumnCount = hideableColumns.filter(
+    (column) => userColumnVisibilityState[column.id] ?? true,
+  ).length;
+  const hiddenColumnCount = Math.max(0, hideableColumns.length - visibleColumnCount);
 
   const handleReset = () => {
     table.resetColumnVisibility(true);
@@ -55,31 +68,127 @@ export function DataTableColumnsMenu<TData extends object>({
     table.resetGrouping(true);
   };
 
+  useEffect(() => {
+    if (!open) return;
+
+    function handleBackdropPointerDown(event: PointerEvent) {
+      if (
+        event.target instanceof Element &&
+        event.target.classList.contains('data-table__popover-backdrop')
+      ) {
+        setOpen(false);
+      }
+    }
+
+    document.addEventListener('pointerdown', handleBackdropPointerDown, true);
+    return () => {
+      document.removeEventListener('pointerdown', handleBackdropPointerDown, true);
+    };
+  }, [open, setOpen]);
+
   return (
     <Popover.Root open={open} onOpenChange={setOpen}>
-      <div className="data-table__columns-menu">
+      <div
+        className={
+          open
+            ? 'data-table__columns-menu data-table__popover-root--open'
+            : 'data-table__columns-menu'
+        }
+      >
         <Popover.Trigger asChild>
           <button
             type="button"
-            className="data-table__toolbar-button data-table__toolbar-button--icon"
-            aria-label="Columns"
-            title="Columns"
+            className={
+              open
+                ? 'data-table__toolbar-button data-table__toolbar-button--columns data-table__toolbar-button--active'
+                : 'data-table__toolbar-button data-table__toolbar-button--columns'
+            }
+            aria-label={locale.columns.buttonLabel}
+            title={locale.columns.buttonLabel}
           >
             <Columns3
               className="data-table__toolbar-button-icon"
               aria-hidden="true"
             />
+            <span className="data-table__toolbar-button-label">{locale.columns.buttonLabel}</span>
+            {hiddenColumnCount > 0 || groupedColumnIds.length > 0 ? (
+              <span
+                className="data-table__toolbar-button-count"
+                aria-hidden="true"
+              >
+                {hiddenColumnCount + groupedColumnIds.length}
+              </span>
+            ) : null}
           </button>
         </Popover.Trigger>
 
         {open ? (
-          <Popover.Content
-            role="menu"
-            aria-label="Columns"
-            className="data-table__columns-menu-panel"
-            sideOffset={8}
-            align="end"
-          >
+          <>
+            <Popover.Portal>
+              <div
+                className="data-table__popover-backdrop"
+                onPointerDown={() => setOpen(false)}
+                aria-hidden="true"
+              />
+            </Popover.Portal>
+            <Popover.Portal>
+            <Popover.Content
+              role="menu"
+              aria-label={locale.columns.panelAriaLabel}
+              className="data-table__columns-menu-panel"
+              sideOffset={8}
+              align="end"
+            >
+            <div className="data-table__columns-menu-header">
+              <div className="data-table__columns-menu-heading">
+                <Columns3 aria-hidden="true" />
+                <div>
+                  <div className="data-table__columns-menu-title">{locale.columns.panelTitle}</div>
+                  <div className="data-table__columns-menu-subtitle">
+                    {locale.columns.visibleCount(visibleColumnCount)}
+                    {hiddenColumnCount > 0 ? `, ${locale.columns.hiddenCount(hiddenColumnCount)}` : ''}
+                    {groupedColumnIds.length > 0
+                      ? `, ${locale.columns.groupedCount(groupedColumnIds.length)}`
+                      : ''}
+                  </div>
+                </div>
+              </div>
+              <Popover.Close asChild>
+                <button
+                  type="button"
+                  className="data-table__columns-menu-close"
+                  aria-label={locale.columns.panelClose}
+                  title={locale.columns.panelCloseTitle}
+                >
+                  <X aria-hidden="true" />
+                </button>
+              </Popover.Close>
+            </div>
+
+            <div className="data-table__columns-menu-overview" aria-label={locale.columns.summaryAriaLabel}>
+              {enableColumnVisibility ? (
+                <div className="data-table__columns-menu-stat">
+                  <Eye aria-hidden="true" />
+                  <span>{locale.columns.statVisible}</span>
+                  <strong>{visibleColumnCount}</strong>
+                </div>
+              ) : null}
+              {enableColumnOrdering ? (
+                <div className="data-table__columns-menu-stat">
+                  <GripVertical aria-hidden="true" />
+                  <span>{locale.columns.statOrder}</span>
+                  <strong>{leafColumns.length}</strong>
+                </div>
+              ) : null}
+              {enableGrouping ? (
+                <div className="data-table__columns-menu-stat">
+                  <GitBranch aria-hidden="true" />
+                  <span>{locale.columns.statGrouped}</span>
+                  <strong>{groupedColumnIds.length}</strong>
+                </div>
+              ) : null}
+            </div>
+
             <DataTableScrollArea
               className="data-table__scroll-area--columns-menu"
               viewportClassName="data-table__columns-menu-list"
@@ -111,7 +220,7 @@ export function DataTableColumnsMenu<TData extends object>({
                 onClick={handleReset}
               >
                 <RotateCcw aria-hidden="true" />
-                Reset
+                {locale.columns.reset}
               </button>
               {enableColumnOrdering ? (
                 <button
@@ -120,7 +229,7 @@ export function DataTableColumnsMenu<TData extends object>({
                   onClick={handleResetOrder}
                 >
                   <RotateCcw aria-hidden="true" />
-                  Reset order
+                  {locale.columns.resetOrder}
                 </button>
               ) : null}
               {enableGrouping && hasGrouping ? (
@@ -129,11 +238,13 @@ export function DataTableColumnsMenu<TData extends object>({
                   className="data-table__columns-menu-action data-table__columns-menu-action--secondary"
                   onClick={handleClearGrouping}
                 >
-                  Clear grouping
+                  {locale.columns.clearGrouping}
                 </button>
               ) : null}
             </div>
-          </Popover.Content>
+            </Popover.Content>
+            </Popover.Portal>
+          </>
         ) : null}
       </div>
     </Popover.Root>
@@ -144,12 +255,13 @@ function DataTableColumnsOrderingSection<TData extends object>({
   table,
   columns,
 }: DataTableColumnsOrderingSectionProps<TData>) {
+  const locale = useDataTableLocale();
   return (
     <div className="data-table__columns-menu-section">
-      <div className="data-table__columns-menu-section-title">Column order</div>
+      <div className="data-table__columns-menu-section-title">{locale.columns.orderSectionTitle}</div>
       {columns.length === 0 ? (
         <div className="data-table__columns-menu-empty">
-          No columns can be reordered.
+          {locale.columns.noOrderableColumns}
         </div>
       ) : (
         <DataTableColumnOrderList table={table} columns={columns} />
@@ -163,47 +275,44 @@ function DataTableColumnsVisibilitySection<TData extends object>({
   groupedColumnIds,
   userColumnVisibilityState,
 }: DataTableColumnsVisibilitySectionProps<TData>) {
+  const locale = useDataTableLocale();
   return columns.length === 0 ? (
-    <div className="data-table__columns-menu-empty">No columns can be hidden.</div>
+    <div className="data-table__columns-menu-empty">{locale.columns.noHidableColumns}</div>
   ) : (
     <div className="data-table__columns-menu-section">
-      {columns.length > 0 ? (
-        <div className="data-table__columns-menu-section-title">
-          Column visibility
-        </div>
-      ) : null}
+      <div className="data-table__columns-menu-section-title">
+        {locale.columns.visibilitySectionTitle}
+      </div>
       {columns.map((column) => {
         const label = column.columnDef.meta?.label ?? column.id;
         const isVisible = userColumnVisibilityState[column.id] ?? true;
         const isGroupedSource = groupedColumnIds.includes(column.id);
 
         return (
-          <label
+          <DataTableCheckboxField
             key={column.id}
             className={
               isGroupedSource
                 ? 'data-table__columns-menu-item data-table__columns-menu-item--grouped'
                 : 'data-table__columns-menu-item'
             }
+            checked={isVisible}
+            onCheckedChange={() => column.toggleVisibility()}
+            ariaDescribedBy={isGroupedSource ? `${column.id}-grouped-hint` : undefined}
+            label={label}
+            labelClassName="data-table__columns-menu-item-label"
           >
-            <input
-              type="checkbox"
-              checked={isVisible}
-              onChange={() => column.toggleVisibility()}
-              aria-describedby={isGroupedSource ? `${column.id}-grouped-hint` : undefined}
-            />
-            <span>{label}</span>
             {isGroupedSource ? (
               <span
                 id={`${column.id}-grouped-hint`}
                 className="data-table__columns-menu-item-badge"
                 aria-hidden="true"
-                title="Grouped"
+                title={locale.columns.groupedBadge}
               >
-                Grouped
+                {locale.columns.groupedBadge}
               </span>
             ) : null}
-          </label>
+          </DataTableCheckboxField>
         );
       })}
     </div>

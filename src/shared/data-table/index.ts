@@ -2,6 +2,7 @@
 // TanStack implementation details stay inside the module.
 
 export { DataTable } from './components/data-table';
+export { DataTableLocaleProvider } from './components/data-table-locale-context';
 export { useDataTable } from './hooks/use-data-table';
 export type {
   DataTableColumnBuilderOptions,
@@ -26,6 +27,8 @@ export {
   selectColumn,
   textColumn,
 } from './lib/data-table-config';
+export type { DataTableLocale, DataTableLocaleOverrides } from './lib/data-table-locale';
+export { createLocale, DEFAULT_DATA_TABLE_LOCALE } from './lib/data-table-locale';
 export type {
   DataTableAlign,
   DataTableFilterOperator,

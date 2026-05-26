@@ -6,10 +6,11 @@ import { type MouseEvent, type TouchEvent } from 'react';
 
 import { isDataTableAutoGroupColumnId } from '../lib/auto-group-column';
 import { getColumnSizeStyle } from '../lib/column-sizing';
-import { isDataTableRowNumberColumnId } from '../lib/row-number-column';
 import { createDataTableDndData, getColumnHeaderDndId } from '../lib/data-table-dnd';
+import { isDataTableRowNumberColumnId } from '../lib/row-number-column';
 import { DataTableAutoGroupHeaderCell } from './data-table-auto-group-header-cell';
 import { useDataTableHeaderDragPreview } from './data-table-header-drag-preview-context';
+import { useDataTableLocale } from './data-table-locale-context';
 import { DataTableSortIcon } from './data-table-sort-icon';
 
 type DataTableSortState = 'none' | 'asc' | 'desc';
@@ -34,6 +35,8 @@ export function DataTableHeaderCell<TData extends object>({
   enableColumnResizing,
   enableColumnOrdering,
 }: DataTableHeaderCellProps<TData>) {
+  const locale = useDataTableLocale();
+
   if (isDataTableAutoGroupColumnId(header.column.id)) {
     return (
       <DataTableAutoGroupHeaderCell
@@ -50,7 +53,7 @@ export function DataTableHeaderCell<TData extends object>({
         className="data-table__th data-table__row-number-th"
         style={getColumnSizeStyle(48, 48, 48)}
         data-column-id={header.column.id}
-        aria-label="Row number"
+        aria-label={locale.columnHeader.rowNumberAriaLabel}
       />
     );
   }
@@ -69,6 +72,7 @@ function DataTableSortableHeaderCell<TData extends object>({
   enableColumnResizing,
   enableColumnOrdering,
 }: DataTableHeaderCellProps<TData>) {
+  const locale = useDataTableLocale();
   const headerDragPreview = useDataTableHeaderDragPreview();
   const isPlaceholder = header.isPlaceholder;
   const canSort = header.column.getCanSort();
@@ -88,12 +92,12 @@ function DataTableSortableHeaderCell<TData extends object>({
 
   const sortLabel = canSort
     ? sortState === 'asc'
-      ? `Sort ${label} descending`
+      ? locale.columnHeader.sortDescendingAriaLabel(label)
       : sortState === 'desc'
-        ? `Clear ${label} sorting`
-        : `Sort ${label} ascending`
+        ? locale.columnHeader.clearSortAriaLabel(label)
+        : locale.columnHeader.sortAscendingAriaLabel(label)
     : label;
-  const resizeLabel = `Resize ${label} column`;
+  const resizeLabel = locale.columnHeader.resizeAriaLabel(label);
 
   const resizeHandler = header.getResizeHandler();
 
@@ -127,6 +131,10 @@ function DataTableSortableHeaderCell<TData extends object>({
   style.transform = headerDragPreview?.isHeaderDragActive ? undefined : CSS.Transform.toString(transform);
   style.transition = transition;
 
+  const thClassName = isDragging
+    ? 'data-table__th data-table__header-cell data-table__header-cell--dragging'
+    : 'data-table__th data-table__header-cell';
+
   if (isPlaceholder) {
     return (
       <th
@@ -145,11 +153,7 @@ function DataTableSortableHeaderCell<TData extends object>({
       ref={setNodeRef}
       key={header.id}
       colSpan={header.colSpan}
-      className={
-        isDragging
-          ? 'data-table__th data-table__header-cell data-table__header-cell--dragging'
-          : 'data-table__th data-table__header-cell'
-      }
+      className={thClassName}
       style={style}
       data-column-id={header.column.id}
       data-resizing={isResizing || undefined}
@@ -181,7 +185,7 @@ function DataTableSortableHeaderCell<TData extends object>({
         ref={canReorder ? setActivatorNodeRef : undefined}
         data-reorderable={canReorder || undefined}
         {...(canReorder ? { ...attributes, ...listeners } : {})}
-        aria-label={canReorder ? `Drag ${label} column` : undefined}
+        aria-label={canReorder ? locale.columnHeader.dragAriaLabel(label) : undefined}
       >
         {/* Drag affordance icon — visual only, not interactive */}
         {canReorder ? (
@@ -210,18 +214,16 @@ function DataTableSortableHeaderCell<TData extends object>({
           </div>
         )}
 
-        {/* Groupable indicator */}
         {isGroupable ? (
           <span
             className="data-table__header-groupable-indicator"
-            title="Can be grouped"
+            title={locale.columnHeader.canBeGroupedTitle}
             aria-hidden="true"
           >
             <Layers className="data-table__header-groupable-indicator-icon" aria-hidden="true" />
           </span>
         ) : null}
 
-        {/* Resize handle */}
         {canResize ? (
           <button
             type="button"

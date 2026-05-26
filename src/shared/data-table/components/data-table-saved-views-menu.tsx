@@ -17,6 +17,7 @@ import {
   upsertSavedView,
 } from '../lib/saved-views';
 import type { DataTableSavedViewsStorage } from '../types/data-table.types';
+import { useDataTableLocale } from './data-table-locale-context';
 import { DataTableScrollArea } from './data-table-scroll-area';
 
 interface DataTableSavedViewsMenuProps<TData extends object> {
@@ -24,11 +25,13 @@ interface DataTableSavedViewsMenuProps<TData extends object> {
   storageKey?: string;
   defaultViewName?: string;
   savedViewsStorage?: DataTableSavedViewsStorage;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
 }
 
-function getDefaultDraftName(defaultViewName: string | undefined) {
+function getDefaultDraftName(defaultViewName: string | undefined, fallbackName: string) {
   const trimmed = defaultViewName?.trim();
-  return trimmed && trimmed.length > 0 ? trimmed : 'Saved view';
+  return trimmed && trimmed.length > 0 ? trimmed : fallbackName;
 }
 
 function getInitialSavedViewsDocument(
@@ -47,8 +50,13 @@ export function DataTableSavedViewsMenu<TData extends object>({
   storageKey,
   defaultViewName,
   savedViewsStorage,
+  open: controlledOpen,
+  onOpenChange,
 }: DataTableSavedViewsMenuProps<TData>) {
-  const [open, setOpen] = useState(false);
+  const locale = useDataTableLocale();
+  const [uncontrolledOpen, setUncontrolledOpen] = useState(false);
+  const open = controlledOpen ?? uncontrolledOpen;
+  const setOpen = onOpenChange ?? setUncontrolledOpen;
   const storage = useMemo(
     () => resolveSavedViewsStorage(savedViewsStorage),
     [savedViewsStorage],
@@ -58,13 +66,13 @@ export function DataTableSavedViewsMenu<TData extends object>({
     getInitialSavedViewsDocument(storage, storageKey),
   );
   const [draftName, setDraftName] = useState(() =>
-    getDefaultDraftName(defaultViewName),
+    getDefaultDraftName(defaultViewName, locale.savedViews.defaultName),
   );
 
   useEffect(() => {
     setSavedViewsDocument(getInitialSavedViewsDocument(storage, storageKey));
-    setDraftName(getDefaultDraftName(defaultViewName));
-  }, [defaultViewName, storage, storageKey]);
+    setDraftName(getDefaultDraftName(defaultViewName, locale.savedViews.defaultName));
+  }, [defaultViewName, locale.savedViews.defaultName, storage, storageKey]);
 
   const canOpenMenu = storageKey !== undefined && storageKey.trim().length > 0;
 
@@ -81,7 +89,7 @@ export function DataTableSavedViewsMenu<TData extends object>({
 
     setSavedViewsDocument(nextDocument);
     persistSavedViewsDocument(storage, storageKey, nextDocument);
-    setDraftName(nextDocument.views[0]?.name ?? getDefaultDraftName(defaultViewName));
+    setDraftName(nextDocument.views[0]?.name ?? getDefaultDraftName(defaultViewName, locale.savedViews.defaultName));
   };
 
   const handleApplySavedView = (savedView: DataTableSavedView) => {
@@ -99,9 +107,33 @@ export function DataTableSavedViewsMenu<TData extends object>({
     resetSavedViewState(table);
   };
 
+  useEffect(() => {
+    if (!open) return;
+
+    function handleBackdropPointerDown(event: PointerEvent) {
+      if (
+        event.target instanceof Element &&
+        event.target.classList.contains('data-table__popover-backdrop')
+      ) {
+        setOpen(false);
+      }
+    }
+
+    document.addEventListener('pointerdown', handleBackdropPointerDown, true);
+    return () => {
+      document.removeEventListener('pointerdown', handleBackdropPointerDown, true);
+    };
+  }, [open, setOpen]);
+
   return (
     <Popover.Root open={open} onOpenChange={setOpen}>
-      <div className="data-table__saved-views-menu">
+      <div
+        className={
+          open
+            ? 'data-table__saved-views-menu data-table__popover-root--open'
+            : 'data-table__saved-views-menu'
+        }
+      >
         <Popover.Trigger asChild>
           <button
             type="button"
@@ -111,36 +143,45 @@ export function DataTableSavedViewsMenu<TData extends object>({
             disabled={!canOpenMenu}
             title={
               canOpenMenu
-                ? 'Open saved views'
-                : 'Saved views require a storage key'
+                ? locale.savedViews.buttonLabel
+                : locale.savedViews.buttonDisabledTitle
             }
           >
             <Bookmark aria-hidden="true" />
-            Saved views
+            {locale.savedViews.buttonLabel}
           </button>
         </Popover.Trigger>
 
         {open && canOpenMenu ? (
-          <Popover.Content
-            role="dialog"
-            aria-label="Saved views"
-            className="data-table__saved-views-menu-panel"
-            sideOffset={8}
-            align="end"
-          >
+          <>
+            <Popover.Portal>
+              <div
+                className="data-table__popover-backdrop"
+                onPointerDown={() => setOpen(false)}
+                aria-hidden="true"
+              />
+            </Popover.Portal>
+            <Popover.Portal>
+            <Popover.Content
+              role="dialog"
+              aria-label={locale.savedViews.panelTitle}
+              className="data-table__saved-views-menu-panel"
+              sideOffset={8}
+              align="end"
+            >
             <div className="data-table__saved-views-menu-section">
               <div className="data-table__saved-views-menu-section-title">
-                Save current view
+                {locale.savedViews.saveSectionTitle}
               </div>
               <label className="data-table__saved-views-field">
-                <span className="data-table__saved-views-label">View name</span>
+                <span className="data-table__saved-views-label">{locale.savedViews.nameLabel}</span>
                 <input
                   className="data-table__saved-views-input"
                   type="text"
                   value={draftName}
                   onChange={(event) => setDraftName(event.currentTarget.value)}
-                  placeholder="Saved view"
-                  aria-label="View name"
+                  placeholder={locale.savedViews.namePlaceholder}
+                  aria-label={locale.savedViews.nameLabel}
                 />
               </label>
               <button
@@ -149,17 +190,17 @@ export function DataTableSavedViewsMenu<TData extends object>({
                 onClick={handleSaveCurrentView}
               >
                 <Save aria-hidden="true" />
-                Save current view
+                {locale.savedViews.saveButton}
               </button>
             </div>
 
             <div className="data-table__saved-views-menu-section">
               <div className="data-table__saved-views-menu-section-title">
-                Current saved views
+                {locale.savedViews.listSectionTitle}
               </div>
               {savedViewsDocument.views.length === 0 ? (
                 <div className="data-table__saved-views-empty">
-                  No saved views yet.
+                  {locale.savedViews.noViews}
                 </div>
               ) : (
                 <DataTableScrollArea className="data-table__scroll-area--saved-views">
@@ -174,19 +215,19 @@ export function DataTableSavedViewsMenu<TData extends object>({
                             type="button"
                             className="data-table__saved-views-item-action"
                             onClick={() => handleApplySavedView(savedView)}
-                            aria-label={`Apply ${savedView.name}`}
+                            aria-label={locale.savedViews.applyAriaLabel(savedView.name)}
                           >
                             <Check aria-hidden="true" />
-                            Apply
+                            {locale.savedViews.applyLabel}
                           </button>
                           <button
                             type="button"
                             className="data-table__saved-views-item-action data-table__saved-views-item-action--secondary"
                             onClick={() => handleDeleteSavedView(savedView)}
-                            aria-label={`Delete ${savedView.name}`}
+                            aria-label={locale.savedViews.deleteAriaLabel(savedView.name)}
                           >
                             <Trash2 aria-hidden="true" />
-                            Delete
+                            {locale.savedViews.deleteLabel}
                           </button>
                         </div>
                       </li>
@@ -203,10 +244,12 @@ export function DataTableSavedViewsMenu<TData extends object>({
                 onClick={handleResetTableState}
               >
                 <RotateCcw aria-hidden="true" />
-                Reset current table state
+                {locale.savedViews.resetLabel}
               </button>
             </div>
-          </Popover.Content>
+            </Popover.Content>
+            </Popover.Portal>
+          </>
         ) : null}
       </div>
     </Popover.Root>

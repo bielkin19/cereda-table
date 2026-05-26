@@ -9,6 +9,7 @@ import {
   getGroupingPanelDndId,
 } from '../lib/data-table-dnd';
 import { useDataTableGroupingDragPreview } from './data-table-grouping-drag-preview-context';
+import { useDataTableLocale } from './data-table-locale-context';
 
 interface DataTableGroupingPanelItemProps<TData extends object> {
   column: Column<TData, unknown>;
@@ -23,6 +24,7 @@ export function DataTableGroupingPanelItem<TData extends object>({
   total,
   onRemove,
 }: DataTableGroupingPanelItemProps<TData>) {
+  const locale = useDataTableLocale();
   const label = column.columnDef.meta?.label ?? column.id;
   const groupingDragPreview = useDataTableGroupingDragPreview();
   const {
@@ -41,10 +43,10 @@ export function DataTableGroupingPanelItem<TData extends object>({
   const canSort = column.getCanSort();
   const sortButtonLabel =
     sortState === 'asc'
-      ? `Sort ${label} descending`
+      ? locale.groupingPanel.sortDescendingAriaLabel(label)
       : sortState === 'desc'
-        ? `Clear ${label} sorting`
-        : `Sort ${label} ascending`;
+        ? locale.groupingPanel.clearSortAriaLabel(label)
+        : locale.groupingPanel.sortAscendingAriaLabel(label);
   const SortIcon =
     sortState === 'asc' ? ArrowUp : sortState === 'desc' ? ArrowDown : ArrowUpDown;
 
@@ -112,6 +114,9 @@ export function DataTableGroupingPanelItem<TData extends object>({
     transition,
   };
 
+  const dragLabel = locale.groupingPanel.dragAriaLabel(label);
+  const removeLabel = locale.groupingPanel.removeAriaLabel(label);
+
   return (
     <li
       ref={setNodeRef}
@@ -122,7 +127,7 @@ export function DataTableGroupingPanelItem<TData extends object>({
           : 'data-table__grouping-pill'
       }
       data-dragging={isDragging || undefined}
-      aria-label={`${label} grouping, position ${index + 1} of ${total}`}
+      aria-label={locale.groupingPanel.itemAriaLabel(label, index + 1, total)}
       aria-posinset={index + 1}
       aria-setsize={total}
     >
@@ -131,8 +136,8 @@ export function DataTableGroupingPanelItem<TData extends object>({
           type="button"
           ref={setActivatorNodeRef}
           className="data-table__grouping-pill-handle"
-          aria-label={`Drag ${label} grouping`}
-          title={`Drag ${label} grouping`}
+          aria-label={dragLabel}
+          title={dragLabel}
           {...attributes}
           {...listeners}
         >
@@ -172,8 +177,8 @@ export function DataTableGroupingPanelItem<TData extends object>({
           onPointerDown={(event) => {
             event.stopPropagation();
           }}
-          aria-label={`Remove ${label} grouping`}
-          title={`Remove ${label} grouping`}
+          aria-label={removeLabel}
+          title={removeLabel}
         >
           <CircleX aria-hidden="true" />
         </button>

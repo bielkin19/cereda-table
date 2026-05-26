@@ -10,6 +10,7 @@ import { DataTableDndLayer } from './data-table-dnd-layer';
 import { DataTableEmpty } from './data-table-empty';
 import { DataTableGroupingPanel } from './data-table-grouping-panel';
 import { DataTableHeader } from './data-table-header';
+import { DataTableLocaleProvider } from './data-table-locale-context';
 import { DataTablePagination } from './data-table-pagination';
 import { DataTableSearchProvider } from './data-table-search-context';
 import { DataTableToolbar } from './data-table-toolbar';
@@ -59,6 +60,7 @@ export function DataTable<TData extends object>({
   savedViewsStorage,
   getRowId,
   bodyHeight,
+  locale,
   isLoading = false,
   renderEmpty,
   renderLoading,
@@ -124,9 +126,10 @@ export function DataTable<TData extends object>({
 
   const isEmpty = !isLoading && table.getRowModel().rows.length === 0;
 
-  const activeGlobalFilter = table.getState().globalFilter;
+  const rawGlobalFilter: unknown = table.getState().globalFilter;
+  const activeGlobalFilter = typeof rawGlobalFilter === 'string' ? rawGlobalFilter : undefined;
   const activeFilterRules = table.options.meta?.getFilterRules?.() ?? [];
-  const hasGlobalFilter = enableGlobalFilter === true && typeof activeGlobalFilter === 'string' && activeGlobalFilter.trim().length > 0;
+  const hasGlobalFilter = enableGlobalFilter === true && (activeGlobalFilter?.trim().length ?? 0) > 0;
   const hasColumnFilters = enableColumnFilters === true && activeFilterRules.length > 0;
   const activeFilterCount = (hasGlobalFilter ? 1 : 0) + (hasColumnFilters ? activeFilterRules.length : 0);
 
@@ -188,7 +191,7 @@ export function DataTable<TData extends object>({
     ? ({ '--dt-body-max-height': typeof bodyHeight === 'number' ? `${bodyHeight}px` : bodyHeight } as React.CSSProperties)
     : undefined;
 
-  return (
+  const wrapperContent = (
     <div ref={wrapperRef} className="data-table__wrapper" style={wrapperStyle}>
       <DataTableDndLayer
         table={table}
@@ -206,4 +209,8 @@ export function DataTable<TData extends object>({
       ) : null}
     </div>
   );
+
+  return locale ? (
+    <DataTableLocaleProvider locale={locale}>{wrapperContent}</DataTableLocaleProvider>
+  ) : wrapperContent;
 }

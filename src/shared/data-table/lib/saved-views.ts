@@ -13,7 +13,6 @@ import { flushSync } from 'react-dom';
 import type { DataTableSavedViewsStorage } from '../types/data-table.types';
 import type { DataTableFilterRule } from '../types/data-table.types';
 import { isDataTableAutoGroupColumnId } from './auto-group-column';
-import { isDataTableRowNumberColumnId } from './row-number-column';
 import { normalizeColumnFiltersStateForTable } from './column-filters';
 import {
   clampColumnSizingStateToLeafColumns,
@@ -27,6 +26,7 @@ import {
   normalizeDataTableFilterRules,
 } from './filters/data-table-filter-normalization';
 import { normalizeGroupingIds } from './grouping-ordering';
+import { isDataTableRowNumberColumnId } from './row-number-column';
 
 export interface DataTableSavedViewState {
   sorting: SortingState;
