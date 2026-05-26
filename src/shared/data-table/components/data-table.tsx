@@ -113,8 +113,8 @@ export function DataTable<TData extends object>({
   const headerGroups = table.getHeaderGroups();
   const visibleTableWidth = getVisibleLeafColumnsTotalSize(table);
   const tableStyle = {
-    width: visibleTableWidth > 0 ? `${visibleTableWidth}px` : '100%',
-    minWidth: '100%',
+    width: '100%',
+    minWidth: visibleTableWidth > 0 ? `${visibleTableWidth}px` : '100%',
     tableLayout: 'fixed' as const,
   };
   const hasToolbar =
@@ -157,7 +157,10 @@ export function DataTable<TData extends object>({
         </div>
       ) : null}
       {enableGrouping ? <DataTableGroupingPanel table={table} /> : null}
-      <div className="cereda-table__body-scroll">
+      <div
+        className="cereda-table__body-scroll"
+        data-constrained-height={bodyHeight != null || undefined}
+      >
         <table className="cereda-table" style={tableStyle}>
           <DataTableHeader
             headerGroups={headerGroups}

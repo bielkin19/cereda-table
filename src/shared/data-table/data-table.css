@@ -81,6 +81,7 @@
    ========================================================================== */
 
 .cereda-table {
+  box-sizing: border-box;
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
@@ -93,10 +94,14 @@
 .cereda-table__body-scroll {
   min-width: 0;
   overflow-x: auto;
-  overflow-y: auto;
+  overflow-y: hidden;
   max-height: var(--cereda-table-body-max-height, none);
   scrollbar-width: thin;
   scrollbar-color: var(--cereda-table-border-strong) transparent;
+}
+
+.cereda-table__body-scroll[data-constrained-height='true'] {
+  overflow-y: auto;
 }
 
 .cereda-table__body-scroll::-webkit-scrollbar {
@@ -135,6 +140,7 @@
 }
 
 .cereda-table__th {
+  box-sizing: border-box;
   background: var(--cereda-table-bg-header);
   border-right: 1px solid var(--cereda-table-border);
   border-bottom: 1px solid var(--cereda-table-border-strong);
@@ -293,6 +299,10 @@
   z-index: 2;
   outline: none;
   padding: 0;
+}
+
+.cereda-table__th:last-child .cereda-table__column-resize-handle {
+  right: 0;
 }
 
 .cereda-table__column-resize-handle::after {

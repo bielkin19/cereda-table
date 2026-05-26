@@ -1174,7 +1174,8 @@ describe('DataTable - column resizing', () => {
 
     expect(container.querySelector('.cereda-table__body-scroll')).toBeInTheDocument();
     expect(container.querySelector('table')).toHaveStyle({
-      width: '632px',
+      width: '100%',
+      minWidth: '632px',
       tableLayout: 'fixed',
     });
 
@@ -1224,7 +1225,8 @@ describe('DataTable - column resizing', () => {
     );
 
     expect(container.querySelector('table')).toHaveStyle({
-      width: '272px',
+      width: '100%',
+      minWidth: '272px',
       tableLayout: 'fixed',
     });
     expect(screen.getByRole('columnheader', { name: 'ID' })).toHaveStyle({
@@ -1287,7 +1289,8 @@ describe('DataTable - column resizing', () => {
       throw new Error('Expected table to be present');
     }
 
-    expect(table.style.width).toBe(`${expectedMinWidth + labelColumnWidth}px`);
+    expect(table.style.width).toBe('100%');
+    expect(table.style.minWidth).toBe(`${expectedMinWidth + labelColumnWidth}px`);
     expect(table).toHaveStyle({
       tableLayout: 'fixed',
     });
@@ -1329,10 +1332,12 @@ describe('DataTable - column resizing', () => {
       minWidth: '144px',
       maxWidth: '260px',
     });
-    expect(container.querySelector('table')).toHaveStyle({
+    const table = container.querySelector('table') as HTMLTableElement;
+    expect(table).toHaveStyle({
+      width: '100%',
       tableLayout: 'fixed',
     });
-    expect((container.querySelector('table') as HTMLTableElement).style.width).not.toBe('100%');
+    expect(table.style.minWidth).toBe('536px');
   });
 
   it('reordered columns keep their widths by column id', () => {
