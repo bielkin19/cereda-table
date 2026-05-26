@@ -63,6 +63,120 @@
   --cereda-table-checkbox-icon: var(--cereda-table-text-invert);
   --cereda-table-checkbox-ring: var(--cereda-table-field-ring);
 }
+
+@media (prefers-color-scheme: dark) {
+  :where(
+    .cereda-table__wrapper,
+    .cereda-table__columns-menu-panel,
+    .cereda-table__filters-menu-panel,
+    .cereda-table__saved-views-menu-panel,
+    .cereda-table__select-content,
+    .cereda-table__column-filter-popover,
+    .cereda-table__date-picker-popover,
+    .cereda-table__dnd-overlay
+  ) {
+    --cereda-table-text:             #f1f5f9;
+    --cereda-table-text-muted:       #94a3b8;
+    --cereda-table-text-invert:      #0f172a;
+
+    --cereda-table-accent:           #60a5fa;
+
+    --cereda-table-bg:               #0f172a;
+    --cereda-table-bg-header:        #1e293b;
+    --cereda-table-bg-hover:         #1e293b;
+    --cereda-table-bg-selected:      #172554;
+    --cereda-table-bg-group:         #162032;
+    --cereda-table-bg-accent-subtle: #1e3a5f;
+
+    --cereda-table-border:           #334155;
+    --cereda-table-border-strong:    #475569;
+
+    --cereda-table-danger:           #f87171;
+    --cereda-table-danger-bg:        #1c0a0a;
+    --cereda-table-danger-border:    #b91c1c;
+
+    --cereda-table-highlight-bg:     #713f12;
+    --cereda-table-highlight-text:   #fef08a;
+
+    --cereda-table-field-ring: rgba(96, 165, 250, 0.20);
+  }
+}
+
+/* Explicit theme on <html>/<body> overrides the media query (higher specificity).
+   Supports both attribute-based ([data-theme]) and class-based (.dark / .light) theming. */
+
+:is([data-theme="dark"], .dark) :where(
+  .cereda-table__wrapper,
+  .cereda-table__columns-menu-panel,
+  .cereda-table__filters-menu-panel,
+  .cereda-table__saved-views-menu-panel,
+  .cereda-table__select-content,
+  .cereda-table__column-filter-popover,
+  .cereda-table__date-picker-popover,
+  .cereda-table__dnd-overlay
+) {
+  --cereda-table-text:             #f1f5f9;
+  --cereda-table-text-muted:       #94a3b8;
+  --cereda-table-text-invert:      #0f172a;
+
+  --cereda-table-accent:           #60a5fa;
+
+  --cereda-table-bg:               #0f172a;
+  --cereda-table-bg-header:        #1e293b;
+  --cereda-table-bg-hover:         #1e293b;
+  --cereda-table-bg-selected:      #172554;
+  --cereda-table-bg-group:         #162032;
+  --cereda-table-bg-accent-subtle: #1e3a5f;
+
+  --cereda-table-border:           #334155;
+  --cereda-table-border-strong:    #475569;
+
+  --cereda-table-danger:           #f87171;
+  --cereda-table-danger-bg:        #1c0a0a;
+  --cereda-table-danger-border:    #b91c1c;
+
+  --cereda-table-highlight-bg:     #713f12;
+  --cereda-table-highlight-text:   #fef08a;
+
+  --cereda-table-field-ring: rgba(96, 165, 250, 0.20);
+}
+
+:is([data-theme="light"], .light) :where(
+  .cereda-table__wrapper,
+  .cereda-table__columns-menu-panel,
+  .cereda-table__filters-menu-panel,
+  .cereda-table__saved-views-menu-panel,
+  .cereda-table__select-content,
+  .cereda-table__column-filter-popover,
+  .cereda-table__date-picker-popover,
+  .cereda-table__dnd-overlay
+) {
+  --cereda-table-text:             #111827;
+  --cereda-table-text-muted:       #6b7280;
+  --cereda-table-text-invert:      #ffffff;
+
+  --cereda-table-accent:           #2563eb;
+
+  --cereda-table-bg:               #ffffff;
+  --cereda-table-bg-header:        #f9fafb;
+  --cereda-table-bg-hover:         #f3f4f6;
+  --cereda-table-bg-selected:      #eff6ff;
+  --cereda-table-bg-group:         #f9fafb;
+  --cereda-table-bg-accent-subtle: #dbeafe;
+
+  --cereda-table-border:           #e5e7eb;
+  --cereda-table-border-strong:    #d1d5db;
+
+  --cereda-table-danger:           #ef4444;
+  --cereda-table-danger-bg:        #fef2f2;
+  --cereda-table-danger-border:    #f87171;
+
+  --cereda-table-highlight-bg:     #fef08a;
+  --cereda-table-highlight-text:   #713f12;
+
+  --cereda-table-field-ring: rgba(37, 99, 235, 0.16);
+}
+
 /* ==========================================================================
    Wrapper
    ========================================================================== */
