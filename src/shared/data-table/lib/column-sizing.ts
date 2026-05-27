@@ -253,8 +253,17 @@ export function getColumnSizeStyle(
   // minWidth never exceeds the explicit maxWidth in the rendered CSS.
   const normalizedMin = Math.min(safeMinSize ?? 0, safeMaxSize ?? Infinity);
   const normalizedMax = safeMaxSize;
-  const width = getEffectiveColumnSize(size, normalizedMin, normalizedMax, label);
 
+  // Fill column (no explicit maxSize): omit the explicit width so that
+  // table-layout:fixed distributes leftover container space to these columns.
+  // Only minWidth is set to prevent the column collapsing below its minimum.
+  if (normalizedMax === undefined) {
+    return {
+      minWidth: normalizedMin > 0 ? normalizedMin : undefined,
+    };
+  }
+
+  const width = getEffectiveColumnSize(size, normalizedMin, normalizedMax, label);
   return {
     width,
     minWidth: normalizedMin || width,
@@ -457,11 +466,13 @@ export function applyDataTableSizingDefaultsToColumns<TData extends object>(
       const effectiveSize =
         effectiveMaxSize !== undefined ? Math.min(rawSize, effectiveMaxSize) : rawSize;
 
+      // Always set maxSize explicitly so consumers can reliably detect fill
+      // columns via `col.columnDef.maxSize === undefined`.
       return {
         ...column,
         size: effectiveSize,
         minSize: cappedMinSize,
-        ...(effectiveMaxSize !== undefined ? { maxSize: effectiveMaxSize } : {}),
+        maxSize: effectiveMaxSize,
       };
     });
   }

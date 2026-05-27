@@ -114,17 +114,28 @@ export function DataTable<TData extends object>({
 
   const headerGroups = table.getHeaderGroups();
   const visibleTableWidth = getVisibleLeafColumnsTotalSize(table);
-  // Set the table to its exact pixel width so that table-layout:fixed never
-  // distributes leftover space proportionally across columns (which would grow
-  // fixed-width icon columns beyond their declared size on wide viewports).
-  // The overflow-x:auto scroll container handles narrow viewports via the
-  // same minWidth value.
+
+  // When at least one visible column has no explicit maxSize ("fill column"),
+  // the table must be width:100% so table-layout:fixed has leftover space to
+  // distribute to those columns. All bounded columns keep their exact sizes.
+  // When every column has an explicit maxSize, use the exact pixel sum so no
+  // column can ever grow beyond its declared maximum.
+  const hasFillColumns = table
+    .getVisibleLeafColumns()
+    .some((col) => col.columnDef.maxSize == null);
+
   const exactTableWidth = visibleTableWidth > 0 ? `${visibleTableWidth}px` : '100%';
-  const tableStyle = {
-    width: exactTableWidth,
-    minWidth: exactTableWidth,
-    tableLayout: 'fixed' as const,
-  };
+  const tableStyle = hasFillColumns
+    ? {
+        width: '100%',
+        minWidth: visibleTableWidth > 0 ? `${visibleTableWidth}px` : '100%',
+        tableLayout: 'fixed' as const,
+      }
+    : {
+        width: exactTableWidth,
+        minWidth: exactTableWidth,
+        tableLayout: 'fixed' as const,
+      };
   const hasToolbar =
     enableColumnOrdering === true ||
     enableColumnVisibility === true ||

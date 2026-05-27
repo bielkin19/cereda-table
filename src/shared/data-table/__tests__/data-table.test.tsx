@@ -1293,14 +1293,14 @@ describe('DataTable - column resizing', () => {
       throw new Error('Expected table to be present');
     }
 
-    // width and minWidth are always the same pixel value so table-layout:fixed
-    // never distributes leftover space across columns on wide viewports.
-    //
     // The 'id' column has maxSize:220. Its auto-min (256) exceeds that ceiling,
     // so the column is correctly capped at 220 rather than bumping maxSize.
+    // The 'label' column has no maxSize → it is a fill column.
+    // Fill columns make the table use width:100% so they can grow to fill the
+    // container; minWidth still enforces the sum of all column minimums.
     const cappedColWidth = Math.min(expectedMinWidth, 220);
     expect(table.style.minWidth).toBe(`${cappedColWidth + labelColumnWidth}px`);
-    expect(table.style.width).toBe(table.style.minWidth);
+    expect(table.style.width).toBe('100%');
     expect(table).toHaveStyle({
       tableLayout: 'fixed',
     });

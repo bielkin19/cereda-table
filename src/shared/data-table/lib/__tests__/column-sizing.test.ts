@@ -26,11 +26,22 @@ describe('column sizing helpers', () => {
     ).toEqual({ id: 96 });
   });
 
-  it('treats negative sizes as zero in inline styles', () => {
-    expect(getColumnSizeStyle(-20)).toEqual({
+  it('omits explicit width for fill columns (no maxSize), keeps only minWidth', () => {
+    // No label, no minSize → nothing to constrain, minWidth is also absent.
+    expect(getColumnSizeStyle(-20)).toEqual({ minWidth: undefined });
+
+    // With a label the auto-estimated minimum becomes minWidth.
+    const labelMin = estimateColumnMinSize('Name');
+    expect(getColumnSizeStyle(40, undefined, undefined, 'Name')).toEqual({
+      minWidth: labelMin,
+    });
+  });
+
+  it('treats negative sizes as zero in inline styles for bounded columns', () => {
+    expect(getColumnSizeStyle(-20, undefined, 260)).toEqual({
       width: 0,
       minWidth: 0,
-      maxWidth: undefined,
+      maxWidth: 260,
     });
   });
 
