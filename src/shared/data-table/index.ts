@@ -2,6 +2,11 @@
 // TanStack implementation details stay inside the module.
 
 export { DataTable } from './components/data-table';
+export { DataTableHighlightText } from './components/data-table-highlight-text';
+export {
+  getEffectiveTerm,
+  useDataTableSearch,
+} from './components/data-table-search-context';
 export { DataTableLocaleProvider } from './components/data-table-locale-context';
 export { useDataTable } from './hooks/use-data-table';
 export type {

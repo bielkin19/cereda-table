@@ -110,7 +110,14 @@ export function DataTableCell<TData extends object>({
   }
 
   const term = getEffectiveTerm(search, cell.column.id);
-  const highlighted = maybeHighlight(cell.getValue(), term);
+
+  // Auto-highlight only applies when the column has no custom cell renderer.
+  // A custom renderer is responsible for its own output (e.g. formatted dates,
+  // badges). Replacing it with a raw highlighted string would show the wrong
+  // content. Custom renderers that want highlighting can call
+  // useDataTableSearch() + <DataTableHighlightText> themselves.
+  const hasCustomRenderer = cell.column.columnDef.cell !== undefined;
+  const highlighted = hasCustomRenderer ? null : maybeHighlight(cell.getValue(), term);
 
   return (
     <td
