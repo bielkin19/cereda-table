@@ -129,7 +129,7 @@ export function DataTableGroupingPanel<TData extends object>({
                         className="cereda-table__grouping-pill cereda-table__grouping-pill--ghost"
                         aria-hidden="true"
                       >
-                        <span className="cereda-table__grouping-pill-chip cereda-table__grouping-pill-chip--ghost">
+                        <span className="cereda-table__grouping-pill-chip">
                           <span className="cereda-table__grouping-pill-body cereda-table__grouping-pill-body--static">
                             <span className="cereda-table__grouping-pill-label">{ghostLabel}</span>
                           </span>
