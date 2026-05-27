@@ -99,6 +99,7 @@ export const localeUk: DataTableLocale = {
     sortDescendingAriaLabel: (label) => `Сортувати ${label} за спаданням`,
     clearSortAriaLabel: (label) => `Скинути сортування ${label}`,
     resizeAriaLabel: (label) => `Змінити розмір колонки ${label}`,
+    autoFitAriaLabel: (label) => `Змінити розмір колонки ${label} · Подвійний клік для автопідбору`,
     dragAriaLabel: (label) => `Перетягнути колонку ${label}`,
     canBeGroupedTitle: 'Можна групувати',
   },

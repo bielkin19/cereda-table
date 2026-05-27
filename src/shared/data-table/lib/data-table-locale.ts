@@ -88,6 +88,8 @@ export interface DataTableLocale {
     sortDescendingAriaLabel: (label: string) => string;
     clearSortAriaLabel: (label: string) => string;
     resizeAriaLabel: (label: string) => string;
+    /** Tooltip shown on the resize handle to hint that double-click auto-fits the column. */
+    autoFitAriaLabel: (label: string) => string;
     dragAriaLabel: (label: string) => string;
     canBeGroupedTitle: string;
   };
@@ -272,6 +274,7 @@ export const DEFAULT_DATA_TABLE_LOCALE: DataTableLocale = {
     sortDescendingAriaLabel: (label) => `Sort ${label} descending`,
     clearSortAriaLabel: (label) => `Clear ${label} sorting`,
     resizeAriaLabel: (label) => `Resize ${label} column`,
+    autoFitAriaLabel: (label) => `Resize ${label} column · Double-click to auto-fit`,
     dragAriaLabel: (label) => `Drag ${label} column`,
     canBeGroupedTitle: 'Can be grouped',
   },

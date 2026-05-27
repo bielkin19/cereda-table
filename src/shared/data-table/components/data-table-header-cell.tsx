@@ -2,7 +2,8 @@ import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { flexRender, type Header } from '@tanstack/react-table';
 import { GripVertical, Layers } from 'lucide-react';
-import { type MouseEvent, type TouchEvent } from 'react';
+import { type MouseEvent, type TouchEvent, useRef } from 'react';
+import { flushSync } from 'react-dom';
 
 import { isDataTableAutoGroupColumnId } from '../lib/auto-group-column';
 import { getColumnSizeStyle } from '../lib/column-sizing';
@@ -105,13 +106,63 @@ function DataTableSortableHeaderCell<TData extends object>({
         : locale.columnHeader.sortAscendingAriaLabel(label)
     : label;
   const resizeLabel = locale.columnHeader.resizeAriaLabel(label);
+  const autoFitLabel = locale.columnHeader.autoFitAriaLabel(label);
 
   const resizeHandler = header.getResizeHandler();
+  const thRef = useRef<HTMLTableCellElement | null>(null);
 
   function handleResizeStart(event: MouseEvent | TouchEvent) {
     event.preventDefault();
     event.stopPropagation();
     resizeHandler(event);
+  }
+
+  function handleResizeDoubleClick(event: MouseEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    const table = header.getContext().table;
+    const columnId = header.column.id;
+
+    // Measure the natural content width of each rendered cell for this column.
+    // For header cells the inner `header-main` flex container tracks the real
+    // content width (the <th> itself is constrained by table-layout:fixed).
+    // For body cells we use the scrollWidth of the <td> or its first child.
+    const cells = Array.from(
+      document.querySelectorAll<HTMLElement>(`[data-column-id="${columnId}"]`),
+    );
+
+    let maxContentWidth = 0;
+    for (const cell of cells) {
+      if (cell.tagName === 'TH') {
+        // Header: measure the inner flex container which holds real content
+        const headerMain = cell.querySelector<HTMLElement>('.cereda-table__header-main');
+        if (headerMain) {
+          maxContentWidth = Math.max(maxContentWidth, headerMain.scrollWidth);
+        }
+      } else {
+        // Body cell: scrollWidth reflects actual content width even under
+        // table-layout:fixed when content is wider than the column.
+        const inner = cell.firstElementChild as HTMLElement | null;
+        const measured = inner
+          ? inner.scrollWidth + (cell.clientWidth - inner.clientWidth) // add padding diff
+          : cell.scrollWidth;
+        maxContentWidth = Math.max(maxContentWidth, measured);
+      }
+    }
+
+    if (maxContentWidth <= 0) return;
+
+    const minSize = header.column.columnDef.minSize ?? 0;
+    const colMaxSize = header.column.columnDef.maxSize;
+    const clampedSize =
+      colMaxSize !== undefined
+        ? Math.max(minSize, Math.min(colMaxSize, maxContentWidth))
+        : Math.max(minSize, maxContentWidth);
+
+    flushSync(() => {
+      table.setColumnSizing((prev) => ({ ...prev, [columnId]: clampedSize }));
+    });
   }
 
   // For fill columns (no maxSize): once the user has resized the column its
@@ -154,10 +205,17 @@ function DataTableSortableHeaderCell<TData extends object>({
     ? 'cereda-table__th cereda-table__header-cell cereda-table__header-cell--dragging'
     : 'cereda-table__th cereda-table__header-cell';
 
+  // Combined ref: forwards to both useSortable's setNodeRef and our local thRef
+  // so measurements can be taken on the <th> element directly.
+  function setThRef(node: HTMLTableCellElement | null) {
+    setNodeRef(node);
+    thRef.current = node;
+  }
+
   if (isPlaceholder) {
     return (
       <th
-        ref={setNodeRef}
+        ref={setThRef}
         key={header.id}
         colSpan={header.colSpan}
         className="cereda-table__th cereda-table__header-cell"
@@ -170,7 +228,7 @@ function DataTableSortableHeaderCell<TData extends object>({
   if (!hasLabel) {
     return (
       <th
-        ref={setNodeRef}
+        ref={setThRef}
         key={header.id}
         colSpan={header.colSpan}
         className="cereda-table__th cereda-table__header-cell"
@@ -185,8 +243,9 @@ function DataTableSortableHeaderCell<TData extends object>({
             onPointerDownCapture={(e) => e.stopPropagation()}
             onMouseDown={handleResizeStart}
             onTouchStart={handleResizeStart}
+            onDoubleClick={handleResizeDoubleClick}
             aria-label={resizeLabel}
-            title={resizeLabel}
+            title={autoFitLabel}
           />
         ) : null}
       </th>
@@ -195,7 +254,7 @@ function DataTableSortableHeaderCell<TData extends object>({
 
   return (
     <th
-      ref={setNodeRef}
+      ref={setThRef}
       key={header.id}
       colSpan={header.colSpan}
       className={thClassName}
@@ -276,8 +335,9 @@ function DataTableSortableHeaderCell<TData extends object>({
             onPointerDownCapture={(e) => e.stopPropagation()}
             onMouseDown={handleResizeStart}
             onTouchStart={handleResizeStart}
+            onDoubleClick={handleResizeDoubleClick}
             aria-label={resizeLabel}
-            title={resizeLabel}
+            title={autoFitLabel}
           />
         ) : null}
       </div>

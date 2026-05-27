@@ -94,6 +94,7 @@ export const localeDe: DataTableLocale = {
     sortDescendingAriaLabel: (label) => `${label} absteigend sortieren`,
     clearSortAriaLabel: (label) => `Sortierung ${label} zurücksetzen`,
     resizeAriaLabel: (label) => `Spalte ${label} in der Größe ändern`,
+    autoFitAriaLabel: (label) => `Spalte ${label} in der Größe ändern · Doppelklick für automatische Anpassung`,
     dragAriaLabel: (label) => `Spalte ${label} verschieben`,
     canBeGroupedTitle: 'Kann gruppiert werden',
   },
