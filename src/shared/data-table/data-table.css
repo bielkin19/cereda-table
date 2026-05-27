@@ -545,6 +545,14 @@
 .cereda-table__row[data-selected='true'] .cereda-table__row-number-td { background: var(--cereda-table-bg-selected); }
 .cereda-table__row--grouped .cereda-table__row-number-td              { background: var(--cereda-table-bg-group); }
 
+/* Group row shows a leaf-count badge instead of a sequential row number */
+.cereda-table__row--grouped .cereda-table__row-number-td {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  opacity: 0.65;
+}
+
 /* ==========================================================================
    Search highlight
    ========================================================================== */
