@@ -114,11 +114,23 @@ function DataTableSortableHeaderCell<TData extends object>({
     resizeHandler(event);
   }
 
+  // For fill columns (no maxSize): once the user has resized the column its
+  // current size becomes an effective maxSize so that an explicit CSS width is
+  // applied and the resize is visually reflected.
+  const currentSize = header.getSize();
+  const columnMaxSize = header.column.columnDef.maxSize;
+  const effectiveMaxSize =
+    columnMaxSize !== undefined
+      ? columnMaxSize
+      : currentSize !== header.column.columnDef.size
+        ? currentSize
+        : undefined;
+
   const style = {
     ...getColumnSizeStyle(
-      header.getSize(),
+      currentSize,
       header.column.columnDef.minSize,
-      header.column.columnDef.maxSize,
+      effectiveMaxSize,
       label,
     ),
   };

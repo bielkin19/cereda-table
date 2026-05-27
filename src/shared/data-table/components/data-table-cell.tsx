@@ -33,7 +33,16 @@ export function DataTableCell<TData extends object>({
   const isAggregated = cell.getIsAggregated();
   const isPlaceholder = cell.getIsPlaceholder();
   const columnMinSize = cell.column.columnDef.minSize;
-  const columnMaxSize = cell.column.columnDef.maxSize;
+  // For fill columns (no maxSize): once the user has resized the column its
+  // current size becomes an effective maxSize so an explicit CSS width is set
+  // and the resize is visually reflected in body cells too.
+  const currentColumnSize = cell.column.getSize();
+  const columnMaxSize =
+    cell.column.columnDef.maxSize !== undefined
+      ? cell.column.columnDef.maxSize
+      : currentColumnSize !== cell.column.columnDef.size
+        ? currentColumnSize
+        : undefined;
   const label =
     cell.column.columnDef.meta?.label ??
     (typeof cell.column.columnDef.header === 'string'
@@ -125,7 +134,7 @@ export function DataTableCell<TData extends object>({
       className="cereda-table__td"
       data-column-id={cell.column.id}
       style={getColumnSizeStyle(
-        cell.column.getSize(),
+        currentColumnSize,
         columnMinSize,
         columnMaxSize,
         label,

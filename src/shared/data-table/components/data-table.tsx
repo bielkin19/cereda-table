@@ -115,14 +115,21 @@ export function DataTable<TData extends object>({
   const headerGroups = table.getHeaderGroups();
   const visibleTableWidth = getVisibleLeafColumnsTotalSize(table);
 
-  // When at least one visible column has no explicit maxSize ("fill column"),
-  // the table must be width:100% so table-layout:fixed has leftover space to
-  // distribute to those columns. All bounded columns keep their exact sizes.
-  // When every column has an explicit maxSize, use the exact pixel sum so no
-  // column can ever grow beyond its declared maximum.
-  const hasFillColumns = table
-    .getVisibleLeafColumns()
-    .some((col) => col.columnDef.maxSize == null);
+  // When at least one visible column has no explicit maxSize ("fill column")
+  // AND that column hasn't been explicitly resized yet, the table must be
+  // width:100% so table-layout:fixed distributes leftover space to it.
+  // Once the user resizes all fill columns they become bounded and the table
+  // reverts to exact pixel width (preventing unbounded growth on wide screens).
+  //
+  // During an active drag we treat the column being resized as still fill
+  // (isResizingColumn guard) to prevent a layout jump mid-drag.
+  const columnSizingState = table.getState().columnSizing;
+  const isResizingColumn = table.getState().columnSizingInfo.isResizingColumn;
+  const hasFillColumns = table.getVisibleLeafColumns().some((col) => {
+    if (col.columnDef.maxSize != null) return false;      // bounded column
+    if (col.id === isResizingColumn) return true;          // keep fill during active drag
+    return !(col.id in columnSizingState);                 // fill only if not yet resized
+  });
 
   const exactTableWidth = visibleTableWidth > 0 ? `${visibleTableWidth}px` : '100%';
   const tableStyle = hasFillColumns
