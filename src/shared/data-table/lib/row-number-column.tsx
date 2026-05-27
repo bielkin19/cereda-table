@@ -43,15 +43,18 @@ export function createDataTableRowNumberColumn<TData extends object>(): ColumnDe
       // The auto-group column already shows the group label + child count.
       if (row.getIsGrouped()) return null;
 
-      const { pageIndex, pageSize } = table.getState().pagination;
-
-      // Flat mode (no grouping): O(1), correct cross-page offset.
+      // Flat mode (no grouping active): row.index is TanStack's global 0-based
+      // position in the full dataset — it already encodes the page offset, so
+      // +1 is all that is needed.  Adding pageIndex*pageSize would double-count
+      // and produce page 2 → 21-30 instead of 11-20.
       if (table.getState().grouping.length === 0) {
-        return pageIndex * pageSize + row.index + 1;
+        return row.index + 1;
       }
 
-      // Grouped mode: sequential numbers across the current page's leaf rows.
-      // WeakMap cache makes the total cost O(n) per render, not O(n²).
+      // Grouped mode: page boundaries fall on group rows, not leaf rows, so the
+      // leaf count per page is variable and we cannot use pageIndex*pageSize as
+      // a reliable offset.  Number leaves sequentially within the current page
+      // via the WeakMap cache (O(n) total per render, not O(n²)).
       const flatRows = table.getRowModel().flatRows;
       const indexMap = getLeafIndexMap(flatRows);
       return indexMap.get(row.id) ?? null;
