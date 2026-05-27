@@ -1,6 +1,6 @@
 {
   "name": "@bielkin19/cereda-table",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "description": "Enterprise-grade React DataTable with sorting, filtering, grouping, DnD, virtualization and saved views.",
   "type": "module",
   "exports": {
