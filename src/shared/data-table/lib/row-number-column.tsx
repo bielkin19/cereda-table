@@ -6,21 +6,23 @@ export function isDataTableRowNumberColumnId(columnId: string): boolean {
   return columnId === DATA_TABLE_ROW_NUMBER_COLUMN_ID;
 }
 
-/**
- * Recursively counts the total number of leaf (non-grouped) rows
- * within the given subRows array.  Used to display the row count
- * on a group header cell.
- */
-function countLeafRows<TData extends object>(rows: Row<TData>[]): number {
-  let count = 0;
-  for (const r of rows) {
-    if (r.getIsGrouped()) {
-      count += countLeafRows(r.subRows);
-    } else {
-      count++;
+// Module-level WeakMap: built once per flatRows array reference (= once per
+// render) and garbage-collected automatically when TanStack drops the array.
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const leafIndexCache = new WeakMap<Row<any>[], Map<string, number>>();
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function getLeafIndexMap(flatRows: Row<any>[]): Map<string, number> {
+  let map = leafIndexCache.get(flatRows);
+  if (!map) {
+    map = new Map<string, number>();
+    let idx = 0;
+    for (const r of flatRows) {
+      if (!r.getIsGrouped()) map.set(r.id, ++idx);
     }
+    leafIndexCache.set(flatRows, map);
   }
-  return count;
+  return map;
 }
 
 export function createDataTableRowNumberColumn<TData extends object>(): ColumnDef<TData, unknown> {
@@ -37,34 +39,22 @@ export function createDataTableRowNumberColumn<TData extends object>(): ColumnDe
     enableResizing: false,
     enableHiding: false,
     cell: ({ row, table }) => {
-      // ── Group row ─────────────────────────────────────────────────────────
-      // Show the total count of leaf rows inside this group (all levels).
-      if (row.getIsGrouped()) {
-        return countLeafRows(row.subRows);
-      }
+      // Group rows: always blank.
+      // The auto-group column already shows the group label + child count.
+      if (row.getIsGrouped()) return null;
 
-      // ── Leaf row inside a group ───────────────────────────────────────────
-      // Show a 1-based index within the immediate parent's leaf children so
-      // numbers restart at 1 for every group, making it easy to count rows
-      // relative to the group rather than the whole table.
-      const parent = row.getParentRow();
-      if (parent !== undefined) {
-        let idx = 0;
-        for (const sibling of parent.subRows) {
-          if (!sibling.getIsGrouped()) {
-            idx++;
-            if (sibling.id === row.id) return idx;
-          }
-        }
-        return null; // should never reach here
-      }
-
-      // ── Flat (no grouping) ────────────────────────────────────────────────
-      // row.index is the 0-based position within the current page, so we add
-      // the page offset to get a continuous global row number across pages.
-      // All O(1) — no loops.
       const { pageIndex, pageSize } = table.getState().pagination;
-      return pageIndex * pageSize + row.index + 1;
+
+      // Flat mode (no grouping): O(1), correct cross-page offset.
+      if (table.getState().grouping.length === 0) {
+        return pageIndex * pageSize + row.index + 1;
+      }
+
+      // Grouped mode: sequential numbers across the current page's leaf rows.
+      // WeakMap cache makes the total cost O(n) per render, not O(n²).
+      const flatRows = table.getRowModel().flatRows;
+      const indexMap = getLeafIndexMap(flatRows);
+      return indexMap.get(row.id) ?? null;
     },
   };
 }
