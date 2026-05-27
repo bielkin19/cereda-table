@@ -114,9 +114,15 @@ export function DataTable<TData extends object>({
 
   const headerGroups = table.getHeaderGroups();
   const visibleTableWidth = getVisibleLeafColumnsTotalSize(table);
+  // Set the table to its exact pixel width so that table-layout:fixed never
+  // distributes leftover space proportionally across columns (which would grow
+  // fixed-width icon columns beyond their declared size on wide viewports).
+  // The overflow-x:auto scroll container handles narrow viewports via the
+  // same minWidth value.
+  const exactTableWidth = visibleTableWidth > 0 ? `${visibleTableWidth}px` : '100%';
   const tableStyle = {
-    width: '100%',
-    minWidth: visibleTableWidth > 0 ? `${visibleTableWidth}px` : '100%',
+    width: exactTableWidth,
+    minWidth: exactTableWidth,
     tableLayout: 'fixed' as const,
   };
   const hasToolbar =

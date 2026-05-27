@@ -196,7 +196,8 @@
 
 .cereda-table {
   box-sizing: border-box;
-  width: 100%;
+  /* width is set via inline style to the exact pixel sum of visible columns,
+     so table-layout:fixed never distributes spare space across columns. */
   border-collapse: separate;
   border-spacing: 0;
   color: var(--cereda-table-text);
