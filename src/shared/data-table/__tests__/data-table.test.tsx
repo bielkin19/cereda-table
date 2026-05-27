@@ -1173,9 +1173,11 @@ describe('DataTable - column resizing', () => {
     );
 
     expect(container.querySelector('.cereda-table__body-scroll')).toBeInTheDocument();
+    // ID column: autoMin=136 > maxSize=120 → capped at 120 (not bumped to 136)
+    // Name=180 + Dept=180 + Status=136 + ID=120 = 616px total
     expect(container.querySelector('table')).toHaveStyle({
-      width: '632px',
-      minWidth: '632px',
+      width: '616px',
+      minWidth: '616px',
       tableLayout: 'fixed',
     });
 
@@ -1224,9 +1226,11 @@ describe('DataTable - column resizing', () => {
       />,
     );
 
+    // ID  column: intrinsicMin=136 < maxSize=160  → size=136, minSize=136, maxSize=160
+    // Title column: intrinsicMin=136 > maxSize=120 → capped at maxSize → size=120, minSize=120, maxSize=120
     expect(container.querySelector('table')).toHaveStyle({
-      width: '272px',
-      minWidth: '272px',
+      width: '256px',
+      minWidth: '256px',
       tableLayout: 'fixed',
     });
     expect(screen.getByRole('columnheader', { name: 'ID' })).toHaveStyle({
@@ -1235,9 +1239,9 @@ describe('DataTable - column resizing', () => {
       maxWidth: '160px',
     });
     expect(screen.getByRole('columnheader', { name: 'Title' })).toHaveStyle({
-      width: '136px',
-      minWidth: '136px',
-      maxWidth: '136px',
+      width: '120px',
+      minWidth: '120px',
+      maxWidth: '120px',
     });
   });
 
@@ -1291,21 +1295,27 @@ describe('DataTable - column resizing', () => {
 
     // width and minWidth are always the same pixel value so table-layout:fixed
     // never distributes leftover space across columns on wide viewports.
-    expect(table.style.minWidth).toBe(`${expectedMinWidth + labelColumnWidth}px`);
+    //
+    // The 'id' column has maxSize:220. Its auto-min (256) exceeds that ceiling,
+    // so the column is correctly capped at 220 rather than bumping maxSize.
+    const cappedColWidth = Math.min(expectedMinWidth, 220);
+    expect(table.style.minWidth).toBe(`${cappedColWidth + labelColumnWidth}px`);
     expect(table.style.width).toBe(table.style.minWidth);
     expect(table).toHaveStyle({
       tableLayout: 'fixed',
     });
     expect(screen.getByRole('columnheader', { name: label })).toHaveStyle({
-      width: `${expectedMinWidth}px`,
-      minWidth: `${expectedMinWidth}px`,
-      maxWidth: `${expectedMinWidth}px`,
+      width: `${cappedColWidth}px`,
+      minWidth: `${cappedColWidth}px`,
+      maxWidth: `${cappedColWidth}px`,
     });
     expect(screen.getByRole('button', { name: `Drag ${label} column` })).toBeInTheDocument();
     expect(
       container.querySelector('.cereda-table__header-groupable-indicator'),
     ).toBeInTheDocument();
-    expect(getEffectiveColumnSize(40, undefined, 220, label)).toBe(estimateColumnMinSize(label));
+    // getEffectiveColumnSize respects maxSize as a hard ceiling:
+    // auto-estimate (224) > maxSize (220) → returns 220, not 224.
+    expect(getEffectiveColumnSize(40, undefined, 220, label)).toBe(Math.min(estimateColumnMinSize(label), 220));
   });
 
   it('keeps visible widths aligned when a hidden column has its own width', () => {
@@ -1334,10 +1344,12 @@ describe('DataTable - column resizing', () => {
       minWidth: '144px',
       maxWidth: '260px',
     });
+    // Visible: ID=120 + Name=220 + Dept=180 = 520px
+    // (ID column: autoMin=136 > maxSize=120 → capped at 120, not bumped to 136)
     const table = container.querySelector('table') as HTMLTableElement;
     expect(table).toHaveStyle({
-      width: '536px',
-      minWidth: '536px',
+      width: '520px',
+      minWidth: '520px',
       tableLayout: 'fixed',
     });
   });

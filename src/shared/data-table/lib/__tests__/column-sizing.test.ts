@@ -52,11 +52,13 @@ describe('column sizing helpers', () => {
     });
   });
 
-  it('does not let a smaller maxSize crush the effective minimum width', () => {
+  it('treats maxSize as a hard ceiling even when the auto-derived minSize exceeds it', () => {
+    // When explicit minSize (136) > explicit maxSize (120), maxSize wins:
+    // minWidth is capped at maxSize and width is clamped to maxSize.
     expect(getColumnSizeStyle(40, 136, 120, 'Status')).toEqual({
-      width: 136,
-      minWidth: 136,
-      maxWidth: 136,
+      width: 120,
+      minWidth: 120,
+      maxWidth: 120,
     });
   });
 
@@ -205,7 +207,10 @@ describe('column sizing helpers', () => {
     expect(columns[0]?.size).toBe(columns[0]?.minSize);
   });
 
-  it('raises maxSize to the effective minimum when maxSize is smaller', () => {
+  it('caps minSize at the explicit maxSize when the auto-minimum exceeds it', () => {
+    // 'Status' with sort+group+filter controls auto-calculates a minimum > 120.
+    // The explicit maxSize: 120 is the hard ceiling — minSize and size are capped
+    // at 120 rather than maxSize being bumped beyond the user-declared value.
     const columns = applyDataTableSizingDefaultsToColumns(
       [
         {
@@ -226,9 +231,9 @@ describe('column sizing helpers', () => {
       },
     );
 
-    expect(columns[0]?.minSize).toBeGreaterThan(120);
-    expect(columns[0]?.maxSize).toBe(columns[0]?.minSize);
-    expect(columns[0]?.size).toBe(columns[0]?.minSize);
+    expect(columns[0]?.maxSize).toBe(120);
+    expect(columns[0]?.minSize).toBeLessThanOrEqual(120);
+    expect(columns[0]?.size).toBeLessThanOrEqual(120);
   });
 
   it('honours fixed-width columns (minSize === maxSize) without applying DEFAULT_HEADER_MIN_SIZE', () => {

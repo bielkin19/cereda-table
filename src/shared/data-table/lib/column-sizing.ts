@@ -194,10 +194,14 @@ function createColumnSizingConstraint({
   });
   const normalizedMaxSize = normalizeBound(maxSize);
 
+  // maxSize is a hard ceiling: cap the auto-derived minSize at normalizedMaxSize
+  // rather than bumping normalizedMaxSize to fit the auto minimum.
+  const effectiveMinSize =
+    normalizedMaxSize !== undefined ? Math.min(minSize, normalizedMaxSize) : minSize;
+
   return {
-    minSize,
-    maxSize:
-      normalizedMaxSize !== undefined ? Math.max(normalizedMaxSize, minSize) : undefined,
+    minSize: effectiveMinSize,
+    maxSize: normalizedMaxSize,
   };
 }
 
@@ -228,9 +232,10 @@ export function getEffectiveColumnSize(
   const safeSize = Number.isFinite(size) && size > 0 ? size : 0;
   const safeMinSize = normalizeBound(minSize) ?? (label ? estimateColumnMinSize(label) : undefined);
   const safeMaxSize = normalizeBound(maxSize);
-  const normalizedMin = safeMinSize ?? 0;
-  const normalizedMax =
-    safeMaxSize !== undefined ? Math.max(safeMaxSize, normalizedMin) : Number.POSITIVE_INFINITY;
+  // maxSize is a hard ceiling: if the auto-estimated min exceeds the explicit max,
+  // cap normalizedMin at safeMaxSize rather than letting it exceed the ceiling.
+  const normalizedMin = Math.min(safeMinSize ?? 0, safeMaxSize ?? Infinity);
+  const normalizedMax = safeMaxSize ?? Number.POSITIVE_INFINITY;
   const clampedSize = Math.max(normalizedMin, Math.min(safeSize, normalizedMax));
 
   return Number.isFinite(clampedSize) ? clampedSize : safeSize;
@@ -244,10 +249,10 @@ export function getColumnSizeStyle(
 ): CSSProperties {
   const safeMinSize = normalizeBound(minSize) ?? (label ? estimateColumnMinSize(label) : undefined);
   const safeMaxSize = normalizeBound(maxSize);
-  const normalizedMin = safeMinSize ?? 0;
-  const normalizedMax = safeMaxSize !== undefined
-    ? Math.max(safeMaxSize, normalizedMin)
-    : undefined;
+  // maxSize is a hard ceiling: cap normalizedMin at safeMaxSize so that
+  // minWidth never exceeds the explicit maxWidth in the rendered CSS.
+  const normalizedMin = Math.min(safeMinSize ?? 0, safeMaxSize ?? Infinity);
+  const normalizedMax = safeMaxSize;
   const width = getEffectiveColumnSize(size, normalizedMin, normalizedMax, label);
 
   return {
@@ -441,15 +446,21 @@ export function applyDataTableSizingDefaultsToColumns<TData extends object>(
         typeof column.size === 'number' && Number.isFinite(column.size)
           ? column.size
           : 0;
-      const effectiveMaxSize =
-        explicitMax !== undefined
-          ? Math.max(explicitMax, intrinsicMinSize)
-          : undefined;
+      // maxSize is a hard ceiling: cap the auto-derived intrinsicMinSize at
+      // explicitMax rather than bumping explicitMax to accommodate it.
+      const effectiveMaxSize = explicitMax !== undefined ? explicitMax : undefined;
+      const cappedMinSize =
+        effectiveMaxSize !== undefined
+          ? Math.min(intrinsicMinSize, effectiveMaxSize)
+          : intrinsicMinSize;
+      const rawSize = Math.max(currentSize, cappedMinSize);
+      const effectiveSize =
+        effectiveMaxSize !== undefined ? Math.min(rawSize, effectiveMaxSize) : rawSize;
 
       return {
         ...column,
-        size: Math.max(currentSize, intrinsicMinSize),
-        minSize: intrinsicMinSize,
+        size: effectiveSize,
+        minSize: cappedMinSize,
         ...(effectiveMaxSize !== undefined ? { maxSize: effectiveMaxSize } : {}),
       };
     });
