@@ -36,11 +36,17 @@ export function DataTableCell<TData extends object>({
   // For fill columns (no maxSize): once the user has resized the column its
   // current size becomes an effective maxSize so an explicit CSS width is set
   // and the resize is visually reflected in body cells too.
+  //
+  // Also apply an explicit width while the column is being actively resized
+  // (getIsResizing guard) — without it, a delta that crosses back through the
+  // column's default size mid-drag would momentarily drop effectiveMaxSize to
+  // undefined, flipping the body cell back to fill mode and causing a jump.
   const currentColumnSize = cell.column.getSize();
+  const isColumnResizing = cell.column.getIsResizing();
   const columnMaxSize =
     cell.column.columnDef.maxSize !== undefined
       ? cell.column.columnDef.maxSize
-      : currentColumnSize !== cell.column.columnDef.size
+      : isColumnResizing || currentColumnSize !== cell.column.columnDef.size
         ? currentColumnSize
         : undefined;
   const label =

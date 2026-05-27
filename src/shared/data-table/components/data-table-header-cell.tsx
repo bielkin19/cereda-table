@@ -114,6 +114,28 @@ function DataTableSortableHeaderCell<TData extends object>({
   function handleResizeStart(event: MouseEvent | TouchEvent) {
     event.preventDefault();
     event.stopPropagation();
+
+    // Fill columns (no maxSize) are sized by table-layout:fixed distribution so
+    // their visual width can differ greatly from TanStack's reported getSize()
+    // which returns columnDef.size (the default).  If we let TanStack start
+    // delta-tracking from that default the column jumps on the first tick and
+    // can't be shrunk meaningfully.
+    //
+    // Fix: read the actual rendered width from the <th> DOM node and pre-seed
+    // columnSizing synchronously before the resize handler fires.  TanStack will
+    // then anchor its delta from the real visual baseline.
+    if (thRef.current && header.column.columnDef.maxSize === undefined) {
+      const visualWidth = Math.round(thRef.current.getBoundingClientRect().width);
+      if (visualWidth !== header.column.getSize()) {
+        flushSync(() => {
+          header.getContext().table.setColumnSizing((prev) => ({
+            ...prev,
+            [header.column.id]: visualWidth,
+          }));
+        });
+      }
+    }
+
     resizeHandler(event);
   }
 
@@ -168,12 +190,17 @@ function DataTableSortableHeaderCell<TData extends object>({
   // For fill columns (no maxSize): once the user has resized the column its
   // current size becomes an effective maxSize so that an explicit CSS width is
   // applied and the resize is visually reflected.
+  //
+  // During an active drag we also apply an explicit width (isResizing guard):
+  // without it, if the delta carries the column back through its default size
+  // value mid-drag, effectiveMaxSize would momentarily become undefined,
+  // reverting the column to fill mode and causing a visible layout jump.
   const currentSize = header.getSize();
   const columnMaxSize = header.column.columnDef.maxSize;
   const effectiveMaxSize =
     columnMaxSize !== undefined
       ? columnMaxSize
-      : currentSize !== header.column.columnDef.size
+      : isResizing || currentSize !== header.column.columnDef.size
         ? currentSize
         : undefined;
 
