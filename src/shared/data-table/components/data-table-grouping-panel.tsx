@@ -63,6 +63,20 @@ export function DataTableGroupingPanel<TData extends object>({
     ? `cereda-table__grouping-panel ${panelModifier}`
     : 'cereda-table__grouping-panel';
 
+  // Ghost pill — shown when a groupable column header is dragged over a
+  // non-empty panel so the user gets a preview of where the new group will land.
+  const activeDragData = dndState?.activeDragData;
+  const isColumnHeaderOverPanel =
+    isOver &&
+    activeDragData?.zone === 'column-header' &&
+    activeDragData?.groupable === true;
+  const ghostColumnId = isColumnHeaderOverPanel ? (activeDragData?.columnId ?? null) : null;
+  const ghostLabel = isColumnHeaderOverPanel
+    ? (activeDragData?.label ?? activeDragData?.columnId ?? null)
+    : null;
+  const isAlreadyGrouped = ghostColumnId ? groupingIds.includes(ghostColumnId) : false;
+  const showGhost = !isAlreadyGrouped && ghostLabel != null && groupedColumns.length > 0;
+
   return (
     <section className={panelClassName} aria-label={locale.groupingPanel.ariaLabel}>
       <div ref={setNodeRef} className="cereda-table__grouping-panel-drop-surface" />
@@ -100,6 +114,29 @@ export function DataTableGroupingPanel<TData extends object>({
                       />
                     </Fragment>
                   ))}
+
+                  {/* Ghost pill — drop preview when adding a new group to a non-empty panel */}
+                  {showGhost ? (
+                    <>
+                      <li
+                        role="presentation"
+                        aria-hidden="true"
+                        className="cereda-table__grouping-panel-separator cereda-table__grouping-panel-separator--ghost"
+                      >
+                        <ChevronRight aria-hidden="true" />
+                      </li>
+                      <li
+                        className="cereda-table__grouping-pill cereda-table__grouping-pill--ghost"
+                        aria-hidden="true"
+                      >
+                        <span className="cereda-table__grouping-pill-chip cereda-table__grouping-pill-chip--ghost">
+                          <span className="cereda-table__grouping-pill-body cereda-table__grouping-pill-body--static">
+                            <span className="cereda-table__grouping-pill-label">{ghostLabel}</span>
+                          </span>
+                        </span>
+                      </li>
+                    </>
+                  ) : null}
                 </ul>
               </SortableContext>
             </DataTableScrollArea>

@@ -993,6 +993,31 @@
 .cereda-table__grouping-pill { display: flex; align-items: center; gap: 4px; flex: 0 0 auto; max-width: 260px; }
 .cereda-table__grouping-pill--dragging { opacity: 0.4; }
 
+/* Ghost pill — drop-target preview for adding a new group to a non-empty panel */
+@keyframes cereda-table-ghost-pill-in {
+  from { opacity: 0; transform: translateX(-6px) scale(0.9); }
+  to   { opacity: 1; transform: translateX(0)   scale(1);   }
+}
+
+.cereda-table__grouping-pill--ghost {
+  pointer-events: none;
+  user-select: none;
+  animation: cereda-table-ghost-pill-in 140ms cubic-bezier(0.2, 0, 0.2, 1) both;
+}
+
+.cereda-table__grouping-pill-chip--ghost {
+  border-style: dashed;
+  border-color: var(--cereda-table-accent);
+  background: var(--cereda-table-bg-selected);
+}
+
+.cereda-table__grouping-pill-chip--ghost .cereda-table__grouping-pill-label {
+  color: var(--cereda-table-accent);
+}
+
+/* Ghost separator inherits accent tone from its sibling ghost pill */
+.cereda-table__grouping-panel-separator--ghost { color: var(--cereda-table-accent); opacity: 0.7; }
+
 .cereda-table__grouping-pill-chip {
   display: inline-flex;
   align-items: center;
