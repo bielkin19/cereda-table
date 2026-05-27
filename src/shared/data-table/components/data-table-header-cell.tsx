@@ -187,20 +187,23 @@ function DataTableSortableHeaderCell<TData extends object>({
     });
   }
 
-  // For fill columns (no maxSize): once the user has resized the column its
-  // current size becomes an effective maxSize so that an explicit CSS width is
-  // applied and the resize is visually reflected.
+  // For fill columns (no maxSize): apply an explicit CSS width whenever the
+  // column has been touched by the user — either it's currently being dragged
+  // (isResizing) or it already has an entry in the table's columnSizing state.
   //
-  // During an active drag we also apply an explicit width (isResizing guard):
-  // without it, if the delta carries the column back through its default size
-  // value mid-drag, effectiveMaxSize would momentarily become undefined,
-  // reverting the column to fill mode and causing a visible layout jump.
+  // We deliberately avoid comparing currentSize to columnDef.size as a proxy
+  // for "has been resized", because applyDataTableSizingDefaultsToColumns can
+  // bump a column's size up to its auto-derived minSize — making the two equal
+  // even after the user resizes to that minimum — which would incorrectly drop
+  // the column back into fill mode and cause a visual jump on mouse-up.
   const currentSize = header.getSize();
   const columnMaxSize = header.column.columnDef.maxSize;
+  const columnSizingState = header.getContext().table.getState().columnSizing;
+  const isExplicitlySized = header.column.id in columnSizingState;
   const effectiveMaxSize =
     columnMaxSize !== undefined
       ? columnMaxSize
-      : isResizing || currentSize !== header.column.columnDef.size
+      : isResizing || isExplicitlySized
         ? currentSize
         : undefined;
 

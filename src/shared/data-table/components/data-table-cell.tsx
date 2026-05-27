@@ -33,20 +33,22 @@ export function DataTableCell<TData extends object>({
   const isAggregated = cell.getIsAggregated();
   const isPlaceholder = cell.getIsPlaceholder();
   const columnMinSize = cell.column.columnDef.minSize;
-  // For fill columns (no maxSize): once the user has resized the column its
-  // current size becomes an effective maxSize so an explicit CSS width is set
-  // and the resize is visually reflected in body cells too.
-  //
-  // Also apply an explicit width while the column is being actively resized
-  // (getIsResizing guard) — without it, a delta that crosses back through the
-  // column's default size mid-drag would momentarily drop effectiveMaxSize to
-  // undefined, flipping the body cell back to fill mode and causing a jump.
+  // For fill columns (no maxSize): apply an explicit CSS width whenever the
+  // column has been touched by the user — either it's currently being dragged
+  // (getIsResizing) or it already has an entry in the table's columnSizing
+  // state.  Comparing currentSize to columnDef.size is NOT safe: when
+  // applyDataTableSizingDefaultsToColumns bumps a column's size up to its
+  // auto-derived minSize the two values can be equal even after the user has
+  // explicitly resized to that minimum, which would incorrectly drop the column
+  // back into fill mode and cause a visible jump on mouse-up.
   const currentColumnSize = cell.column.getSize();
   const isColumnResizing = cell.column.getIsResizing();
+  const columnSizingState = cell.getContext().table.getState().columnSizing;
+  const isExplicitlySized = cell.column.id in columnSizingState;
   const columnMaxSize =
     cell.column.columnDef.maxSize !== undefined
       ? cell.column.columnDef.maxSize
-      : isColumnResizing || currentColumnSize !== cell.column.columnDef.size
+      : isColumnResizing || isExplicitlySized
         ? currentColumnSize
         : undefined;
   const label =
