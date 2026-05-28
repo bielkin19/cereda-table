@@ -1,6 +1,8 @@
 // Public API — only stable, consumer-facing exports live here.
 // TanStack implementation details stay inside the module.
 
+export { DATA_TABLE_VERSION } from './lib/version';
+
 export { DataTable } from './components/data-table';
 export { DataTableHighlightText } from './components/data-table-highlight-text';
 export {

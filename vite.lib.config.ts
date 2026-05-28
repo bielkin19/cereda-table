@@ -1,9 +1,16 @@
+import { createRequire } from 'node:module';
 import { resolve } from 'path';
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 import dts from 'vite-plugin-dts';
 
+const require = createRequire(import.meta.url);
+const { version } = require('./package.json') as { version: string };
+
 export default defineConfig({
+  define: {
+    __CEREDA_TABLE_VERSION__: JSON.stringify(version),
+  },
   plugins: [
     react(),
     dts({

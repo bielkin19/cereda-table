@@ -3,6 +3,7 @@ import '../data-table.css';
 import React, { useRef } from 'react';
 
 import { useDataTable } from '../hooks/use-data-table';
+import { DATA_TABLE_VERSION } from '../lib/version';
 import { getVisibleLeafColumnsTotalSize } from '../lib/column-sizing';
 import type { DataTableProps } from '../types/data-table.types';
 import { DataTableBody } from './data-table-body';
@@ -238,6 +239,7 @@ export function DataTable<TData extends object>({
           pageSizeOptions={pageSizeOptions}
         />
       ) : null}
+      <div className="cereda-table__version" aria-hidden="true">v{DATA_TABLE_VERSION}</div>
     </div>
   );
 
