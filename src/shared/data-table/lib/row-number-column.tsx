@@ -53,10 +53,16 @@ export function createDataTableRowNumberColumn<TData extends object>(): ColumnDe
 
       // Grouped mode: page boundaries fall on group rows, not leaf rows, so the
       // leaf count per page is variable and we cannot use pageIndex*pageSize as
-      // a reliable offset.  Number leaves sequentially within the current page
-      // via the WeakMap cache (O(n) total per render, not O(n²)).
-      const flatRows = table.getRowModel().flatRows;
-      const indexMap = getLeafIndexMap(flatRows);
+      // a reliable offset.  Number leaves sequentially within the current page.
+      //
+      // Use .rows (the flat rendered list) NOT .flatRows — TanStack builds
+      // flatRows by recursing into subRows of every row in .rows, so each leaf
+      // ends up added twice (once as subRow, once directly) and the WeakMap
+      // would assign the wrong index on the second pass.
+      // .rows has no duplicates and is the same memoized reference per render,
+      // so the WeakMap cache hits correctly.
+      const rows = table.getRowModel().rows;
+      const indexMap = getLeafIndexMap(rows);
       return indexMap.get(row.id) ?? null;
     },
   };
