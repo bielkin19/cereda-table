@@ -201,6 +201,8 @@
   pointer-events: none;
   user-select: none;
   letter-spacing: 0.03em;
+  border-top: 1px solid var(--cereda-table-border);
+  background: var(--cereda-table-bg-header);
 }
 
 /* ==========================================================================
